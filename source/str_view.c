@@ -44,9 +44,9 @@
 struct Factorization
 {
     /* Position in the needle at which (local period = period). */
-    ptrdiff_t critical_pos;
+    ptrdiff_t critical_position;
     /* A distance in the needle such that two letters always coincide. */
-    ptrdiff_t period_dist;
+    ptrdiff_t period_distance;
 };
 
 /* Avoid giving the user a chance to dereference null as much as possible
@@ -61,9 +61,9 @@ static SV_Str_view const nil = {
 /* =========================   Prototypes   =============================== */
 
 static size_t after_find(SV_Str_view, SV_Str_view);
-static size_t before_r_find(SV_Str_view, SV_Str_view);
+static size_t before_reverse_find(SV_Str_view, SV_Str_view);
 static size_t min(size_t, size_t);
-static SV_Order char_cmp(char, char);
+static SV_Order char_compare(char, char);
 static ptrdiff_t signed_max(ptrdiff_t, ptrdiff_t);
 
 /* Once the user facing API has verified the lengths of strings provided to
@@ -71,70 +71,86 @@ static ptrdiff_t signed_max(ptrdiff_t, ptrdiff_t);
    by assuming the strings are GREATER than or EQUAL TO certain lengths
    allowing for processing by larger units than 1 in compiled code. */
 
-static size_t pos_memo(ptrdiff_t haystack_sz, char const ARR_GEQ(, haystack_sz),
-                       ptrdiff_t needle_sz, char const ARR_GEQ(, needle_sz),
-                       ptrdiff_t, ptrdiff_t);
-static size_t pos_normal(ptrdiff_t haystack_sz,
-                         char const ARR_GEQ(, haystack_sz), ptrdiff_t needle_sz,
-                         char const ARR_GEQ(, needle_sz), ptrdiff_t, ptrdiff_t);
-static size_t r_pos_memo(ptrdiff_t haystack_sz,
-                         char const ARR_GEQ(, haystack_sz), ptrdiff_t needle_sz,
-                         char const ARR_GEQ(, needle_sz), ptrdiff_t, ptrdiff_t);
-static size_t r_pos_normal(ptrdiff_t haystack_sz,
-                           char const ARR_GEQ(, haystack_sz),
-                           ptrdiff_t needle_sz, char const ARR_GEQ(, needle_sz),
-                           ptrdiff_t, ptrdiff_t);
-static size_t tw_match(ptrdiff_t haystack_sz, char const ARR_GEQ(, haystack_sz),
-                       ptrdiff_t needle_sz, char const ARR_GEQ(, needle_sz));
-static size_t tw_rmatch(ptrdiff_t haystack_sz,
-                        char const ARR_GEQ(, haystack_sz), ptrdiff_t needle_sz,
-                        char const ARR_GEQ(, needle_sz));
-static struct Factorization maximal_suffix(ptrdiff_t needle_sz,
-                                           char const ARR_GEQ(, needle_sz));
-static struct Factorization maximal_suffix_rev(ptrdiff_t needle_sz,
-                                               char const ARR_GEQ(, needle_sz));
-static struct Factorization r_maximal_suffix(ptrdiff_t needle_sz,
-                                             char const ARR_GEQ(, needle_sz));
+static size_t position_memoized(ptrdiff_t haystack_size,
+                                char const ARR_GEQ(, haystack_size),
+                                ptrdiff_t needle_size,
+                                char const ARR_GEQ(, needle_size), ptrdiff_t,
+                                ptrdiff_t);
+static size_t position_normal(ptrdiff_t haystack_size,
+                              char const ARR_GEQ(, haystack_size),
+                              ptrdiff_t needle_size,
+                              char const ARR_GEQ(, needle_size), ptrdiff_t,
+                              ptrdiff_t);
+static size_t reverse_position_memoized(ptrdiff_t haystack_size,
+                                        char const ARR_GEQ(, haystack_size),
+                                        ptrdiff_t needle_size,
+                                        char const ARR_GEQ(, needle_size),
+                                        ptrdiff_t, ptrdiff_t);
+static size_t reverse_position_normal(ptrdiff_t haystack_size,
+                                      char const ARR_GEQ(, haystack_size),
+                                      ptrdiff_t needle_size,
+                                      char const ARR_GEQ(, needle_size),
+                                      ptrdiff_t, ptrdiff_t);
+static size_t two_way_match(ptrdiff_t haystack_size,
+                            char const ARR_GEQ(, haystack_size),
+                            ptrdiff_t needle_size,
+                            char const ARR_GEQ(, needle_size));
+static size_t two_way_reverse_match(ptrdiff_t haystack_size,
+                                    char const ARR_GEQ(, haystack_size),
+                                    ptrdiff_t needle_size,
+                                    char const ARR_GEQ(, needle_size));
+static struct Factorization maximal_suffix(ptrdiff_t needle_size,
+                                           char const ARR_GEQ(, needle_size));
 static struct Factorization
-r_maximal_suffix_rev(ptrdiff_t needle_sz, char const ARR_GEQ(, needle_sz));
-static size_t two_byte_view_n_view_n(size_t haystack_sz,
-                                     unsigned char const ARR_GEQ(, haystack_sz),
-                                     size_t n_sz,
-                                     unsigned char const ARR_GEQ(, n_sz));
-static size_t three_byte_view_n_view_n(size_t sz,
-                                       unsigned char const ARR_GEQ(, sz),
-                                       size_t n_sz,
-                                       unsigned char const ARR_GEQ(, n_sz));
-static size_t four_byte_view_n_view_n(size_t sz,
-                                      unsigned char const ARR_GEQ(, sz),
-                                      size_t n_sz,
-                                      unsigned char const ARR_GEQ(, n_sz));
-static size_t view_c_spn(size_t str_sz, char const ARR_GEQ(, str_sz),
-                         size_t set_sz, char const ARR_GEQ(, set_sz));
-static size_t view_r_spn(size_t str_sz, char const ARR_GEQ(, str_sz),
-                         size_t set_sz, char const ARR_GEQ(, set_sz));
-static size_t view_n_view_n(ptrdiff_t haystack_sz,
-                            char const ARR_GEQ(, haystack_sz),
-                            ptrdiff_t needle_sz,
-                            char const ARR_GEQ(, needle_sz));
-static size_t view_n_chr(size_t n, char const ARR_GEQ(, n), char);
-static size_t r_view_n_chr(size_t n, char const ARR_GEQ(, n), char);
-static size_t r_view_n_view_n(ptrdiff_t haystack_sz,
-                              char const ARR_GEQ(, haystack_sz),
-                              ptrdiff_t needle_sz,
-                              char const ARR_GEQ(, needle_sz));
-static size_t r_two_byte_view_n_view_n(size_t sz,
-                                       unsigned char const ARR_GEQ(, sz),
-                                       size_t n_sz,
-                                       unsigned char const ARR_GEQ(, n_sz));
-static size_t r_three_byte_view_n_view_n(size_t sz,
-                                         unsigned char const ARR_GEQ(, sz),
-                                         size_t n_sz,
-                                         unsigned char const ARR_GEQ(, n_sz));
-static size_t r_four_byte_view_n_view_n(size_t sz,
-                                        unsigned char const ARR_GEQ(, sz),
-                                        size_t n_sz,
-                                        unsigned char const ARR_GEQ(, n_sz));
+maximal_suffix_reverse(ptrdiff_t needle_size,
+                       char const ARR_GEQ(, needle_size));
+static struct Factorization
+reverse_maximal_suffix(ptrdiff_t needle_size,
+                       char const ARR_GEQ(, needle_size));
+static struct Factorization
+reverse_maximal_suffix_reverse(ptrdiff_t needle_size,
+                               char const ARR_GEQ(, needle_size));
+static size_t two_byte_view_match(size_t haystack_size,
+                                  unsigned char const ARR_GEQ(, haystack_size),
+                                  size_t n_size,
+                                  unsigned char const ARR_GEQ(, n_size));
+static size_t three_byte_view_match(size_t size,
+                                    unsigned char const ARR_GEQ(, size),
+                                    size_t n_size,
+                                    unsigned char const ARR_GEQ(, n_size));
+static size_t four_byte_view_match(size_t size,
+                                   unsigned char const ARR_GEQ(, size),
+                                   size_t n_size,
+                                   unsigned char const ARR_GEQ(, n_size));
+static size_t view_complimentary_substring_length(
+    size_t str_size, char const ARR_GEQ(, str_size), size_t set_size,
+    char const ARR_GEQ(, set_size));
+static size_t view_substring_length(size_t str_size,
+                                    char const ARR_GEQ(, str_size),
+                                    size_t set_size,
+                                    char const ARR_GEQ(, set_size));
+static size_t view_match(ptrdiff_t haystack_size,
+                         char const ARR_GEQ(, haystack_size),
+                         ptrdiff_t needle_size,
+                         char const ARR_GEQ(, needle_size));
+static size_t view_match_char(size_t n, char const ARR_GEQ(, n), char);
+static size_t reverse_view_match_char(size_t n, char const ARR_GEQ(, n), char);
+static size_t reverse_view_match(ptrdiff_t haystack_size,
+                                 char const ARR_GEQ(, haystack_size),
+                                 ptrdiff_t needle_size,
+                                 char const ARR_GEQ(, needle_size));
+static size_t
+reverse_two_byte_view_match(size_t size, unsigned char const ARR_GEQ(, size),
+                            size_t n_size,
+                            unsigned char const ARR_GEQ(, n_size));
+static size_t
+reverse_three_byte_view_match(size_t size, unsigned char const ARR_GEQ(, size),
+                              size_t n_size,
+                              unsigned char const ARR_GEQ(, n_size));
+static size_t
+reverse_four_byte_view_match(size_t size, unsigned char const ARR_GEQ(, size),
+                             size_t n_size,
+                             unsigned char const ARR_GEQ(, n_size));
 
 /* ===================   Interface Implementation   ====================== */
 
@@ -265,9 +281,9 @@ SV_compare(SV_Str_view const lhs, SV_Str_view const rhs)
     {
         return SV_ORDER_ERROR;
     }
-    size_t const sz = min(lhs.len, rhs.len);
+    size_t const size = min(lhs.len, rhs.len);
     size_t i = 0;
-    for (; i < sz && lhs.str[i] == rhs.str[i]; ++i)
+    for (; i < size && lhs.str[i] == rhs.str[i]; ++i)
     {}
     if (i == lhs.len && i == rhs.len)
     {
@@ -288,9 +304,9 @@ SV_terminated_compare(SV_Str_view const lhs, char const *const rhs)
     {
         return SV_ORDER_ERROR;
     }
-    size_t const sz = lhs.len;
+    size_t const size = lhs.len;
     size_t i = 0;
-    for (; i < sz && rhs[i] && lhs.str[i] == rhs[i]; ++i)
+    for (; i < size && rhs[i] && lhs.str[i] == rhs[i]; ++i)
     {}
     if (i == lhs.len && !rhs[i])
     {
@@ -311,16 +327,16 @@ SV_view_compare(SV_Str_view const lhs, char const *const rhs, size_t const n)
     {
         return SV_ORDER_ERROR;
     }
-    size_t const sz = min(lhs.len, n);
+    size_t const size = min(lhs.len, n);
     size_t i = 0;
-    for (; i < sz && rhs[i] && lhs.str[i] == rhs[i]; ++i)
+    for (; i < size && rhs[i] && lhs.str[i] == rhs[i]; ++i)
     {}
-    if (i == lhs.len && sz == n)
+    if (i == lhs.len && size == n)
     {
         return SV_ORDER_EQUAL;
     }
     /* strncmp compares the first at most n bytes inclusive */
-    if (i < lhs.len && sz <= n)
+    if (i < lhs.len && size <= n)
     {
         return (uint8_t)lhs.str[i] < (uint8_t)rhs[i] ? SV_ORDER_LESSER
                                                      : SV_ORDER_GREATER;
@@ -502,8 +518,8 @@ SV_token_next(SV_Str_view const src, SV_Str_view const token,
             .len = 0,
         };
     }
-    size_t const found = view_n_view_n((ptrdiff_t)next.len, next.str,
-                                       (ptrdiff_t)delim.len, delim.str);
+    size_t const found = view_match((ptrdiff_t)next.len, next.str,
+                                    (ptrdiff_t)delim.len, delim.str);
     return (SV_Str_view){
         .str = next.str,
         .len = found,
@@ -524,7 +540,7 @@ SV_token_reverse_begin(SV_Str_view src, SV_Str_view const delim)
             0,
         };
     }
-    size_t before_delim = before_r_find(src, delim);
+    size_t before_delim = before_reverse_find(src, delim);
     src.len = min(src.len, before_delim + 1);
     size_t start = SV_reverse_find(src, src.len, delim);
     if (start == src.len)
@@ -561,13 +577,13 @@ SV_token_reverse_next(SV_Str_view const src, SV_Str_view const token,
     /* Same as in the forward version, this method is a quick way to skip
        any number of repeating delimiters before starting the next search
        for a delimiter before a token. */
-    size_t const before_delim = before_r_find(shorter, delim);
+    size_t const before_delim = before_reverse_find(shorter, delim);
     if (before_delim == shorter.len)
     {
         return shorter;
     }
-    size_t start = r_view_n_view_n((ptrdiff_t)before_delim, shorter.str,
-                                   (ptrdiff_t)delim.len, delim.str);
+    size_t start = reverse_view_match((ptrdiff_t)before_delim, shorter.str,
+                                      (ptrdiff_t)delim.len, delim.str);
     if (start == before_delim)
     {
         return (SV_Str_view){
@@ -678,8 +694,8 @@ SV_contains(SV_Str_view const haystack, SV_Str_view const needle)
         return true;
     }
     return haystack.len
-           != view_n_view_n((ptrdiff_t)haystack.len, haystack.str,
-                            (ptrdiff_t)needle.len, needle.str);
+           != view_match((ptrdiff_t)haystack.len, haystack.str,
+                         (ptrdiff_t)needle.len, needle.str);
 }
 
 SV_Str_view
@@ -697,8 +713,8 @@ SV_match(SV_Str_view const haystack, SV_Str_view const needle)
             .len = 0,
         };
     }
-    size_t const found = view_n_view_n((ptrdiff_t)haystack.len, haystack.str,
-                                       (ptrdiff_t)needle.len, needle.str);
+    size_t const found = view_match((ptrdiff_t)haystack.len, haystack.str,
+                                    (ptrdiff_t)needle.len, needle.str);
     if (found == haystack.len)
     {
         return (SV_Str_view){
@@ -726,8 +742,9 @@ SV_reverse_match(SV_Str_view const haystack, SV_Str_view const needle)
             .len = 0,
         };
     }
-    size_t const found = r_view_n_view_n((ptrdiff_t)haystack.len, haystack.str,
-                                         (ptrdiff_t)needle.len, needle.str);
+    size_t const found
+        = reverse_view_match((ptrdiff_t)haystack.len, haystack.str,
+                             (ptrdiff_t)needle.len, needle.str);
     if (found == haystack.len)
     {
         return (SV_Str_view){.str = haystack.str + haystack.len, .len = 0};
@@ -746,8 +763,8 @@ SV_find(SV_Str_view const haystack, size_t const pos, SV_Str_view const needle)
         return haystack.len;
     }
     return pos
-           + view_n_view_n((ptrdiff_t)(haystack.len - pos), haystack.str + pos,
-                           (ptrdiff_t)needle.len, needle.str);
+           + view_match((ptrdiff_t)(haystack.len - pos), haystack.str + pos,
+                        (ptrdiff_t)needle.len, needle.str);
 }
 
 size_t
@@ -761,8 +778,8 @@ SV_reverse_find(SV_Str_view const h, size_t pos, SV_Str_view const n)
     {
         pos = h.len - 1;
     }
-    size_t const found
-        = r_view_n_view_n((ptrdiff_t)pos + 1, h.str, (ptrdiff_t)n.len, n.str);
+    size_t const found = reverse_view_match((ptrdiff_t)pos + 1, h.str,
+                                            (ptrdiff_t)n.len, n.str);
     return found == pos + 1 ? h.len : found;
 }
 
@@ -777,7 +794,8 @@ SV_find_first_of(SV_Str_view const haystack, SV_Str_view const set)
     {
         return haystack.len;
     }
-    return view_c_spn(haystack.len, haystack.str, set.len, set.str);
+    return view_complimentary_substring_length(haystack.len, haystack.str,
+                                               set.len, set.str);
 }
 
 size_t
@@ -796,8 +814,8 @@ SV_find_last_of(SV_Str_view const haystack, SV_Str_view const set)
        The last occurrence of a set char could be anywhere in the string. */
     size_t last_pos = haystack.len;
     for (size_t in = 0, prev = 0;
-         (in
-          += view_r_spn(haystack.len - in, haystack.str + in, set.len, set.str))
+         (in += view_substring_length(haystack.len - in, haystack.str + in,
+                                      set.len, set.str))
          != haystack.len;
          ++in, prev = in)
     {
@@ -820,7 +838,7 @@ SV_find_first_not_of(SV_Str_view const haystack, SV_Str_view const set)
     {
         return 0;
     }
-    return view_r_spn(haystack.len, haystack.str, set.len, set.str);
+    return view_substring_length(haystack.len, haystack.str, set.len, set.str);
 }
 
 size_t
@@ -836,8 +854,8 @@ SV_find_last_not_of(SV_Str_view const haystack, SV_Str_view const set)
     }
     size_t last_pos = haystack.len;
     for (size_t in = 0, prev = 0;
-         (in
-          += view_r_spn(haystack.len - in, haystack.str + in, set.len, set.str))
+         (in += view_substring_length(haystack.len - in, haystack.str + in,
+                                      set.len, set.str))
          != haystack.len;
          ++in, prev = in)
     {
@@ -876,7 +894,7 @@ after_find(SV_Str_view const haystack, SV_Str_view const needle)
 }
 
 static size_t
-before_r_find(SV_Str_view const haystack, SV_Str_view const needle)
+before_reverse_find(SV_Str_view const haystack, SV_Str_view const needle)
 {
     if (needle.len > haystack.len || !needle.len || !haystack.len)
     {
@@ -909,7 +927,7 @@ signed_max(ptrdiff_t const a, ptrdiff_t const b)
 }
 
 static inline SV_Order
-char_cmp(char const a, char const b)
+char_compare(char const a, char const b)
 {
     return (a > b) - (a < b);
 }
@@ -930,7 +948,7 @@ char_cmp(char const a, char const b)
    the forward version expects the same. However, the comparison
    moves backward from the location provided for n bytes. */
 static int
-r_memcmp(void const *const vl, void const *const vr, size_t n)
+reverse_memcmp(void const *const vl, void const *const vr, size_t n)
 {
     unsigned char const *l = vl;
     unsigned char const *r = vr;
@@ -946,26 +964,28 @@ r_memcmp(void const *const vl, void const *const vr, size_t n)
    end of a view until null is found. This way, string searches are
    efficient and only within the range specified. */
 static size_t
-view_c_spn(size_t const str_sz, char const ARR_CONST_GEQ(str, str_sz),
-           size_t const set_sz, char const ARR_GEQ(set, set_sz))
+view_complimentary_substring_length(size_t const str_size,
+                                    char const ARR_CONST_GEQ(str, str_size),
+                                    size_t const set_size,
+                                    char const ARR_GEQ(set, set_size))
 {
-    if (!set_sz)
+    if (!set_size)
     {
-        return str_sz;
+        return str_size;
     }
     char const *a = str;
     size_t byteset[32 / sizeof(size_t)];
-    if (set_sz == 1)
+    if (set_size == 1)
     {
-        for (size_t i = 0; i < str_sz && *a != *set; ++a, ++i)
+        for (size_t i = 0; i < str_size && *a != *set; ++a, ++i)
         {}
         return a - str;
     }
     memset(byteset, 0, sizeof byteset);
-    for (size_t i = 0; i < set_sz && BITOP(byteset, *(unsigned char *)set, |=);
-         ++set, ++i)
+    for (size_t i = 0;
+         i < set_size && BITOP(byteset, *(unsigned char *)set, |=); ++set, ++i)
     {}
-    for (size_t i = 0; i < str_sz && !BITOP(byteset, *(unsigned char *)a, &);
+    for (size_t i = 0; i < str_size && !BITOP(byteset, *(unsigned char *)a, &);
          ++a)
     {}
     return a - str;
@@ -978,25 +998,26 @@ view_c_spn(size_t const str_sz, char const ARR_CONST_GEQ(str, str_sz),
    end of a view until null is found. This way, string searches are
    efficient and only within the range specified. */
 static size_t
-view_r_spn(size_t const str_sz, char const ARR_CONST_GEQ(str, str_sz),
-           size_t const set_sz, char const ARR_GEQ(set, set_sz))
+view_substring_length(size_t const str_size,
+                      char const ARR_CONST_GEQ(str, str_size),
+                      size_t const set_size, char const ARR_GEQ(set, set_size))
 {
     char const *a = str;
     size_t byteset[32 / sizeof(size_t)] = {0};
-    if (!set_sz)
+    if (!set_size)
     {
-        return str_sz;
+        return str_size;
     }
-    if (set_sz == 1)
+    if (set_size == 1)
     {
-        for (size_t i = 0; i < str_sz && *a == *set; ++a, ++i)
+        for (size_t i = 0; i < str_size && *a == *set; ++a, ++i)
         {}
         return a - str;
     }
-    for (size_t i = 0; i < set_sz && BITOP(byteset, *(unsigned char *)set, |=);
-         ++set, ++i)
+    for (size_t i = 0;
+         i < set_size && BITOP(byteset, *(unsigned char *)set, |=); ++set, ++i)
     {}
-    for (size_t i = 0; i < str_sz && BITOP(byteset, *(unsigned char *)a, &);
+    for (size_t i = 0; i < str_size && BITOP(byteset, *(unsigned char *)a, &);
          ++a, ++i)
     {}
     return a - str;
@@ -1008,35 +1029,35 @@ view_r_spn(size_t const str_sz, char const ARR_CONST_GEQ(str, str_sz),
    haystack length. Returns 0 based index position at which needle begins in
    haystack if it can be found, otherwise the haystack size is returned. */
 static size_t
-view_n_view_n(ptrdiff_t const haystack_sz,
-              char const ARR_CONST_GEQ(haystack, haystack_sz),
-              ptrdiff_t const needle_sz,
-              char const ARR_CONST_GEQ(needle, needle_sz))
+view_match(ptrdiff_t const haystack_size,
+           char const ARR_CONST_GEQ(haystack, haystack_size),
+           ptrdiff_t const needle_size,
+           char const ARR_CONST_GEQ(needle, needle_size))
 {
-    if (!haystack_sz || !needle_sz || needle_sz > haystack_sz)
+    if (!haystack_size || !needle_size || needle_size > haystack_size)
     {
-        return haystack_sz;
+        return haystack_size;
     }
-    if (1 == needle_sz)
+    if (1 == needle_size)
     {
-        return view_n_chr(haystack_sz, haystack, *needle);
+        return view_match_char(haystack_size, haystack, *needle);
     }
-    if (2 == needle_sz)
+    if (2 == needle_size)
     {
-        return two_byte_view_n_view_n(haystack_sz, (unsigned char *)haystack, 2,
-                                      (unsigned char *)needle);
+        return two_byte_view_match(haystack_size, (unsigned char *)haystack, 2,
+                                   (unsigned char *)needle);
     }
-    if (3 == needle_sz)
+    if (3 == needle_size)
     {
-        return three_byte_view_n_view_n(haystack_sz, (unsigned char *)haystack,
-                                        3, (unsigned char *)needle);
+        return three_byte_view_match(haystack_size, (unsigned char *)haystack,
+                                     3, (unsigned char *)needle);
     }
-    if (4 == needle_sz)
+    if (4 == needle_size)
     {
-        return four_byte_view_n_view_n(haystack_sz, (unsigned char *)haystack,
-                                       4, (unsigned char *)needle);
+        return four_byte_view_match(haystack_size, (unsigned char *)haystack, 4,
+                                    (unsigned char *)needle);
     }
-    return tw_match(haystack_sz, haystack, needle_sz, needle);
+    return two_way_match(haystack_size, haystack, needle_size, needle);
 }
 
 /* For now reverse logic for backwards searches has been separated into
@@ -1045,35 +1066,38 @@ view_n_view_n(ptrdiff_t const haystack_sz,
    the start of the reverse two-way algorithm for more. May unite if
    a clean way exists. */
 static size_t
-r_view_n_view_n(ptrdiff_t const haystack_sz,
-                char const ARR_CONST_GEQ(haystack, haystack_sz),
-                ptrdiff_t const needle_sz,
-                char const ARR_CONST_GEQ(needle, needle_sz))
+reverse_view_match(ptrdiff_t const haystack_size,
+                   char const ARR_CONST_GEQ(haystack, haystack_size),
+                   ptrdiff_t const needle_size,
+                   char const ARR_CONST_GEQ(needle, needle_size))
 {
-    if (!haystack_sz || !needle_sz || needle_sz > haystack_sz)
+    if (!haystack_size || !needle_size || needle_size > haystack_size)
     {
-        return haystack_sz;
+        return haystack_size;
     }
-    if (1 == needle_sz)
+    if (1 == needle_size)
     {
-        return r_view_n_chr(haystack_sz, haystack, *needle);
+        return reverse_view_match_char(haystack_size, haystack, *needle);
     }
-    if (2 == needle_sz)
+    if (2 == needle_size)
     {
-        return r_two_byte_view_n_view_n(haystack_sz, (unsigned char *)haystack,
-                                        2, (unsigned char *)needle);
+        return reverse_two_byte_view_match(haystack_size,
+                                           (unsigned char *)haystack, 2,
+                                           (unsigned char *)needle);
     }
-    if (3 == needle_sz)
+    if (3 == needle_size)
     {
-        return r_three_byte_view_n_view_n(
-            haystack_sz, (unsigned char *)haystack, 3, (unsigned char *)needle);
+        return reverse_three_byte_view_match(haystack_size,
+                                             (unsigned char *)haystack, 3,
+                                             (unsigned char *)needle);
     }
-    if (4 == needle_sz)
+    if (4 == needle_size)
     {
-        return r_four_byte_view_n_view_n(haystack_sz, (unsigned char *)haystack,
-                                         4, (unsigned char *)needle);
+        return reverse_four_byte_view_match(haystack_size,
+                                            (unsigned char *)haystack, 4,
+                                            (unsigned char *)needle);
     }
-    return tw_rmatch(haystack_sz, haystack, needle_sz, needle);
+    return two_way_reverse_match(haystack_size, haystack, needle_size, needle);
 }
 
 /*==============   Post-Precomputation Two-Way Search    =================*/
@@ -1102,48 +1126,52 @@ r_view_n_view_n(ptrdiff_t const haystack_sz,
    an entire string. Returns the position at which needle begins if found
    and the size of the haystack stack if not found. */
 static inline size_t
-tw_match(ptrdiff_t const haystack_sz,
-         char const ARR_CONST_GEQ(haystack, haystack_sz),
-         ptrdiff_t const needle_sz, char const ARR_CONST_GEQ(needle, needle_sz))
+two_way_match(ptrdiff_t const haystack_size,
+              char const ARR_CONST_GEQ(haystack, haystack_size),
+              ptrdiff_t const needle_size,
+              char const ARR_CONST_GEQ(needle, needle_size))
 {
     /* Preprocessing to get critical position and period distance. */
-    struct Factorization const s = maximal_suffix(needle_sz, needle);
-    struct Factorization const r = maximal_suffix_rev(needle_sz, needle);
-    struct Factorization const w = (s.critical_pos > r.critical_pos) ? s : r;
+    struct Factorization const s = maximal_suffix(needle_size, needle);
+    struct Factorization const r = maximal_suffix_reverse(needle_size, needle);
+    struct Factorization const w
+        = (s.critical_position > r.critical_position) ? s : r;
     /* Determine if memoization is available due to found border/overlap. */
-    if (!memcmp(needle, needle + w.period_dist, w.critical_pos + 1))
+    if (!memcmp(needle, needle + w.period_distance, w.critical_position + 1))
     {
-        return pos_memo(haystack_sz, haystack, needle_sz, needle, w.period_dist,
-                        w.critical_pos);
+        return position_memoized(haystack_size, haystack, needle_size, needle,
+                                 w.period_distance, w.critical_position);
     }
-    return pos_normal(haystack_sz, haystack, needle_sz, needle, w.period_dist,
-                      w.critical_pos);
+    return position_normal(haystack_size, haystack, needle_size, needle,
+                           w.period_distance, w.critical_position);
 }
 
 /* Two Way string matching algorithm adapted from ESMAJ
    http://igm.univ-mlv.fr/~lecroq/string/node26.html#SECTION00260 */
 static size_t
-pos_memo(ptrdiff_t const haystack_sz,
-         char const ARR_CONST_GEQ(haystack, haystack_sz),
-         ptrdiff_t const needle_sz, char const ARR_CONST_GEQ(needle, needle_sz),
-         ptrdiff_t const period_dist, ptrdiff_t const critical_pos)
+position_memoized(ptrdiff_t const haystack_size,
+                  char const ARR_CONST_GEQ(haystack, haystack_size),
+                  ptrdiff_t const needle_size,
+                  char const ARR_CONST_GEQ(needle, needle_size),
+                  ptrdiff_t const period_dist, ptrdiff_t const critical_pos)
 {
     ptrdiff_t lpos = 0;
     ptrdiff_t rpos = 0;
     /* Eliminate worst case quadratic time complexity with memoization. */
     ptrdiff_t memoize_shift = -1;
-    while (lpos <= haystack_sz - needle_sz)
+    while (lpos <= haystack_size - needle_size)
     {
         for (rpos = signed_max(critical_pos, memoize_shift) + 1;
-             rpos < needle_sz && needle[rpos] == haystack[rpos + lpos]; ++rpos)
+             rpos < needle_size && needle[rpos] == haystack[rpos + lpos];
+             ++rpos)
         {}
-        if (rpos < needle_sz)
+        if (rpos < needle_size)
         {
             lpos += (rpos - critical_pos);
             memoize_shift = -1;
             continue;
         }
-        /* r_pos >= needle_sz */
+        /* r_pos >= needle_size */
         for (rpos = critical_pos;
              rpos > memoize_shift && needle[rpos] == haystack[rpos + lpos];
              --rpos)
@@ -1155,35 +1183,36 @@ pos_memo(ptrdiff_t const haystack_sz,
         lpos += period_dist;
         /* Some prefix of needle coincides with the text. Memoize the length
            of this prefix to increase length of next shift, if possible. */
-        memoize_shift = needle_sz - period_dist - 1;
+        memoize_shift = needle_size - period_dist - 1;
     }
-    return haystack_sz;
+    return haystack_size;
 }
 
 /* Two Way string matching algorithm adapted from ESMAJ
    http://igm.univ-mlv.fr/~lecroq/string/node26.html#SECTION00260 */
 static size_t
-pos_normal(ptrdiff_t const haystack_sz,
-           char const ARR_CONST_GEQ(haystack, haystack_sz),
-           ptrdiff_t const needle_sz,
-           char const ARR_CONST_GEQ(needle, needle_sz), ptrdiff_t period_dist,
-           ptrdiff_t const critical_pos)
+position_normal(ptrdiff_t const haystack_size,
+                char const ARR_CONST_GEQ(haystack, haystack_size),
+                ptrdiff_t const needle_size,
+                char const ARR_CONST_GEQ(needle, needle_size),
+                ptrdiff_t period_dist, ptrdiff_t const critical_pos)
 {
     period_dist
-        = signed_max(critical_pos + 1, needle_sz - critical_pos - 1) + 1;
+        = signed_max(critical_pos + 1, needle_size - critical_pos - 1) + 1;
     ptrdiff_t lpos = 0;
     ptrdiff_t rpos = 0;
-    while (lpos <= haystack_sz - needle_sz)
+    while (lpos <= haystack_size - needle_size)
     {
         for (rpos = critical_pos + 1;
-             rpos < needle_sz && needle[rpos] == haystack[rpos + lpos]; ++rpos)
+             rpos < needle_size && needle[rpos] == haystack[rpos + lpos];
+             ++rpos)
         {}
-        if (rpos < needle_sz)
+        if (rpos < needle_size)
         {
             lpos += (rpos - critical_pos);
             continue;
         }
-        /* r_pos >= needle_sz */
+        /* r_pos >= needle_size */
         for (rpos = critical_pos;
              rpos >= 0 && needle[rpos] == haystack[rpos + lpos]; --rpos)
         {}
@@ -1193,7 +1222,7 @@ pos_normal(ptrdiff_t const haystack_sz,
         }
         lpos += period_dist;
     }
-    return haystack_sz;
+    return haystack_size;
 }
 
 /* ==============   Suffix and Critical Factorization    =================*/
@@ -1201,16 +1230,16 @@ pos_normal(ptrdiff_t const haystack_sz,
 /* Computing of the maximal suffix. Adapted from ESMAJ.
    http://igm.univ-mlv.fr/~lecroq/string/node26.html#SECTION00260 */
 static inline struct Factorization
-maximal_suffix(ptrdiff_t const needle_sz,
-               char const ARR_CONST_GEQ(needle, needle_sz))
+maximal_suffix(ptrdiff_t const needle_size,
+               char const ARR_CONST_GEQ(needle, needle_size))
 {
     ptrdiff_t suff_pos = -1;
     ptrdiff_t period = 1;
     ptrdiff_t last_rest = 0;
     ptrdiff_t rest = 1;
-    while (last_rest + rest < needle_sz)
+    while (last_rest + rest < needle_size)
     {
-        switch (char_cmp(needle[last_rest + rest], needle[suff_pos + rest]))
+        switch (char_compare(needle[last_rest + rest], needle[suff_pos + rest]))
         {
         case SV_ORDER_LESSER:
             last_rest += rest;
@@ -1238,8 +1267,8 @@ maximal_suffix(ptrdiff_t const needle_sz,
         }
     }
     return (struct Factorization){
-        .critical_pos = suff_pos,
-        .period_dist = period,
+        .critical_position = suff_pos,
+        .period_distance = period,
     };
 }
 
@@ -1247,16 +1276,16 @@ maximal_suffix(ptrdiff_t const needle_sz,
    adapted from ESMAJ
    http://igm.univ-mlv.fr/~lecroq/string/node26.html#SECTION00260 */
 static inline struct Factorization
-maximal_suffix_rev(ptrdiff_t const needle_sz,
-                   char const ARR_CONST_GEQ(needle, needle_sz))
+maximal_suffix_reverse(ptrdiff_t const needle_size,
+                       char const ARR_CONST_GEQ(needle, needle_size))
 {
     ptrdiff_t suff_pos = -1;
     ptrdiff_t period = 1;
     ptrdiff_t last_rest = 0;
     ptrdiff_t rest = 1;
-    while (last_rest + rest < needle_sz)
+    while (last_rest + rest < needle_size)
     {
-        switch (char_cmp(needle[last_rest + rest], needle[suff_pos + rest]))
+        switch (char_compare(needle[last_rest + rest], needle[suff_pos + rest]))
         {
         case SV_ORDER_GREATER:
             last_rest += rest;
@@ -1284,8 +1313,8 @@ maximal_suffix_rev(ptrdiff_t const needle_sz,
         }
     }
     return (struct Factorization){
-        .critical_pos = suff_pos,
-        .period_dist = period,
+        .critical_position = suff_pos,
+        .period_distance = period,
     };
 }
 
@@ -1302,20 +1331,20 @@ maximal_suffix_rev(ptrdiff_t const needle_sz,
         ptrdiff_t period = 1;
         ptrdiff_t last_rest = 0;
         ptrdiff_t rest = 1;
-        ptrdiff_t negate_sz = 0;
+        ptrdiff_t negate_size = 0;
         ptrdiff_t negate_one = 0;
         if (direction == FORWARD)
         {
-            negate_sz = needle_sz;
+            negate_size = needle_size;
             negate_one = 1;
         }
-        while (last_rest + rest < needle_sz)
+        while (last_rest + rest < needle_size)
         {
             switch (SV_char_cmp(
-                needle[needle_sz
-                        - (last_rest + rest) - 1 + negate_sz + negate_one],
-                needle[needle_sz
-                        - (suff_pos + rest) - 1 + negate_sz + negate_one]))
+                needle[needle_size
+                        - (last_rest + rest) - 1 + negate_size + negate_one],
+                needle[needle_size
+                        - (suff_pos + rest) - 1 + negate_size + negate_one]))
             {
             ...
 
@@ -1328,119 +1357,124 @@ maximal_suffix_rev(ptrdiff_t const needle_sz,
 /* Searches a string from right to left with a two-way algorithm. Returns
    the position of the start of the strig if found and string size if not. */
 static inline size_t
-tw_rmatch(ptrdiff_t const haystack_sz,
-          char const ARR_CONST_GEQ(haystack, haystack_sz),
-          ptrdiff_t const needle_sz,
-          char const ARR_CONST_GEQ(needle, needle_sz))
+two_way_reverse_match(ptrdiff_t const haystack_size,
+                      char const ARR_CONST_GEQ(haystack, haystack_size),
+                      ptrdiff_t const needle_size,
+                      char const ARR_CONST_GEQ(needle, needle_size))
 {
-    struct Factorization const s = r_maximal_suffix(needle_sz, needle);
-    struct Factorization const r = r_maximal_suffix_rev(needle_sz, needle);
-    struct Factorization const w = (s.critical_pos > r.critical_pos) ? s : r;
-    if (!r_memcmp(needle + needle_sz - 1,
-                  needle + needle_sz - w.period_dist - 1, w.critical_pos + 1))
+    struct Factorization const s = reverse_maximal_suffix(needle_size, needle);
+    struct Factorization const r
+        = reverse_maximal_suffix_reverse(needle_size, needle);
+    struct Factorization const w
+        = (s.critical_position > r.critical_position) ? s : r;
+    if (!reverse_memcmp(needle + needle_size - 1,
+                        needle + needle_size - w.period_distance - 1,
+                        w.critical_position + 1))
     {
-        return r_pos_memo(haystack_sz, haystack, needle_sz, needle,
-                          w.period_dist, w.critical_pos);
+        return reverse_position_memoized(haystack_size, haystack, needle_size,
+                                         needle, w.period_distance,
+                                         w.critical_position);
     }
-    return r_pos_normal(haystack_sz, haystack, needle_sz, needle, w.period_dist,
-                        w.critical_pos);
+    return reverse_position_normal(haystack_size, haystack, needle_size, needle,
+                                   w.period_distance, w.critical_position);
 }
 
 static size_t
-r_pos_memo(ptrdiff_t const haystack_sz,
-           char const ARR_CONST_GEQ(haystack, haystack_sz),
-           ptrdiff_t const needle_sz,
-           char const ARR_CONST_GEQ(needle, needle_sz),
-           ptrdiff_t const period_dist, ptrdiff_t const critical_pos)
+reverse_position_memoized(ptrdiff_t const haystack_size,
+                          char const ARR_CONST_GEQ(haystack, haystack_size),
+                          ptrdiff_t const needle_size,
+                          char const ARR_CONST_GEQ(needle, needle_size),
+                          ptrdiff_t const period_dist,
+                          ptrdiff_t const critical_pos)
 {
     ptrdiff_t lpos = 0;
     ptrdiff_t rpos = 0;
     ptrdiff_t memoize_shift = -1;
-    while (lpos <= haystack_sz - needle_sz)
+    while (lpos <= haystack_size - needle_size)
     {
         for (rpos = signed_max(critical_pos, memoize_shift) + 1;
-             rpos < needle_sz
-             && needle[needle_sz - rpos - 1]
-                    == haystack[haystack_sz - (rpos + lpos) - 1];
+             rpos < needle_size
+             && needle[needle_size - rpos - 1]
+                    == haystack[haystack_size - (rpos + lpos) - 1];
              ++rpos)
         {}
-        if (rpos < needle_sz)
+        if (rpos < needle_size)
         {
             lpos += (rpos - critical_pos);
             memoize_shift = -1;
             continue;
         }
-        /* r_pos >= needle_sz */
+        /* r_pos >= needle_size */
         for (rpos = critical_pos;
              rpos > memoize_shift
-             && needle[needle_sz - rpos - 1]
-                    == haystack[haystack_sz - (rpos + lpos) - 1];
+             && needle[needle_size - rpos - 1]
+                    == haystack[haystack_size - (rpos + lpos) - 1];
              --rpos)
         {}
         if (rpos <= memoize_shift)
         {
-            return haystack_sz - lpos - needle_sz;
+            return haystack_size - lpos - needle_size;
         }
         lpos += period_dist;
         /* Some prefix of needle coincides with the text. Memoize the length
            of this prefix to increase length of next shift, if possible. */
-        memoize_shift = needle_sz - period_dist - 1;
+        memoize_shift = needle_size - period_dist - 1;
     }
-    return haystack_sz;
+    return haystack_size;
 }
 
 static size_t
-r_pos_normal(ptrdiff_t const haystack_sz,
-             char const ARR_CONST_GEQ(haystack, haystack_sz),
-             ptrdiff_t const needle_sz,
-             char const ARR_CONST_GEQ(needle, needle_sz), ptrdiff_t period_dist,
-             ptrdiff_t const critical_pos)
+reverse_position_normal(ptrdiff_t const haystack_size,
+                        char const ARR_CONST_GEQ(haystack, haystack_size),
+                        ptrdiff_t const needle_size,
+                        char const ARR_CONST_GEQ(needle, needle_size),
+                        ptrdiff_t period_dist, ptrdiff_t const critical_pos)
 {
     period_dist
-        = signed_max(critical_pos + 1, needle_sz - critical_pos - 1) + 1;
+        = signed_max(critical_pos + 1, needle_size - critical_pos - 1) + 1;
     ptrdiff_t lpos = 0;
     ptrdiff_t rpos = 0;
-    while (lpos <= haystack_sz - needle_sz)
+    while (lpos <= haystack_size - needle_size)
     {
         for (rpos = critical_pos + 1;
-             rpos < needle_sz
-             && (needle[needle_sz - rpos - 1]
-                 == haystack[haystack_sz - (rpos + lpos) - 1]);
+             rpos < needle_size
+             && (needle[needle_size - rpos - 1]
+                 == haystack[haystack_size - (rpos + lpos) - 1]);
              ++rpos)
         {}
-        if (rpos < needle_sz)
+        if (rpos < needle_size)
         {
             lpos += (rpos - critical_pos);
             continue;
         }
-        /* r_pos >= needle_sz */
+        /* r_pos >= needle_size */
         for (rpos = critical_pos;
              rpos >= 0
-             && needle[needle_sz - rpos - 1]
-                    == haystack[haystack_sz - (rpos + lpos) - 1];
+             && needle[needle_size - rpos - 1]
+                    == haystack[haystack_size - (rpos + lpos) - 1];
              --rpos)
         {}
         if (rpos < 0)
         {
-            return haystack_sz - lpos - needle_sz;
+            return haystack_size - lpos - needle_size;
         }
         lpos += period_dist;
     }
-    return haystack_sz;
+    return haystack_size;
 }
 
 static inline struct Factorization
-r_maximal_suffix(ptrdiff_t const needle_sz,
-                 char const ARR_CONST_GEQ(needle, needle_sz))
+reverse_maximal_suffix(ptrdiff_t const needle_size,
+                       char const ARR_CONST_GEQ(needle, needle_size))
 {
     ptrdiff_t suff_pos = -1;
     ptrdiff_t period = 1;
     ptrdiff_t last_rest = 0;
     ptrdiff_t rest = 1;
-    while (last_rest + rest < needle_sz)
+    while (last_rest + rest < needle_size)
     {
-        switch (char_cmp(needle[needle_sz - (last_rest + rest) - 1],
-                         needle[needle_sz - (suff_pos + rest) - 1]))
+        switch (char_compare(needle[needle_size - (last_rest + rest) - 1],
+                             needle[needle_size - (suff_pos + rest) - 1]))
         {
         case SV_ORDER_LESSER:
             last_rest += rest;
@@ -1468,23 +1502,23 @@ r_maximal_suffix(ptrdiff_t const needle_sz,
         }
     }
     return (struct Factorization){
-        .critical_pos = suff_pos,
-        .period_dist = period,
+        .critical_position = suff_pos,
+        .period_distance = period,
     };
 }
 
 static inline struct Factorization
-r_maximal_suffix_rev(ptrdiff_t const needle_sz,
-                     char const ARR_CONST_GEQ(needle, needle_sz))
+reverse_maximal_suffix_reverse(ptrdiff_t const needle_size,
+                               char const ARR_CONST_GEQ(needle, needle_size))
 {
     ptrdiff_t suff_pos = -1;
     ptrdiff_t period = 1;
     ptrdiff_t last_rest = 0;
     ptrdiff_t rest = 1;
-    while (last_rest + rest < needle_sz)
+    while (last_rest + rest < needle_size)
     {
-        switch (char_cmp(needle[needle_sz - (last_rest + rest) - 1],
-                         needle[needle_sz - (suff_pos + rest) - 1]))
+        switch (char_compare(needle[needle_size - (last_rest + rest) - 1],
+                             needle[needle_size - (suff_pos + rest) - 1]))
         {
         case SV_ORDER_GREATER:
             last_rest += rest;
@@ -1512,8 +1546,8 @@ r_maximal_suffix_rev(ptrdiff_t const needle_sz,
         }
     }
     return (struct Factorization){
-        .critical_pos = suff_pos,
-        .period_dist = period,
+        .critical_position = suff_pos,
+        .period_distance = period,
     };
 }
 
@@ -1529,7 +1563,7 @@ r_maximal_suffix_rev(ptrdiff_t const needle_sz,
    to left. Also having a reverse tokenizer is convenient and also relies
    on right to left brute force searches. */
 static inline size_t
-view_n_chr(size_t n, char const ARR_GEQ(s, n), char const c)
+view_match_char(size_t n, char const ARR_GEQ(s, n), char const c)
 {
     size_t i = 0;
     for (; n && *s != c; s++, --n, ++i)
@@ -1538,7 +1572,8 @@ view_n_chr(size_t n, char const ARR_GEQ(s, n), char const c)
 }
 
 static inline size_t
-r_view_n_chr(size_t const n, char const ARR_CONST_GEQ(s, n), char const c)
+reverse_view_match_char(size_t const n, char const ARR_CONST_GEQ(s, n),
+                        char const c)
 {
     char const *x = s + n - 1;
     size_t i = n;
@@ -1548,25 +1583,25 @@ r_view_n_chr(size_t const n, char const ARR_CONST_GEQ(s, n), char const c)
 }
 
 static inline size_t
-two_byte_view_n_view_n(size_t const sz, unsigned char const ARR_GEQ(h, sz),
-                       size_t const n_sz,
-                       unsigned char const ARR_CONST_GEQ(n, n_sz))
+two_byte_view_match(size_t const size, unsigned char const ARR_GEQ(h, size),
+                    size_t const n_size,
+                    unsigned char const ARR_CONST_GEQ(n, n_size))
 {
-    unsigned char const *const end = h + sz;
+    unsigned char const *const end = h + size;
     uint16_t nw = n[0] << 8 | n[1];
     uint16_t hw = h[0] << 8 | h[1];
     for (++h; hw != nw && ++h < end; hw = (hw << 8) | *h)
     {}
-    return h >= end ? sz : (sz - (size_t)(end - h)) - 1;
+    return h >= end ? size : (size - (size_t)(end - h)) - 1;
 }
 
 static inline size_t
-r_two_byte_view_n_view_n(size_t const sz,
-                         unsigned char const ARR_CONST_GEQ(h, sz),
-                         size_t const n_sz,
-                         unsigned char const ARR_CONST_GEQ(n, n_sz))
+reverse_two_byte_view_match(size_t const size,
+                            unsigned char const ARR_CONST_GEQ(h, size),
+                            size_t const n_size,
+                            unsigned char const ARR_CONST_GEQ(n, n_size))
 {
-    unsigned char const *i = h + (sz - 2);
+    unsigned char const *i = h + (size - 2);
     uint16_t nw = n[0] << 8 | n[1];
     uint16_t iw = i[0] << 8 | i[1];
     /* The search is right to left therefore the Most Significant Byte will
@@ -1574,29 +1609,29 @@ r_two_byte_view_n_view_n(size_t const sz,
        character is shifted to the right. */
     for (; iw != nw && --i >= h; iw = (iw >> 8) | (*i << 8))
     {}
-    return i < h ? sz : (size_t)(i - h);
+    return i < h ? size : (size_t)(i - h);
 }
 
 static inline size_t
-three_byte_view_n_view_n(size_t const sz, unsigned char const ARR_GEQ(h, sz),
-                         size_t const n_sz,
-                         unsigned char const ARR_CONST_GEQ(n, n_sz))
+three_byte_view_match(size_t const size, unsigned char const ARR_GEQ(h, size),
+                      size_t const n_size,
+                      unsigned char const ARR_CONST_GEQ(n, n_size))
 {
-    unsigned char const *const end = h + sz;
+    unsigned char const *const end = h + size;
     uint32_t nw = (uint32_t)n[0] << 24 | n[1] << 16 | n[2] << 8;
     uint32_t hw = (uint32_t)h[0] << 24 | h[1] << 16 | h[2] << 8;
     for (h += 2; hw != nw && ++h < end; hw = (hw | *h) << 8)
     {}
-    return h >= end ? sz : (sz - (size_t)(end - h)) - 2;
+    return h >= end ? size : (size - (size_t)(end - h)) - 2;
 }
 
 static inline size_t
-r_three_byte_view_n_view_n(size_t const sz,
-                           unsigned char const ARR_CONST_GEQ(h, sz),
-                           size_t const n_sz,
-                           unsigned char const ARR_CONST_GEQ(n, n_sz))
+reverse_three_byte_view_match(size_t const size,
+                              unsigned char const ARR_CONST_GEQ(h, size),
+                              size_t const n_size,
+                              unsigned char const ARR_CONST_GEQ(n, n_size))
 {
-    unsigned char const *i = h + (sz - 3);
+    unsigned char const *i = h + (size - 3);
     uint32_t nw = (uint32_t)n[0] << 16 | n[1] << 8 | n[2];
     uint32_t iw = (uint32_t)i[0] << 16 | i[1] << 8 | i[2];
     /* Align the bits with fewer left shifts such that as the parsing
@@ -1604,29 +1639,29 @@ r_three_byte_view_n_view_n(size_t const sz,
        bit position and there is no need for any masking. */
     for (; iw != nw && --i >= h; iw = (iw >> 8) | (*i << 16))
     {}
-    return i < h ? sz : (size_t)(i - h);
+    return i < h ? size : (size_t)(i - h);
 }
 
 static inline size_t
-four_byte_view_n_view_n(size_t const sz, unsigned char const ARR_GEQ(h, sz),
-                        size_t const n_sz,
-                        unsigned char const ARR_CONST_GEQ(n, n_sz))
+four_byte_view_match(size_t const size, unsigned char const ARR_GEQ(h, size),
+                     size_t const n_size,
+                     unsigned char const ARR_CONST_GEQ(n, n_size))
 {
-    unsigned char const *const end = h + sz;
+    unsigned char const *const end = h + size;
     uint32_t nw = (uint32_t)n[0] << 24 | n[1] << 16 | n[2] << 8 | n[3];
     uint32_t hw = (uint32_t)h[0] << 24 | h[1] << 16 | h[2] << 8 | h[3];
     for (h += 3; hw != nw && ++h < end; hw = (hw << 8) | *h)
     {}
-    return h >= end ? sz : (sz - (size_t)(end - h)) - 3;
+    return h >= end ? size : (size - (size_t)(end - h)) - 3;
 }
 
 static inline size_t
-r_four_byte_view_n_view_n(size_t const sz,
-                          unsigned char const ARR_CONST_GEQ(h, sz),
-                          size_t const n_sz,
-                          unsigned char const ARR_CONST_GEQ(n, n_sz))
+reverse_four_byte_view_match(size_t const size,
+                             unsigned char const ARR_CONST_GEQ(h, size),
+                             size_t const n_size,
+                             unsigned char const ARR_CONST_GEQ(n, n_size))
 {
-    unsigned char const *i = h + (sz - 4);
+    unsigned char const *i = h + (size - 4);
     uint32_t nw = (uint32_t)n[0] << 24 | n[1] << 16 | n[2] << 8 | n[3];
     uint32_t iw = (uint32_t)i[0] << 24 | i[1] << 16 | i[2] << 8 | i[3];
     /* Now that all four bytes of the unsigned int are used the shifting
@@ -1634,5 +1669,5 @@ r_four_byte_view_n_view_n(size_t const sz,
        next leading character takes the high bit position. */
     for (; iw != nw && --i >= h; iw = (iw >> 8) | (*i << 24))
     {}
-    return i < h ? sz : (size_t)(i - h);
+    return i < h ? size : (size_t)(i - h);
 }
