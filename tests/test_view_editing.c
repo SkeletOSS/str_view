@@ -21,14 +21,11 @@ static Test_fn const all_tests[NUM_TESTS] = {
 };
 
 int
-main()
-{
+main(void) {
     enum Test_result res = PASS;
-    for (size_t i = 0; i < NUM_TESTS; ++i)
-    {
+    for (size_t i = 0; i < NUM_TESTS; ++i) {
         enum Test_result const t_res = all_tests[i]();
-        if (t_res == FAIL)
-        {
+        if (t_res == FAIL) {
             res = FAIL;
         }
     }
@@ -36,23 +33,22 @@ main()
 }
 
 static enum Test_result
-test_prefix_suffix(void)
-{
+test_prefix_suffix(void) {
     char const *const reference = "Remove the suffix! No, remove the prefix!";
     char const *const ref_prefix = "Remove the suffix!";
     char const *const ref_suffix = "No, remove the prefix!";
     SV_Str_view entire_string = SV_from_terminated(reference);
     SV_Str_view prefix = SV_remove_suffix(entire_string, 23);
     size_t i = 0;
-    for (char const *c = SV_begin(prefix); c != SV_end(prefix); c = SV_next(c))
-    {
+    for (char const *c = SV_begin(prefix); c != SV_end(prefix);
+         c = SV_next(c)) {
         CHECK(*c, ref_prefix[i], char, "%c");
         ++i;
     }
     i = 0;
     SV_Str_view const suffix = SV_remove_prefix(entire_string, 19);
-    for (char const *c = SV_begin(suffix); c != SV_end(suffix); c = SV_next(c))
-    {
+    for (char const *c = SV_begin(suffix); c != SV_end(suffix);
+         c = SV_next(c)) {
         CHECK(*c, ref_suffix[i], char, "%c");
         ++i;
     }
@@ -64,8 +60,7 @@ test_prefix_suffix(void)
 }
 
 static enum Test_result
-test_substr(void)
-{
+test_substr(void) {
     char const ref[27] = {
         [0] = 'A',  [1] = ' ',  [2] = 's',   [3] = 'u',  [4] = 'b',  [5] = 's',
         [6] = 't',  [7] = 'r',  [8] = 'i',   [9] = 'n',  [10] = 'g', [11] = '!',
@@ -104,8 +99,7 @@ test_substr(void)
 }
 
 static enum Test_result
-test_dir_entries(void)
-{
+test_dir_entries(void) {
     CHECK(SV_is_empty(
               SV_substr(dirslash, 0, SV_reverse_find(dirslash, 0, dirslash))),
           true, bool, "%d");
@@ -123,8 +117,7 @@ test_dir_entries(void)
     size_t i = 0;
     for (SV_Str_view tok = SV_token_begin(special_file, dirslash);
          !SV_token_end(special_file, tok);
-         tok = SV_token_next(special_file, tok, dirslash), ++i)
-    {
+         tok = SV_token_next(special_file, tok, dirslash), ++i) {
         CHECK(SV_terminated_compare(tok, toks[i]), SV_ORDER_EQUAL, SV_Order,
               "%d");
     }
@@ -133,8 +126,7 @@ test_dir_entries(void)
 }
 
 static enum Test_result
-test_progressive_search(void)
-{
+test_progressive_search(void) {
     SV_Str_view const starting_path
         = SV_from_terminated("/this/is/not/the/file/you/are/looking/for");
     char const *const sub_paths[10] = {
@@ -151,8 +143,7 @@ test_progressive_search(void)
     };
     size_t i = 0;
     for (SV_Str_view path = starting_path; !SV_is_empty(path);
-         path = SV_remove_prefix(path, SV_find_first_of(path, dirslash) + 1))
-    {
+         path = SV_remove_prefix(path, SV_find_first_of(path, dirslash) + 1)) {
         CHECK(SV_terminated_compare(path, sub_paths[i]), SV_ORDER_EQUAL,
               SV_Order, "%d");
         ++i;
@@ -172,8 +163,7 @@ test_progressive_search(void)
     i = 0;
     for (SV_Str_view path = starting_path; !SV_is_empty(path);
          path = SV_remove_suffix(path, SV_len(path)
-                                           - SV_find_last_of(path, dirslash)))
-    {
+                                           - SV_find_last_of(path, dirslash))) {
         CHECK(SV_terminated_compare(path, sub_paths_rev[i]), SV_ORDER_EQUAL,
               SV_Order, "%d");
         ++i;

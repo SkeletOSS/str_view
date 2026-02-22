@@ -16,14 +16,11 @@ static Test_fn const all_tests[NUM_TESTS] = {
 };
 
 int
-main()
-{
+main(void) {
     enum Test_result res = PASS;
-    for (size_t i = 0; i < NUM_TESTS; ++i)
-    {
+    for (size_t i = 0; i < NUM_TESTS; ++i) {
         enum Test_result const t_res = all_tests[i]();
-        if (t_res == FAIL)
-        {
+        if (t_res == FAIL) {
             res = FAIL;
         }
     }
@@ -31,8 +28,7 @@ main()
 }
 
 static enum Test_result
-test_length_terminated(void)
-{
+test_length_terminated(void) {
     char const ref[6] = {
         [0] = 'H', [1] = 'e', [2] = 'l', [3] = 'l', [4] = 'l', [5] = '\0',
     };
@@ -48,8 +44,7 @@ test_length_terminated(void)
 }
 
 static enum Test_result
-test_length_unterminated(void)
-{
+test_length_unterminated(void) {
     char const ref[12] = {
         [0] = 'H', [1] = 'e', [2] = 'l', [3] = 'l', [4] = 'l',  [5] = ' ',
         [6] = 's', [7] = 'n', [8] = 'i', [9] = 'p', [10] = '!', [11] = '\0',
@@ -68,8 +63,7 @@ test_length_unterminated(void)
 }
 
 static enum Test_result
-test_length_innacurate(void)
-{
+test_length_innacurate(void) {
     char const ref[18]
         = {[0] = 'H',  [1] = 'e',   [2] = 'l',  [3] = 'l',  [4] = 'l',
            [5] = ' ',  [6] = 's',   [7] = 'n',  [8] = 'i',  [9] = 'p',

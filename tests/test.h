@@ -2,15 +2,14 @@
 #define TEST
 
 #include <signal.h>
-#include <stdio.h> /* NOLINT */
+#include <stdio.h> /* IWYU pragma: keep */
 
 #define RED "\033[38;5;9m"
 #define GREEN "\033[38;5;10m"
 #define CYAN "\033[38;5;14m"
 #define NONE "\033[0m"
 
-enum Test_result
-{
+enum Test_result {
     ERROR = -1,
     PASS,
     FAIL,
@@ -25,8 +24,7 @@ typedef enum Test_result (*Test_fn)(void);
    and stack frames. Be sure to step "(gdb) up" out of the
    raise function to wherever it triggered. */
 #define BREAKPOINT()                                                           \
-    do                                                                         \
-    {                                                                          \
+    do {                                                                       \
         (void)fprintf(stderr, "\n!!Break. Line: %d File: %s, Func: %s\n ",     \
                       __LINE__, __FILE__, __func__);                           \
         (void)raise(SIGTRAP);                                                  \
@@ -42,12 +40,10 @@ typedef enum Test_result (*Test_fn)(void);
    bool, "%d"). If RESULT or EXPECTED are function calls they will only
    be evaluated once, as expected. */
 #define CHECK(RESULT, EXPECTED, TYPE, TYPE_FORMAT_SPECIFIER)                   \
-    do                                                                         \
-    {                                                                          \
+    do {                                                                       \
         const TYPE _result = RESULT;                                           \
         const TYPE _expected = EXPECTED;                                       \
-        if (_result != _expected)                                              \
-        {                                                                      \
+        if (_result != _expected) {                                            \
             (void)fprintf(stderr, CYAN "--\nfailure in %s, line %d\n" NONE,    \
                           __func__, __LINE__);                                 \
             (void)fprintf(stderr,                                              \

@@ -39,14 +39,11 @@ static Test_fn const all_tests[NUM_TESTS] = {
 };
 
 int
-main()
-{
+main(void) {
     enum Test_result res = PASS;
-    for (size_t i = 0; i < NUM_TESTS; ++i)
-    {
+    for (size_t i = 0; i < NUM_TESTS; ++i) {
         enum Test_result const t_res = all_tests[i]();
-        if (t_res == FAIL)
-        {
+        if (t_res == FAIL) {
             res = FAIL;
         }
     }
@@ -54,8 +51,7 @@ main()
 }
 
 static enum Test_result
-test_small_find(void)
-{
+test_small_find(void) {
     char const ref[20] = {
         [0] = 'A',  [1] = 'A',  [2] = 'C',  [3] = ' ',  [4] = '!',
         [5] = '!',  [6] = '!',  [7] = ' ',  [8] = '*',  [9] = '*',
@@ -70,8 +66,7 @@ test_small_find(void)
 }
 
 static enum Test_result
-test_small_rfind(void)
-{
+test_small_rfind(void) {
     char const ref[20] = {
         [0] = 'Y',  [1] = 'A',  [2] = 'C',  [3] = ' ',  [4] = '!',
         [5] = '!',  [6] = '!',  [7] = ' ',  [8] = '*',  [9] = '*',
@@ -89,8 +84,7 @@ test_small_rfind(void)
 }
 
 static enum Test_result
-test_find_of_sets(void)
-{
+test_find_of_sets(void) {
     char const ref[25] = {
         [0] = 'A',  [1] = 'A',  [2] = 'C',  [3] = 'B',  [4] = '!',
         [5] = '!',  [6] = '!',  [7] = ' ',  [8] = '*',  [9] = '.',
@@ -110,8 +104,7 @@ test_find_of_sets(void)
 }
 
 static enum Test_result
-test_substring_brute_force(void)
-{
+test_substring_brute_force(void) {
     char const *one_byte_needle = "A";
     char const *two_byte_needle = "AA";
     char const *three_byte_needle = "AAA";
@@ -169,8 +162,7 @@ test_substring_brute_force(void)
 }
 
 static enum Test_result
-test_rfind_brute_force(void)
-{
+test_rfind_brute_force(void) {
     char const *one_byte_needle = "A";
     char const *two_byte_needle = "BB";
     char const *three_byte_needle = "CCC";
@@ -259,8 +251,7 @@ test_rfind_brute_force(void)
 }
 
 static enum Test_result
-test_consecutive_find(void)
-{
+test_consecutive_find(void) {
     char const needles[13] = {
         [0] = 'a',  [1] = 'a',  [2] = 'a',   [3] = 'Z', [4] = 'a',
         [5] = 'a',  [6] = 'Z',  [7] = 'a',   [8] = 'a', [9] = 'a',
@@ -273,8 +264,7 @@ test_consecutive_find(void)
     size_t pos = 0;
     size_t i = 0;
     bool found = false;
-    while (i < size && (pos = SV_find(hay, pos, needle)) != SV_npos(hay))
-    {
+    while (i < size && (pos = SV_find(hay, pos, needle)) != SV_npos(hay)) {
         found = true;
         CHECK(pos, found_positions[i], size_t, "%zu");
         ++pos;
@@ -286,8 +276,7 @@ test_consecutive_find(void)
 }
 
 static enum Test_result
-test_consecutive_rfind(void)
-{
+test_consecutive_rfind(void) {
     char const needles[13] = {
         [0] = 'a',  [1] = 'a',  [2] = 'a',   [3] = 'Z', [4] = 'a',
         [5] = 'a',  [6] = 'Z',  [7] = 'a',   [8] = 'a', [9] = 'a',
@@ -299,8 +288,7 @@ test_consecutive_rfind(void)
     size_t pos = SV_len(hay);
     size_t i = sizeof(found_positions) / sizeof(found_positions[0]);
     bool found = false;
-    while (i && (pos = SV_reverse_find(hay, pos, needle)) != SV_npos(hay))
-    {
+    while (i && (pos = SV_reverse_find(hay, pos, needle)) != SV_npos(hay)) {
         --i;
         found = true;
         CHECK(pos, found_positions[i], size_t, "%zu");
@@ -312,8 +300,7 @@ test_consecutive_rfind(void)
 }
 
 static enum Test_result
-test_rfind_off_by_one(void)
-{
+test_rfind_off_by_one(void) {
     char const *one_byte_needle = "Z";
     CHECK(SV_reverse_find(SV_from_terminated(one_byte_needle), 1,
                           SV_from_terminated("Z")),
@@ -391,8 +378,7 @@ test_rfind_off_by_one(void)
 }
 
 static enum Test_result
-test_find_rfind_memoization(void)
-{
+test_find_rfind_memoization(void) {
     char const *needle_forward = "aabbaabba";
     char const *needle_backward = "abbaabbaa";
     char const *const haystack
@@ -414,8 +400,7 @@ test_find_rfind_memoization(void)
 }
 
 static enum Test_result
-test_substring_off_by_one(void)
-{
+test_substring_off_by_one(void) {
     char const *needle = "needle";
     size_t const needle_len = strlen(needle);
     char const *const haystack = "needle_haystackhaystackhaystack_needle";
@@ -447,8 +432,7 @@ test_substring_off_by_one(void)
 }
 
 static enum Test_result
-test_substring_search(void)
-{
+test_substring_search(void) {
     char const *needle = "needle";
     size_t const needle_len = strlen(needle);
     char const *const haystack
@@ -462,8 +446,7 @@ test_substring_search(void)
     SV_Str_view const haystack_view = SV_from_terminated(haystack);
     SV_Str_view const needle_view = SV_from_terminated(needle);
     char const *a = strstr(haystack, needle);
-    if (!a)
-    {
+    if (!a) {
         printf("clibrary strstr failed?\n");
         return FAIL;
     }
@@ -475,8 +458,7 @@ test_substring_search(void)
     CHECK(SV_begin(c), a, char *const, "%s");
     a += needle_len;
     a = strstr(a, needle);
-    if (!a)
-    {
+    if (!a) {
         printf("clibrary strstr failed?\n");
         return FAIL;
     }
@@ -495,14 +477,10 @@ test_substring_search(void)
     size_t i = 0;
     for (SV_Str_view v = SV_token_begin(haystack_view, needle_view);
          !SV_token_end(haystack_view, v);
-         v = SV_token_next(haystack_view, v, needle_view))
-    {
-        if (i == 0)
-        {
+         v = SV_token_next(haystack_view, v, needle_view)) {
+        if (i == 0) {
             CHECK(SV_compare(v, first_chunk), SV_ORDER_EQUAL, SV_Order, "%d");
-        }
-        else
-        {
+        } else {
             CHECK(SV_compare(v, second_chunk), SV_ORDER_EQUAL, SV_Order, "%d");
         }
         ++i;
@@ -512,8 +490,7 @@ test_substring_search(void)
 }
 
 static enum Test_result
-test_rsubstring_search(void)
-{
+test_rsubstring_search(void) {
     char const *needle = "needle";
     char const *const haystack
         = "needle___khaystackhaystackhaystackhaystackhaystackhaystackhaystack"
@@ -527,8 +504,7 @@ test_rsubstring_search(void)
     SV_Str_view const needle_view = SV_from_terminated(needle);
     char const *middle = strstr(haystack + 1, needle);
     char const *begin = strstr(haystack, needle);
-    if (!middle || !begin || begin == middle)
-    {
+    if (!middle || !begin || begin == middle) {
         printf("clibrary strstr failed?\n");
         return ERROR;
     }
@@ -553,8 +529,7 @@ test_rsubstring_search(void)
 }
 
 static enum Test_result
-test_long_substring(void)
-{
+test_long_substring(void) {
     char const *needle = "This needle will make up most of the string such "
                          "that the two-way string searching algorithm has to "
                          "continue for many iterations during a match.";

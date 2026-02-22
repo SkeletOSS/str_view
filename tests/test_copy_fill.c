@@ -13,14 +13,11 @@ static Test_fn const all_tests[NUM_TESTS] = {
 };
 
 int
-main()
-{
+main(void) {
     enum Test_result res = PASS;
-    for (size_t i = 0; i < NUM_TESTS; ++i)
-    {
+    for (size_t i = 0; i < NUM_TESTS; ++i) {
         enum Test_result const t_res = all_tests[i]();
-        if (t_res == FAIL)
-        {
+        if (t_res == FAIL) {
             res = FAIL;
         }
     }
@@ -28,8 +25,7 @@ main()
 }
 
 static enum Test_result
-test_copy_fill(void)
-{
+test_copy_fill(void) {
     char const *const reference = "Copy this over there!";
     SV_Str_view this = SV_copy(strlen(reference), reference);
     char there[SV_str_bytes(reference)];
@@ -41,8 +37,7 @@ test_copy_fill(void)
 }
 
 static enum Test_result
-test_copy_section(void)
-{
+test_copy_section(void) {
     char const ref[20] = {
         [0] = 'A',  [1] = 'A',  [2] = 'C',  [3] = ' ',  [4] = '!',
         [5] = 's',  [6] = 'n',  [7] = 'i',  [8] = 'p',  [9] = '!',

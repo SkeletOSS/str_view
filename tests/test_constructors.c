@@ -19,14 +19,11 @@ static Test_fn const all_tests[NUM_TESTS] = {
 };
 
 int
-main()
-{
+main(void) {
     enum Test_result res = PASS;
-    for (size_t i = 0; i < NUM_TESTS; ++i)
-    {
+    for (size_t i = 0; i < NUM_TESTS; ++i) {
         enum Test_result const t_res = all_tests[i]();
-        if (t_res == FAIL)
-        {
+        if (t_res == FAIL) {
             res = FAIL;
         }
     }
@@ -34,8 +31,7 @@ main()
 }
 
 static enum Test_result
-test_from_null(void)
-{
+test_from_null(void) {
     char const *const reference = "Don't miss the terminator!";
     SV_Str_view const s = SV_from_terminated(reference);
     size_t const reference_len = strlen(reference);
@@ -51,8 +47,7 @@ test_from_null(void)
 }
 
 static enum Test_result
-test_from_delim(void)
-{
+test_from_delim(void) {
     char const *const reference = "Don'tmissthedelim That was it!";
     char const *const reference_chunk = "Don'tmissthedelim";
     SV_Str_view const sv = SV_from_delimiter(reference, " ");
@@ -74,8 +69,7 @@ test_from_delim(void)
 }
 
 static enum Test_result
-test_from_delim_multiple(void)
-{
+test_from_delim_multiple(void) {
     char const *const reference = ",,,Don'tmissthedelim,,,That was it!";
     char const *const reference_chunk = "Don'tmissthedelim";
     SV_Str_view const sv = SV_from_delimiter(reference, ",");
@@ -87,8 +81,7 @@ test_from_delim_multiple(void)
 }
 
 static enum Test_result
-test_from_multichar_delim(void)
-{
+test_from_multichar_delim(void) {
     char const *const reference = "delimDon'tmissthedelimThat was it!";
     char const *const reference_chunk = "Don'tmissthe";
     SV_Str_view const sv = SV_from_delimiter(reference, "delim");
@@ -100,8 +93,7 @@ test_from_multichar_delim(void)
 }
 
 static enum Test_result
-test_from_delim_no_delim(void)
-{
+test_from_delim_no_delim(void) {
     char const *const reference = "Don'tmissthedelimbutnodelim!";
     SV_Str_view const sv = SV_from_delimiter(reference, " ");
     size_t const reference_len = strlen(reference);
@@ -111,8 +103,7 @@ test_from_delim_no_delim(void)
 }
 
 static enum Test_result
-test_empty_constructor(void)
-{
+test_empty_constructor(void) {
     char const *const reference = "------------";
     SV_Str_view const sv = SV_from_delimiter(reference, "-");
     CHECK(SV_len(sv), 0UL, size_t, "%zu");

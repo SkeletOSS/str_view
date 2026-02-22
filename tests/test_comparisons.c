@@ -28,14 +28,11 @@ static Test_fn const all_tests[NUM_TESTS] = {
 };
 
 int
-main()
-{
+main(void) {
     enum Test_result res = PASS;
-    for (size_t i = 0; i < NUM_TESTS; ++i)
-    {
+    for (size_t i = 0; i < NUM_TESTS; ++i) {
         enum Test_result const t_res = all_tests[i]();
-        if (t_res == FAIL)
-        {
+        if (t_res == FAIL) {
             res = FAIL;
         }
     }
@@ -43,8 +40,7 @@ main()
 }
 
 static enum Test_result
-test_compare_single(void)
-{
+test_compare_single(void) {
     char const e1[2] = {
         [0] = 'A',
         [1] = '\0',
@@ -65,8 +61,7 @@ test_compare_single(void)
 }
 
 static enum Test_result
-test_compare_equal(void)
-{
+test_compare_equal(void) {
     char const e1[5] = {
         [0] = 'N', [1] = 'I', [2] = 'C', [3] = 'E', [4] = '\0',
     };
@@ -85,8 +80,7 @@ test_compare_equal(void)
 }
 
 static enum Test_result
-test_compare_equal_view(void)
-{
+test_compare_equal_view(void) {
     char const e1[5] = {
         [0] = 'N', [1] = 'I', [2] = 'C', [3] = 'E', [4] = '\0',
     };
@@ -104,8 +98,7 @@ test_compare_equal_view(void)
 }
 
 static enum Test_result
-test_compare_terminated(void)
-{
+test_compare_terminated(void) {
     char const lesser[5] = {
         [0] = 'A', [1] = 'A', [2] = 'A', [3] = 'A', [4] = '\0',
     };
@@ -126,8 +119,7 @@ test_compare_terminated(void)
 }
 
 static enum Test_result
-test_compare_different_lengths_terminated(void)
-{
+test_compare_different_lengths_terminated(void) {
     char const lesser[5]
         = {[0] = 'A', [1] = 'A', [2] = 'A', [3] = 'A', [4] = '\0'};
     char const greater[3] = {[0] = 'A', [1] = 'A', [2] = '\0'};
@@ -145,8 +137,7 @@ test_compare_different_lengths_terminated(void)
 }
 
 static enum Test_result
-test_compare_view_equals_str(void)
-{
+test_compare_view_equals_str(void) {
     char const *const views
         = "this string constains substring1, substring2, and substring3";
     char const *const str1 = "substring1";
@@ -171,8 +162,7 @@ test_compare_view_equals_str(void)
 }
 
 static enum Test_result
-test_compare_view_off_by_one(void)
-{
+test_compare_view_off_by_one(void) {
     char const *const views
         = "this string constains substring12, substring2, and substring";
     /* Three views of interest withing the string. */
@@ -210,8 +200,7 @@ test_compare_view_off_by_one(void)
 }
 
 static enum Test_result
-test_compare_different_lengths_views(void)
-{
+test_compare_different_lengths_views(void) {
 
     char const lesser[5] = {
         [0] = 'A', [1] = 'A', [2] = 'A', [3] = 'A', [4] = '\0',
@@ -238,8 +227,7 @@ test_compare_different_lengths_views(void)
 }
 
 static enum Test_result
-test_compare_misc(void)
-{
+test_compare_misc(void) {
     CHECK(SV_compare(SV_from_terminated(""), SV_from_terminated("")),
           SV_ORDER_EQUAL, SV_Order, "%d");
     CHECK(SV_terminated_compare(SV_from_terminated(""), ""), SV_ORDER_EQUAL,

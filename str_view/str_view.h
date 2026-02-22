@@ -120,8 +120,7 @@ It is modeled after the C++ `std::string_view`. It consists of a pointer to char
 const data and a size_t field. Therefore, the exact size of this type may be
 platform dependent but it is small enough that one should use the provided
 functions and pass by copy whenever possible. Avoid accessing struct fields. */
-typedef struct
-{
+typedef struct {
     /** The read only data to which we point. */
     char const *str;
     /** The length, not including the NULL terminator position. However, it is
@@ -133,8 +132,7 @@ typedef struct
 
 Orders the result of a comparison between left and right hand side elements,
 describing the order of the left hand side element compared to the right. */
-typedef enum
-{
+typedef enum {
     SV_ORDER_LESSER = -1,
     SV_ORDER_EQUAL,
     SV_ORDER_GREATER,

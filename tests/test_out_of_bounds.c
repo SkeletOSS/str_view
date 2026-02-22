@@ -4,8 +4,7 @@
 #include <stddef.h>
 
 int
-main()
-{
+main(void) {
     SV_Str_view const s = SV_from("a");
     SV_Str_view const empty = SV_from_terminated(SV_pointer(s, 1));
     CHECK(SV_at(s, 9), '\0', char, "%c");

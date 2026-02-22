@@ -14,14 +14,11 @@ static Test_fn const all_tests[NUM_TESTS] = {
 };
 
 int
-main()
-{
+main(void) {
     enum Test_result res = PASS;
-    for (size_t i = 0; i < NUM_TESTS; ++i)
-    {
+    for (size_t i = 0; i < NUM_TESTS; ++i) {
         enum Test_result const t_res = all_tests[i]();
-        if (t_res == FAIL)
-        {
+        if (t_res == FAIL) {
             res = FAIL;
         }
     }
@@ -29,8 +26,7 @@ main()
 }
 
 static enum Test_result
-test_front_back_terminated(void)
-{
+test_front_back_terminated(void) {
     CHECK(SV_back(SV_from_terminated("")), '\0', char, "%c");
     CHECK(SV_front(SV_from_terminated("")), '\0', char, "%c");
     char const *const reference = "*The front was * the back is!";
@@ -43,8 +39,7 @@ test_front_back_terminated(void)
 }
 
 static enum Test_result
-test_front_back_view(void)
-{
+test_front_back_view(void) {
     char const reference[20] = {
         [0] = 'A',  [1] = 'A',  [2] = 'C',  [3] = ' ',  [4] = '^',
         [5] = '!',  [6] = '!',  [7] = ' ',  [8] = '*',  [9] = '*',
