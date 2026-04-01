@@ -744,7 +744,12 @@ SV_find_last_not_of(SV_Str_view const haystack, SV_Str_view const set) {
             last_pos = in;
         }
     }
-    return last_pos;
+    if (last_pos == haystack.len) {
+        return haystack.len;
+    }
+    size_t const one_past_last_of = view_complimentary_substring_length(
+        haystack.len - last_pos, haystack.str + last_pos, set.len, set.str);
+    return last_pos + one_past_last_of - 1;
 }
 
 size_t
@@ -844,17 +849,16 @@ view_complimentary_substring_length(size_t const str_size,
         return str_size;
     }
     char const *a = str;
-    size_t byteset[32 / sizeof(size_t)];
+    size_t byteset[32 / sizeof(size_t)] = {};
     if (set_size == 1) {
         for (size_t i = 0; i < str_size && *a != *set; ++a, ++i) {}
         return a - str;
     }
-    memset(byteset, 0, sizeof byteset);
     for (size_t i = 0;
          i < set_size && BITOP(byteset, *(unsigned char *)set, |=);
          ++set, ++i) {}
     for (size_t i = 0; i < str_size && !BITOP(byteset, *(unsigned char *)a, &);
-         ++a) {}
+         ++a, ++i) {}
     return a - str;
 }
 
