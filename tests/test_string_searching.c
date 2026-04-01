@@ -19,8 +19,12 @@ static enum Test_result test_substring_off_by_one(void);
 static enum Test_result test_substring_search(void);
 static enum Test_result test_rsubstring_search(void);
 static enum Test_result test_long_substring(void);
+static enum Test_result test_find_last_not_of_last_character(void);
+static enum Test_result test_find_last_not_of_second_to_last(void);
+static enum Test_result test_find_last_not_of_third_to_last(void);
+static enum Test_result test_find_last_not_of_none(void);
 
-#define NUM_TESTS (size_t)13
+#define NUM_TESTS (size_t)17
 
 static Test_fn const all_tests[NUM_TESTS] = {
     test_small_find,
@@ -36,6 +40,10 @@ static Test_fn const all_tests[NUM_TESTS] = {
     test_substring_search,
     test_rsubstring_search,
     test_long_substring,
+    test_find_last_not_of_last_character,
+    test_find_last_not_of_second_to_last,
+    test_find_last_not_of_third_to_last,
+    test_find_last_not_of_none,
 };
 
 int
@@ -85,21 +93,59 @@ test_small_rfind(void) {
 
 static enum Test_result
 test_find_of_sets(void) {
-    char const ref[25] = {
-        [0] = 'A',  [1] = 'A',  [2] = 'C',  [3] = 'B',  [4] = '!',
-        [5] = '!',  [6] = '!',  [7] = ' ',  [8] = '*',  [9] = '.',
-        [10] = ':', [11] = ';', [12] = ',', [13] = ' ', [14] = '?',
-        [15] = ' ', [16] = '_', [17] = '_', [18] = ' ', [19] = '!',
-        [20] = '!', [21] = '!', [22] = 'Z', [23] = 'z', [24] = '\0',
+    char const ref[] = {
+        [0] = 'A',  [1] = 'A',   [2] = 'C',  [3] = 'B',  [4] = '!',  [5] = '!',
+        [6] = '!',  [7] = ' ',   [8] = '*',  [9] = '.',  [10] = ':', [11] = ';',
+        [12] = ',', [13] = ' ',  [14] = '?', [15] = ' ', [16] = '_', [17] = '_',
+        [18] = ' ', [19] = '!',  [20] = '!', [21] = '!', [22] = 'Z', [23] = 'Y',
+        [24] = 'z', [25] = '\0',
     };
     SV_Str_view str = SV_from_terminated(ref);
-    CHECK(SV_find_first_of(str, SV_from_terminated("CB!")), 2UL, size_t, "%zu");
-    CHECK(SV_find_first_of(str, SV_from_terminated("")), 24UL, size_t, "%zu");
-    CHECK(SV_find_last_of(str, SV_from_terminated("! _")), 21UL, size_t, "%zu");
-    CHECK(SV_find_last_not_of(str, SV_from_terminated("CBA!")), 22UL, size_t,
+    CHECK(SV_find_first_of(str, SV_from("CB!")), 2UL, size_t, "%zu");
+    CHECK(SV_find_first_of(str, SV_from("")), 25UL, size_t, "%zu");
+    CHECK(SV_find_last_of(str, SV_from("! _")), 21UL, size_t, "%zu");
+    CHECK(SV_find_last_not_of(str, SV_from("CBA!")), 24UL, size_t, "%zu");
+    CHECK(SV_find_last_not_of(str, SV_from("!?.,:;")), 24UL, size_t, "%zu");
+    CHECK(SV_find_last_not_of(str, SV_from("CBA!z")), 23UL, size_t, "%zu");
+    CHECK(SV_find_last_not_of(str, SV_from("!?.,:;z")), 23UL, size_t, "%zu");
+    CHECK(SV_find_first_not_of(str, SV_from("ACB!;:, *.")), 14UL, size_t,
           "%zu");
-    CHECK(SV_find_first_not_of(str, SV_from_terminated("ACB!;:, *.")), 14UL,
-          size_t, "%zu");
+    return PASS;
+}
+
+static enum Test_result
+test_find_last_not_of_last_character(void) {
+    SV_Str_view const needle = SV_from("file:////a");
+    if (SV_find_last_not_of(needle, SV_from("/")) != SV_len(needle) - 1) {
+        return FAIL;
+    }
+    return PASS;
+}
+
+static enum Test_result
+test_find_last_not_of_second_to_last(void) {
+    SV_Str_view const needle = SV_from("this/is/a/directory/path/");
+    if (SV_find_last_not_of(needle, SV_from("/")) != SV_len(needle) - 2) {
+        return FAIL;
+    }
+    return PASS;
+}
+
+static enum Test_result
+test_find_last_not_of_third_to_last(void) {
+    SV_Str_view const needle = SV_from("this/is/a/directory/path//");
+    if (SV_find_last_not_of(needle, SV_from("/")) != SV_len(needle) - 3) {
+        return FAIL;
+    }
+    return PASS;
+}
+
+static enum Test_result
+test_find_last_not_of_none(void) {
+    SV_Str_view const needle = SV_from("///a//a/a/a/a///a");
+    if (SV_find_last_not_of(needle, SV_from("/a")) != SV_len(needle)) {
+        return FAIL;
+    }
     return PASS;
 }
 
