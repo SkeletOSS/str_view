@@ -849,7 +849,7 @@ view_complimentary_substring_length(size_t const str_size,
         return str_size;
     }
     char const *a = str;
-    size_t byteset[32 / sizeof(size_t)] = {};
+    size_t byteset[32 / sizeof(size_t)] = {0};
     if (set_size == 1) {
         for (size_t i = 0; i < str_size && *a != *set; ++a, ++i) {}
         return a - str;
