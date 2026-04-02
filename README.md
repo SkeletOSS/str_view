@@ -12,7 +12,6 @@ A `str_view` is a 16-byte struct and, due to this size, is treated throughout th
 
 Read the [DOCS](https://skeletoss.github.io/str_view/). 
 
-
 ## Install Instructions
 
 This library offers a manual installation through the [Releases](https://github.com/skeletoss/str_view/releases) page or fetch content install via CMake.

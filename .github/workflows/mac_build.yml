@@ -52,5 +52,5 @@ jobs:
     - name: Build with Ninja and Clang
       run: |
         make clean
-        make clang-deb
+        make clang-debug
         make install

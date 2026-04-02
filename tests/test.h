@@ -1,7 +1,6 @@
 #ifndef TEST
 #define TEST
 
-#include <signal.h>
 #include <stdio.h> /* IWYU pragma: keep */
 
 #define RED "\033[38;5;9m"
@@ -16,19 +15,6 @@ enum Test_result {
 };
 
 typedef enum Test_result (*Test_fn)(void);
-
-/* Set this breakpoint on any line where you wish
-   execution to stop. Under normal program runs the program
-   will simply exit. If triggered in GDB execution will stop
-   while able to explore the surrounding context, varialbes,
-   and stack frames. Be sure to step "(gdb) up" out of the
-   raise function to wherever it triggered. */
-#define BREAKPOINT()                                                           \
-    do {                                                                       \
-        (void)fprintf(stderr, "\n!!Break. Line: %d File: %s, Func: %s\n ",     \
-                      __LINE__, __FILE__, __func__);                           \
-        (void)raise(SIGTRAP);                                                  \
-    } while (0)
 
 /* The CHECK macro evaluates a result against an expecation as one
    may be familiar with in many testing frameworks. However, it is

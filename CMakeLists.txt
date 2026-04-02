@@ -21,7 +21,7 @@ if (EXISTS "${PROJECT_SOURCE_DIR}/tests")
     add_subdirectory("${PROJECT_SOURCE_DIR}/tests" EXCLUDE_FROM_ALL)
 endif()
 if (EXISTS "${PROJECT_SOURCE_DIR}/tests" AND EXISTS "${PROJECT_SOURCE_DIR}/samples")
-    include(etc/scanners.cmake)
+    include(tools/scanners.cmake)
 endif()
 
 if (NOT CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)

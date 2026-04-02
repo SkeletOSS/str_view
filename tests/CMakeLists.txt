@@ -4,10 +4,13 @@ project("str_view tests"
     LANGUAGES C
     DESCRIPTION "Testing the str_view library."
 )
+add_custom_target(tests)
 
 add_library(test INTERFACE test.h)
+add_dependencies(tests test)
 include_directories("../str_view")
 add_executable(run_tests run_tests.c)
+add_dependencies(tests run_tests)
 target_link_libraries(run_tests str_view test)
 
 ###########   Add Test Files Below This Point   ###########
@@ -27,6 +30,7 @@ macro(add_test TEST_NAME)
       RUNTIME_OUTPUT_DIRECTORY 
         ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/tests
   )
+  add_dependencies(tests ${TEST_NAME})
 endmacro()
 
 # Add tests below here by the name of the c file without the .c suffix
@@ -41,10 +45,3 @@ add_test(test_comparisons)
 add_test(test_string_searching)
 add_test(test_view_editing)
 
-# Create a custom target that will depend on all targets in the subdirectory
-add_custom_target(tests)
-# Function to add dependencies on all targets from the subdirectory
-get_property(test_targets DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY BUILDSYSTEM_TARGETS)
-foreach(target IN LISTS test_targets)
-    add_dependencies(tests ${target})
-endforeach()
