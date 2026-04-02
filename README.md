@@ -12,7 +12,6 @@ A `str_view` is a 16-byte struct and, due to this size, is treated throughout th
 
 Read the [DOCS](https://skeletoss.github.io/str_view/). 
 
-
 ## Install Instructions
 
 This library offers a manual installation through the [Releases](https://github.com/skeletoss/str_view/releases) page or fetch content install via CMake.
@@ -28,3 +27,7 @@ This library is not yet version `1.0`. To reach `1.0` I would like to implement 
 - SIMD intrinsics. At the very least, SIMD implemented for the short string brute force searches is critical.
 
 That being said, I have already found this library very helpful whenever I need to write C code. Please consider giving it a try.
+
+## Coverage Report
+
+[View the code coverage report here](https://skeletoss.github.io/str_view/coverage).

@@ -1,7 +1,11 @@
+#ifdef __APPLE__
+#    include <machine/limits.h>
+#endif
+#include <limits.h>
+#include <string.h>
+
 #include "str_view.h"
 #include "test.h"
-
-#include <string.h>
 
 static enum Test_result test_length_terminated(void);
 static enum Test_result test_length_unterminated(void);
@@ -39,7 +43,7 @@ test_length_terminated(void) {
     CHECK(bytes, SV_str_bytes(ref), size_t, "%zu");
     CHECK(bytes, SV_bytes(SV_from_terminated(ref)), size_t, "%zu");
     CHECK(len, SV_npos(SV_from_terminated(ref)), size_t, "%zu");
-    CHECK(len, SV_min_len(ref, -1), size_t, "%zu");
+    CHECK(len, SV_min_len(ref, SIZE_T_MAX), size_t, "%zu");
     return PASS;
 }
 

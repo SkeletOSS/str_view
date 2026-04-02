@@ -6,12 +6,13 @@
 #    define FILESYS_MAX_PATH PATH_MAX
 #endif
 #ifdef __APPLE__
+#    include <sys/_types/_pid_t.h>
+#    include <sys/dirent.h>
 #    include <sys/syslimits.h>
-#    define FILESYS_MAX_PATH NAME_MAX
+#    define FILESYS_MAX_PATH PATH_MAX
 #endif
 
 #include <dirent.h>
-#include <signal.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -79,7 +80,7 @@ run(SV_Str_view const tests_dir) {
                 (void)fprintf(stdout, "%s%s%s)%s\n", RED, fail_msg, CYAN, NONE);
                 break;
         }
-        passed += 1 - res;
+        passed += (size_t)(1 - res);
         ++tests;
     }
     fail = passed != tests;

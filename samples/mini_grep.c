@@ -174,7 +174,8 @@ match_file_read(FILE *f, SV_Str_view needle) {
     bool found = false;
     while ((read = getline(&lineptr, &len, f)) != -1) {
         if (read
-            && match_line(lineno, (SV_Str_view){lineptr, read - 1}, needle)) {
+            && match_line(lineno, (SV_Str_view){lineptr, (size_t)read - 1},
+                          needle)) {
             found = true;
         }
         ++lineno;
@@ -265,7 +266,7 @@ get_file_buf(FILE *f) {
         (void)fprintf(stderr, "error seeking in file.\n");
         return (struct File_buf){0};
     }
-    size_t const size = ftell(f);
+    size_t const size = (size_t)ftell(f);
     if (fseek(f, 0L, SEEK_SET) < 0) {
         (void)fprintf(stderr, "error seeking in file.\n");
         return (struct File_buf){0};

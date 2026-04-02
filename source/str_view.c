@@ -121,13 +121,13 @@ static size_t four_byte_view_match(size_t size,
                                    unsigned char const ARR_GEQ(, size),
                                    size_t n_size,
                                    unsigned char const ARR_GEQ(, n_size));
-static size_t view_complimentary_substring_length(
+static size_t view_span_in_set_complement_length(
     size_t str_size, char const ARR_GEQ(, str_size), size_t set_size,
     char const ARR_GEQ(, set_size));
-static size_t view_substring_length(size_t str_size,
-                                    char const ARR_GEQ(, str_size),
-                                    size_t set_size,
-                                    char const ARR_GEQ(, set_size));
+static size_t view_span_in_set_length(size_t str_size,
+                                      char const ARR_GEQ(, str_size),
+                                      size_t set_size,
+                                      char const ARR_GEQ(, set_size));
 static size_t view_match(ptrdiff_t haystack_size,
                          char const ARR_GEQ(, haystack_size),
                          ptrdiff_t needle_size,
@@ -440,7 +440,7 @@ SV_token_next(SV_Str_view const src, SV_Str_view const token,
             .len = 0,
         };
     }
-    next.len = &src.str[src.len] - next.str;
+    next.len = (size_t)(&src.str[src.len] - next.str);
     /* There is a cheap easy way to skip repeating delimiters before the
        next search that should be faster than string comparison. */
     size_t const after_delim = after_find(next, delim);
@@ -499,7 +499,7 @@ SV_token_reverse_next(SV_Str_view const src, SV_Str_view const token,
     }
     SV_Str_view const shorter = {
         .str = src.str,
-        .len = (token.str - delim.len) - src.str,
+        .len = (size_t)((token.str - delim.len) - src.str),
     };
     /* Same as in the forward version, this method is a quick way to skip
        any number of repeating delimiters before starting the next search
@@ -535,7 +535,7 @@ SV_extend(SV_Str_view sv) {
     }
     char const *i = sv.str;
     while (*i++) {}
-    sv.len = i - sv.str - 1;
+    sv.len = (size_t)(i - sv.str - 1);
     return sv;
 }
 
@@ -687,8 +687,8 @@ SV_find_first_of(SV_Str_view const haystack, SV_Str_view const set) {
     if (!set.str || !set.len) {
         return haystack.len;
     }
-    return view_complimentary_substring_length(haystack.len, haystack.str,
-                                               set.len, set.str);
+    return view_span_in_set_complement_length(haystack.len, haystack.str,
+                                              set.len, set.str);
 }
 
 size_t
@@ -704,8 +704,8 @@ SV_find_last_of(SV_Str_view const haystack, SV_Str_view const set) {
        The last occurrence of a set char could be anywhere in the string. */
     size_t last_pos = haystack.len;
     for (size_t in = 0, prev = 0;
-         (in += view_substring_length(haystack.len - in, haystack.str + in,
-                                      set.len, set.str))
+         (in += view_span_in_set_length(haystack.len - in, haystack.str + in,
+                                        set.len, set.str))
          != haystack.len;
          ++in, prev = in) {
         if (in != prev) {
@@ -723,7 +723,8 @@ SV_find_first_not_of(SV_Str_view const haystack, SV_Str_view const set) {
     if (!set.str || !set.len) {
         return 0;
     }
-    return view_substring_length(haystack.len, haystack.str, set.len, set.str);
+    return view_span_in_set_length(haystack.len, haystack.str, set.len,
+                                   set.str);
 }
 
 size_t
@@ -736,8 +737,8 @@ SV_find_last_not_of(SV_Str_view const haystack, SV_Str_view const set) {
     }
     size_t last_pos = haystack.len;
     for (size_t in = 0, prev = 0;
-         (in += view_substring_length(haystack.len - in, haystack.str + in,
-                                      set.len, set.str))
+         (in += view_span_in_set_length(haystack.len - in, haystack.str + in,
+                                        set.len, set.str))
          != haystack.len;
          ++in, prev = in) {
         if (in != prev) {
@@ -747,7 +748,7 @@ SV_find_last_not_of(SV_Str_view const haystack, SV_Str_view const set) {
     if (last_pos == haystack.len) {
         return haystack.len;
     }
-    size_t const one_past_last_of = view_complimentary_substring_length(
+    size_t const one_past_last_of = view_span_in_set_complement_length(
         haystack.len - last_pos, haystack.str + last_pos, set.len, set.str);
     return last_pos + one_past_last_of - 1;
 }
@@ -817,8 +818,8 @@ char_compare(char const a, char const b) {
    using SV_Str_view that may not be null terminated requires modifications. */
 
 #define BITOP(a, b, op)                                                        \
-    ((a)[(size_t)(b) / (8 * sizeof *(a))] op(size_t) 1                         \
-     << ((size_t)(b) % (8 * sizeof *(a))))
+    ((a)[(size_t)(b) / (8 * sizeof *(a))] op(size_t)(                          \
+        1 << ((size_t)(b) % (8 * sizeof *(a)))))
 
 /* This is dangerous. Do not use this under normal circumstances.
    This is an internal helper for the backwards two way string
@@ -841,10 +842,10 @@ reverse_memcmp(void const *const vl, void const *const vr, size_t n) {
    end of a view until null is found. This way, string searches are
    efficient and only within the range specified. */
 static size_t
-view_complimentary_substring_length(size_t const str_size,
-                                    char const ARR_CONST_GEQ(str, str_size),
-                                    size_t const set_size,
-                                    char const ARR_GEQ(set, set_size)) {
+view_span_in_set_complement_length(size_t const str_size,
+                                   char const ARR_CONST_GEQ(str, str_size),
+                                   size_t const set_size,
+                                   char const ARR_GEQ(set, set_size)) {
     if (!set_size) {
         return str_size;
     }
@@ -852,14 +853,14 @@ view_complimentary_substring_length(size_t const str_size,
     size_t byteset[32 / sizeof(size_t)] = {0};
     if (set_size == 1) {
         for (size_t i = 0; i < str_size && *a != *set; ++a, ++i) {}
-        return a - str;
+        return (size_t)(a - str);
     }
     for (size_t i = 0;
          i < set_size && BITOP(byteset, *(unsigned char *)set, |=);
          ++set, ++i) {}
     for (size_t i = 0; i < str_size && !BITOP(byteset, *(unsigned char *)a, &);
          ++a, ++i) {}
-    return a - str;
+    return (size_t)(a - str);
 }
 
 /* strspn is based on musl C-standard library implementation
@@ -869,10 +870,10 @@ view_complimentary_substring_length(size_t const str_size,
    end of a view until null is found. This way, string searches are
    efficient and only within the range specified. */
 static size_t
-view_substring_length(size_t const str_size,
-                      char const ARR_CONST_GEQ(str, str_size),
-                      size_t const set_size,
-                      char const ARR_GEQ(set, set_size)) {
+view_span_in_set_length(size_t const str_size,
+                        char const ARR_CONST_GEQ(str, str_size),
+                        size_t const set_size,
+                        char const ARR_GEQ(set, set_size)) {
     char const *a = str;
     size_t byteset[32 / sizeof(size_t)] = {0};
     if (!set_size) {
@@ -880,14 +881,14 @@ view_substring_length(size_t const str_size,
     }
     if (set_size == 1) {
         for (size_t i = 0; i < str_size && *a == *set; ++a, ++i) {}
-        return a - str;
+        return (size_t)(a - str);
     }
     for (size_t i = 0;
          i < set_size && BITOP(byteset, *(unsigned char *)set, |=);
          ++set, ++i) {}
     for (size_t i = 0; i < str_size && BITOP(byteset, *(unsigned char *)a, &);
          ++a, ++i) {}
-    return a - str;
+    return (size_t)(a - str);
 }
 
 /* Providing strnstrn rather than strstr at the lowest level works better
@@ -901,21 +902,24 @@ view_match(ptrdiff_t const haystack_size,
            ptrdiff_t const needle_size,
            char const ARR_CONST_GEQ(needle, needle_size)) {
     if (!haystack_size || !needle_size || needle_size > haystack_size) {
-        return haystack_size;
+        return (size_t)haystack_size;
     }
     if (1 == needle_size) {
-        return view_match_char(haystack_size, haystack, *needle);
+        return view_match_char((size_t)haystack_size, haystack, *needle);
     }
     if (2 == needle_size) {
-        return two_byte_view_match(haystack_size, (unsigned char *)haystack, 2,
+        return two_byte_view_match((size_t)haystack_size,
+                                   (unsigned char *)haystack, 2,
                                    (unsigned char *)needle);
     }
     if (3 == needle_size) {
-        return three_byte_view_match(haystack_size, (unsigned char *)haystack,
-                                     3, (unsigned char *)needle);
+        return three_byte_view_match((size_t)haystack_size,
+                                     (unsigned char *)haystack, 3,
+                                     (unsigned char *)needle);
     }
     if (4 == needle_size) {
-        return four_byte_view_match(haystack_size, (unsigned char *)haystack, 4,
+        return four_byte_view_match((size_t)haystack_size,
+                                    (unsigned char *)haystack, 4,
                                     (unsigned char *)needle);
     }
     return two_way_match(haystack_size, haystack, needle_size, needle);
@@ -932,23 +936,24 @@ reverse_view_match(ptrdiff_t const haystack_size,
                    ptrdiff_t const needle_size,
                    char const ARR_CONST_GEQ(needle, needle_size)) {
     if (!haystack_size || !needle_size || needle_size > haystack_size) {
-        return haystack_size;
+        return (size_t)haystack_size;
     }
     if (1 == needle_size) {
-        return reverse_view_match_char(haystack_size, haystack, *needle);
+        return reverse_view_match_char((size_t)haystack_size, haystack,
+                                       *needle);
     }
     if (2 == needle_size) {
-        return reverse_two_byte_view_match(haystack_size,
+        return reverse_two_byte_view_match((size_t)haystack_size,
                                            (unsigned char *)haystack, 2,
                                            (unsigned char *)needle);
     }
     if (3 == needle_size) {
-        return reverse_three_byte_view_match(haystack_size,
+        return reverse_three_byte_view_match((size_t)haystack_size,
                                              (unsigned char *)haystack, 3,
                                              (unsigned char *)needle);
     }
     if (4 == needle_size) {
-        return reverse_four_byte_view_match(haystack_size,
+        return reverse_four_byte_view_match((size_t)haystack_size,
                                             (unsigned char *)haystack, 4,
                                             (unsigned char *)needle);
     }
@@ -991,7 +996,8 @@ two_way_match(ptrdiff_t const haystack_size,
     struct Factorization const w
         = (s.critical_position > r.critical_position) ? s : r;
     /* Determine if memoization is available due to found border/overlap. */
-    if (!memcmp(needle, needle + w.period_distance, w.critical_position + 1)) {
+    if (!memcmp(needle, needle + w.period_distance,
+                (size_t)w.critical_position + 1)) {
         return position_memoized(haystack_size, haystack, needle_size, needle,
                                  w.period_distance, w.critical_position);
     }
@@ -1027,14 +1033,14 @@ position_memoized(ptrdiff_t const haystack_size,
             --rpos;
         }
         if (rpos <= memoize_shift) {
-            return lpos;
+            return (size_t)lpos;
         }
         lpos += period_dist;
         /* Some prefix of needle coincides with the text. Memoize the length
            of this prefix to increase length of next shift, if possible. */
         memoize_shift = needle_size - period_dist - 1;
     }
-    return haystack_size;
+    return (size_t)haystack_size;
 }
 
 /* Two Way string matching algorithm adapted from ESMAJ
@@ -1064,11 +1070,11 @@ position_normal(ptrdiff_t const haystack_size,
             --rpos;
         }
         if (rpos < 0) {
-            return lpos;
+            return (size_t)lpos;
         }
         lpos += period_dist;
     }
-    return haystack_size;
+    return (size_t)haystack_size;
 }
 
 /* ==============   Suffix and Critical Factorization    =================*/
@@ -1204,7 +1210,7 @@ two_way_reverse_match(ptrdiff_t const haystack_size,
         = (s.critical_position > r.critical_position) ? s : r;
     if (!reverse_memcmp(needle + needle_size - 1,
                         needle + needle_size - w.period_distance - 1,
-                        w.critical_position + 1)) {
+                        (size_t)w.critical_position + 1)) {
         return reverse_position_memoized(haystack_size, haystack, needle_size,
                                          needle, w.period_distance,
                                          w.critical_position);
@@ -1243,14 +1249,14 @@ reverse_position_memoized(ptrdiff_t const haystack_size,
             --rpos;
         }
         if (rpos <= memoize_shift) {
-            return haystack_size - lpos - needle_size;
+            return (size_t)(haystack_size - lpos - needle_size);
         }
         lpos += period_dist;
         /* Some prefix of needle coincides with the text. Memoize the length
            of this prefix to increase length of next shift, if possible. */
         memoize_shift = needle_size - period_dist - 1;
     }
-    return haystack_size;
+    return (size_t)haystack_size;
 }
 
 static size_t
@@ -1282,11 +1288,11 @@ reverse_position_normal(ptrdiff_t const haystack_size,
             --rpos;
         }
         if (rpos < 0) {
-            return haystack_size - lpos - needle_size;
+            return (size_t)(haystack_size - lpos - needle_size);
         }
         lpos += period_dist;
     }
-    return haystack_size;
+    return (size_t)haystack_size;
 }
 
 static inline struct Factorization
@@ -1397,9 +1403,9 @@ two_byte_view_match(size_t const size, unsigned char const ARR_GEQ(h, size),
                     size_t const n_size,
                     unsigned char const ARR_CONST_GEQ(n, n_size)) {
     unsigned char const *const end = h + size;
-    uint16_t nw = n[0] << 8 | n[1];
-    uint16_t hw = h[0] << 8 | h[1];
-    for (++h; hw != nw && ++h < end; hw = (hw << 8) | *h) {}
+    uint16_t nw = (uint16_t)(n[0] << 8 | n[1]);
+    uint16_t hw = (uint16_t)(h[0] << 8 | h[1]);
+    for (++h; hw != nw && ++h < end; hw = (uint16_t)(hw << 8) | *h) {}
     return h >= end ? size : (size - (size_t)(end - h)) - 1;
 }
 
@@ -1409,12 +1415,12 @@ reverse_two_byte_view_match(size_t const size,
                             size_t const n_size,
                             unsigned char const ARR_CONST_GEQ(n, n_size)) {
     unsigned char const *i = h + (size - 2);
-    uint16_t nw = n[0] << 8 | n[1];
-    uint16_t iw = i[0] << 8 | i[1];
+    uint16_t nw = (uint16_t)(n[0] << 8 | n[1]);
+    uint16_t iw = (uint16_t)(i[0] << 8 | i[1]);
     /* The search is right to left therefore the Most Significant Byte will
        be the leading character of the string and the previous leading
        character is shifted to the right. */
-    for (; iw != nw && --i >= h; iw = (iw >> 8) | (*i << 8)) {}
+    for (; iw != nw && --i >= h; iw = (uint16_t)((iw >> 8) | (*i << 8))) {}
     return i < h ? size : (size_t)(i - h);
 }
 
@@ -1423,8 +1429,8 @@ three_byte_view_match(size_t const size, unsigned char const ARR_GEQ(h, size),
                       size_t const n_size,
                       unsigned char const ARR_CONST_GEQ(n, n_size)) {
     unsigned char const *const end = h + size;
-    uint32_t nw = (uint32_t)n[0] << 24 | n[1] << 16 | n[2] << 8;
-    uint32_t hw = (uint32_t)h[0] << 24 | h[1] << 16 | h[2] << 8;
+    uint32_t nw = (uint32_t)(n[0] << 24 | n[1] << 16 | n[2] << 8);
+    uint32_t hw = (uint32_t)(h[0] << 24 | h[1] << 16 | h[2] << 8);
     for (h += 2; hw != nw && ++h < end; hw = (hw | *h) << 8) {}
     return h >= end ? size : (size - (size_t)(end - h)) - 2;
 }
@@ -1435,12 +1441,12 @@ reverse_three_byte_view_match(size_t const size,
                               size_t const n_size,
                               unsigned char const ARR_CONST_GEQ(n, n_size)) {
     unsigned char const *i = h + (size - 3);
-    uint32_t nw = (uint32_t)n[0] << 16 | n[1] << 8 | n[2];
-    uint32_t iw = (uint32_t)i[0] << 16 | i[1] << 8 | i[2];
+    uint32_t nw = (uint32_t)(n[0] << 16 | n[1] << 8 | n[2]);
+    uint32_t iw = (uint32_t)(i[0] << 16 | i[1] << 8 | i[2]);
     /* Align the bits with fewer left shifts such that as the parsing
        progresses right left, the leading character always takes highest
        bit position and there is no need for any masking. */
-    for (; iw != nw && --i >= h; iw = (iw >> 8) | (*i << 16)) {}
+    for (; iw != nw && --i >= h; iw = (iw >> 8) | (uint32_t)(*i << 16)) {}
     return i < h ? size : (size_t)(i - h);
 }
 
@@ -1449,8 +1455,8 @@ four_byte_view_match(size_t const size, unsigned char const ARR_GEQ(h, size),
                      size_t const n_size,
                      unsigned char const ARR_CONST_GEQ(n, n_size)) {
     unsigned char const *const end = h + size;
-    uint32_t nw = (uint32_t)n[0] << 24 | n[1] << 16 | n[2] << 8 | n[3];
-    uint32_t hw = (uint32_t)h[0] << 24 | h[1] << 16 | h[2] << 8 | h[3];
+    uint32_t nw = (uint32_t)(n[0] << 24 | n[1] << 16 | n[2] << 8 | n[3]);
+    uint32_t hw = (uint32_t)(h[0] << 24 | h[1] << 16 | h[2] << 8 | h[3]);
     for (h += 3; hw != nw && ++h < end; hw = (hw << 8) | *h) {}
     return h >= end ? size : (size - (size_t)(end - h)) - 3;
 }
@@ -1461,11 +1467,11 @@ reverse_four_byte_view_match(size_t const size,
                              size_t const n_size,
                              unsigned char const ARR_CONST_GEQ(n, n_size)) {
     unsigned char const *i = h + (size - 4);
-    uint32_t nw = (uint32_t)n[0] << 24 | n[1] << 16 | n[2] << 8 | n[3];
-    uint32_t iw = (uint32_t)i[0] << 24 | i[1] << 16 | i[2] << 8 | i[3];
+    uint32_t nw = (uint32_t)(n[0] << 24 | n[1] << 16 | n[2] << 8 | n[3]);
+    uint32_t iw = (uint32_t)(i[0] << 24 | i[1] << 16 | i[2] << 8 | i[3]);
     /* Now that all four bytes of the unsigned int are used the shifting
        becomes more intuitive. The window slides left to right and the
        next leading character takes the high bit position. */
-    for (; iw != nw && --i >= h; iw = (iw >> 8) | (*i << 24)) {}
+    for (; iw != nw && --i >= h; iw = (iw >> 8) | (uint32_t)(*i << 24)) {}
     return i < h ? size : (size_t)(i - h);
 }

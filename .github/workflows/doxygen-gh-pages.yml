@@ -10,10 +10,51 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      LLVM_PREFIX: LLVM
+      LLVM_VERSION: 22.1.0
+      LLVM_PLATFORM: Linux-X64
     steps:
       - uses: DenverCoder1/doxygen-github-pages-action@v2.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
-          folder: docs/html
+          folder: docs/doxygen
           config_file: Doxyfile
+
+      - name: Setup LCOV
+        uses: hrishikesh-kadam/setup-lcov@v1
+        with:
+          ref: HEAD
+
+      - name: Cache LLVM
+        id: cache-llvm
+        uses: actions/cache@v5
+        with:
+          path: llvm
+          key: ${{env.LLVM_PREFIX}}-${{env.LLVM_VERSION}}-${{env.LLVM_PLATFORM}}
+
+      - name: Download LLVM release
+        if: steps.cache-llvm.outputs.cache-hit != 'true'
+        run: |
+          set -eux
+          LLVM_URL="https://github.com/llvm/llvm-project/releases/download/llvmorg-${LLVM_VERSION}/${LLVM_PREFIX}-${LLVM_VERSION}-${LLVM_PLATFORM}.tar.xz"
+          curl -L --fail "$LLVM_URL" -o llvm.tar.xz
+          mkdir -p llvm
+          tar -xvf llvm.tar.xz --strip-components=1 -C llvm
+
+      - name: Confirm Clang version
+        run: |
+          "$PWD/llvm/bin/clang" --version
+
+      - name: Build Coverage
+        run: |
+          make clean && cmake --preset=llvm-cov -DCMAKE_C_COMPILER="$PWD/llvm/bin/clang" -G "Ninja" -DSV_COVERAGE_TOOL="$PWD/llvm/bin/llvm-cov" && make test && make coverage-publish
+
+      - name: Deploy Coverage
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/coverage
+          destination_dir: coverage
+          keep_files: true

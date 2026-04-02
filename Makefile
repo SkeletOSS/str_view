@@ -1,6 +1,6 @@
-.PHONY: default install build gcc-rel gcc-deb clang-rel clang-deb tests samples gcc-all-deb gcc-all-rel clang-all-deb clang-all-rel str_view test-deb test-rel clean
+.PHONY: gcc-str_view clang-str_view default build gcc-release gcc-debug clang-release clang-debug sanitize-debug sanitize-release clean tests samples all-gcc-debug all-gcc-release all-sanitize-debug all-sanitize-release all-clang-debug all-clang-release test tidy format coverage-developer coverage-publish
 
-MAKE := $(MAKE) -f Makefile
+MAKE := $(MAKE)
 MAKEFLAGS += --no-print-directory
 # Adjust parallel build jobs based on your available cores.
 JOBS ?= $(shell (command -v nproc > /dev/null 2>&1 && echo "-j$$(nproc)") || echo "")
@@ -16,67 +16,86 @@ default: build
 build:
 	cmake --build $(BUILD_DIR) $(JOBS)
 
-str_view:
-	cmake --preset=default-rel -DCMAKE_INSTALL_PREFIX=$(PREFIX)
-	cmake --build $(BUILD_DIR) --target install $(JOBS)
+gcc-str_view:
+	cmake --preset=gcc-release -DCMAKE_INSTALL_PREFIX=$(PREFIX)
+	cmake --build $(BUILD_DIR) $(JOBS) --target install $(JOBS)
+
+clang-str_view:
+	cmake --preset=clang-release -DCMAKE_INSTALL_PREFIX=$(PREFIX)
+	cmake --build $(BUILD_DIR) $(JOBS) --target install $(JOBS)
 
 install:
-	cmake --build $(BUILD_DIR) --target install $(JOBS)
+	cmake --build $(BUILD_DIR) $(JOBS) --target install
 
-gcc-rel:
-	cmake --preset=gcc-rel -DCMAKE_INSTALL_PREFIX=$(PREFIX)
+gcc-release:
+	cmake --preset=gcc-release -DCMAKE_INSTALL_PREFIX=$(PREFIX)
 	$(MAKE) build
 
-gcc-deb:
-	cmake --preset=gcc-deb -DCMAKE_INSTALL_PREFIX=$(PREFIX)
+gcc-debug:
+	cmake --preset=gcc-debug -DCMAKE_INSTALL_PREFIX=$(PREFIX)
 	$(MAKE) build
 
-clang-rel:
-	cmake --preset=clang-rel -DCMAKE_INSTALL_PREFIX=$(PREFIX)
+clang-release:
+	cmake --preset=clang-release -DCMAKE_INSTALL_PREFIX=$(PREFIX)
 	$(MAKE) build
 
-clang-deb:
-	cmake --preset=clang-deb -DCMAKE_INSTALL_PREFIX=$(PREFIX)
+clang-debug:
+	cmake --preset=clang-debug -DCMAKE_INSTALL_PREFIX=$(PREFIX)
+	$(MAKE) build
+
+sanitize-release:
+	cmake --preset=gcc-sanitize-release -DCMAKE_INSTALL_PREFIX=$(PREFIX)
+	$(MAKE) build
+
+sanitize-debug:
+	cmake --preset=gcc-sanitize-debug -DCMAKE_INSTALL_PREFIX=$(PREFIX)
 	$(MAKE) build
 
 format:
-	cmake --build $(BUILD_DIR) --target format
+	cmake --build $(BUILD_DIR) $(JOBS) --target format
 
 tidy:
-	cmake --build $(BUILD_DIR) --target tidy $(JOBS)
+	cmake --build $(BUILD_DIR) $(JOBS) --target tidy
 
 tests:
-	cmake --build $(BUILD_DIR) --target tests $(JOBS)
+	cmake --build $(BUILD_DIR) $(JOBS) --target tests
 
 samples:
-	cmake --build $(BUILD_DIR) --target samples $(JOBS)
+	cmake --build $(BUILD_DIR) $(JOBS) --target samples
 
-gcc-all-deb:
-	$(MAKE) gcc-deb
-	$(MAKE) tests
-	$(MAKE) samples
+coverage-developer:
+	cmake --build $(BUILD_DIR) --target coverage-developer
 
-gcc-all-rel:
-	$(MAKE) gcc-rel
-	$(MAKE) tests
-	$(MAKE) samples
+coverage-publish:
+	cmake --build $(BUILD_DIR) --target coverage-publish
 
-clang-all-deb:
-	$(MAKE) clang-deb
-	$(MAKE) tests
-	$(MAKE) samples
+all-gcc-debug:
+	cmake --preset=gcc-debug -DCMAKE_INSTALL_PREFIX=$(PREFIX) && cmake --build build $(JOBS) --target str_view tests samples
 
-clang-all-rel:
-	$(MAKE) clang-rel
-	$(MAKE) tests
-	$(MAKE) samples
+all-gcc-release:
+	cmake --preset=gcc-release -DCMAKE_INSTALL_PREFIX=$(PREFIX) && cmake --build build $(JOBS) --target str_view tests samples
 
-test-deb: tests
-	$(BUILD_DIR)debug/bin/run_tests $(BUILD_DIR)debug/bin/tests/
-	@echo "RAN TESTS"
+all-sanitize-debug:
+	cmake --preset=gcc-sanitize-debug -DCMAKE_INSTALL_PREFIX=$(PREFIX) && cmake --build build $(JOBS) --target str_view tests samples
 
-test-rel: tests
-	$(BUILD_DIR)bin/run_tests $(BUILD_DIR)bin/tests/
+all-sanitize-release:
+	cmake --preset=gcc-sanitize-release -DCMAKE_INSTALL_PREFIX=$(PREFIX) && cmake --build build $(JOBS) --target str_view tests samples
+
+all-clang-debug:
+	cmake --preset=clang-debug -DCMAKE_INSTALL_PREFIX=$(PREFIX) && cmake --build build $(JOBS) --target str_view tests samples
+
+all-clang-release:
+	cmake --preset=clang-release -DCMAKE_INSTALL_PREFIX=$(PREFIX) && cmake --build build $(JOBS) --target str_view tests samples
+
+test: tests
+	@if [ -x "$(BUILD_DIR)debug/bin/run_tests" ]; then                \
+		$(BUILD_DIR)debug/bin/run_tests $(BUILD_DIR)debug/bin/tests/; \
+	elif [ -x "$(BUILD_DIR)bin/run_tests" ]; then                     \
+		$(BUILD_DIR)bin/run_tests $(BUILD_DIR)bin/tests/;             \
+	else                                                              \
+		echo "No test runner found";                                  \
+		exit 1;                                                       \
+	fi
 	@echo "RAN TESTS"
 
 clean:

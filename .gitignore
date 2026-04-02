@@ -59,3 +59,7 @@ install/
 .gdb_history
 CMakeUserPresets.json
 Makefile.user
+.DS_Store
+*.info
+*.gcda
+*.gcno

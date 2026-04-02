@@ -2,85 +2,147 @@
     "version": 3,
     "cmakeMinimumRequired": {
         "major": 3,
-        "minor": 21,
+        "minor": 23,
         "patch": 0
     },
     "configurePresets": [
         {
-            "name": "default-deb",
+            "name": "configuration",
+            "hidden": true,
             "binaryDir": "${sourceDir}/build",
             "installDir": "${sourceDir}/install",
-            "hidden": true,
             "cacheVariables": {
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-                "CMAKE_C_STANDARD": "11",
+                "CMAKE_C_STANDARD": "11"
+            }
+        },
+        {
+            "name": "warnings",
+            "hidden": true,
+            "environment": {
+                "SV_WARNING_C_FLAGS": "-Wall -Wextra -Wconversion -Wnull-dereference -Wundef -Wstrict-prototypes -Wwrite-strings -Wfloat-equal -Wtype-limits -Wpointer-arith -Wshadow -Winit-self -Wno-variadic-macros -Wno-gnu-alignof-expression -fno-common"
+            }
+        },
+        {
+            "name": "sanitizers",
+            "hidden": true,
+            "environment": {
+                "SV_SANITIZER_C_FLAGS": "-fanalyzer -fno-omit-frame-pointer -fsanitize-address-use-after-scope -fsanitize=address,leak,undefined,shift,shift-exponent,integer-divide-by-zero,unreachable,null,return,signed-integer-overflow,bounds,bounds-strict,alignment,object-size,float-divide-by-zero,float-cast-overflow,enum,pointer-overflow,pointer-compare,pointer-subtract",
+                "SV_SANITIZER_LINKER_FLAGS": "-fsanitize=address,leak,undefined,shift,shift-exponent,integer-divide-by-zero,unreachable,null,return,signed-integer-overflow,bounds,bounds-strict,alignment,object-size,float-divide-by-zero,float-cast-overflow,enum,pointer-overflow,pointer-compare,pointer-subtract"
+            }
+        },
+        {
+            "name": "memory-sanitizers",
+            "hidden": true,
+            "environment": {
+                "SV_MEMORY_SANITIZER_C_FLAGS": "-fno-omit-frame-pointer -fsanitize=memory -fsanitize-memory-track-origins=2",
+                "SV_MEMORY_SANITIZER_LINKER_FLAGS": "-fsanitize=memory"
+            }
+        },
+        {
+            "name": "default-debug",
+            "hidden": true,
+            "inherits": ["configuration", "warnings"],
+            "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/build/debug/bin",
-                "CMAKE_C_FLAGS": "-g3 -Wall -Wextra -Wfloat-equal -Wtype-limits -Wpointer-arith -Wshadow -Winit-self -fno-diagnostics-show-option"
+                "CMAKE_C_FLAGS": "-g3 $env{SV_WARNING_C_FLAGS}"
             }
         },
         {
-            "name": "default-rel",
-            "binaryDir": "${sourceDir}/build",
-            "installDir": "${sourceDir}/install",
+            "name": "default-release",
+            "hidden": true,
+            "inherits": ["configuration", "warnings"],
             "cacheVariables": {
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-                "CMAKE_C_STANDARD": "11",
                 "CMAKE_BUILD_TYPE": "Release",
                 "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/build/bin",
-                "CMAKE_C_FLAGS": "-Wall -Wextra -Wfloat-equal -Wtype-limits -Wpointer-arith -Wshadow -Winit-self -fno-diagnostics-show-option"
+                "CMAKE_C_FLAGS": "$env{SV_WARNING_C_FLAGS}"
             }
         },
         {
-            "name": "gcc-deb",
-            "inherits": "default-deb",
+            "name": "gcc-debug",
+            "inherits": "default-debug",
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "gcc",
-                "CMAKE_C_FLAGS": "-g3 -Wall -Wextra -Wfloat-equal -Wtype-limits -Wpointer-arith -Wshadow -Winit-self -fno-diagnostics-show-option -Wno-nonnull-compare -Wno-pointer-bool-conversion"
+                "CMAKE_C_FLAGS": "-g3 -Og $env{SV_WARNING_C_FLAGS}"
             }
         },
         {
-            "name": "gcc-rel",
-            "inherits": "default-rel",
+            "name": "gcc-release",
+            "inherits": "default-release",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "gcc"
+            }
+        },
+        {
+            "name": "clang-debug",
+            "inherits": "default-debug",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang"
+            }
+        },
+        {
+            "name": "clang-release",
+            "inherits": "default-release",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang"
+            }
+        },
+        {
+            "name": "gcc-sanitize-debug",
+            "inherits": ["default-debug", "sanitizers"],
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "gcc",
-                "CMAKE_C_FLAGS": "-Wall -Wextra -Wfloat-equal -Wtype-limits -Wpointer-arith -Wshadow -Winit-self -fno-diagnostics-show-option -Wno-nonnull-compare -Wno-pointer-bool-conversion"
+                "CMAKE_C_FLAGS": "-g3 -Og $env{SV_WARNING_C_FLAGS} $env{SV_SANITIZER_C_FLAGS}",
+                "CMAKE_EXE_LINKER_FLAGS": "$env{SV_SANITIZER_LINKER_FLAGS}"
             }
         },
         {
-            "name": "clang-deb",
-            "inherits": "default-deb",
+            "name": "gcc-sanitize-release",
+            "inherits": ["default-release", "sanitizers"],
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "gcc",
+                "CMAKE_C_FLAGS": "-g3 $env{SV_WARNING_C_FLAGS} $env{SV_SANITIZER_C_FLAGS}",
+                "CMAKE_EXE_LINKER_FLAGS": "$env{SV_SANITIZER_LINKER_FLAGS}"
+            }
+        },
+        {
+            "name": "clang-memory-sanitize-debug",
+            "inherits": ["default-debug", "memory-sanitizers"],
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "clang",
-                "CMAKE_C_FLAGS": "-g3 -Wall -Wextra -Wfloat-equal -Wtype-limits -Wpointer-arith -Wshadow -Winit-self -fno-diagnostics-show-option -Wno-pointer-bool-conversion"
+                "CMAKE_C_FLAGS": "-g3 -O1 $env{SV_WARNING_C_FLAGS} $env{SV_MEMORY_SANITIZER_C_FLAGS}",
+                "CMAKE_EXE_LINKER_FLAGS": "$env{SV_MEMORY_SANITIZER_LINKER_FLAGS}"
             }
         },
         {
-            "name": "clang-rel",
-            "inherits": "default-rel",
+            "name": "clang-memory-sanitize-release",
+            "inherits": ["default-release", "memory-sanitizers"],
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "clang",
-                "CMAKE_C_FLAGS": "-Wall -Wextra -Wfloat-equal -Wtype-limits -Wpointer-arith -Wshadow -Winit-self -fno-diagnostics-show-option -Wno-pointer-bool-conversion"
+                "CMAKE_C_FLAGS": "-g3 $env{SV_WARNING_C_FLAGS} $env{SV_MEMORY_SANITIZER_C_FLAGS}",
+                "CMAKE_EXE_LINKER_FLAGS": "$env{SV_MEMORY_SANITIZER_LINKER_FLAGS}"
             }
         },
         {
-            "name": "gcc-debsan",
-            "inherits": "default-deb",
-            "hidden": true,
+            "name": "gcc-gcov",
+            "inherits": ["default-debug"],
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "gcc",
-                "CMAKE_C_FLAGS": "-g3 -Wall -Wextra -Wfloat-equal -Wtype-limits -Wpointer-arith -Wshadow -Winit-self -fno-diagnostics-show-option -fanalyzer -fsanitize=address,leak,undefined",
-                "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address,leak,undefined"
+                "CMAKE_C_FLAGS": "--coverage -g3 -Og $env{SV_WARNING_C_FLAGS}",
+                "CMAKE_EXE_LINKER_FLAGS": "--coverage",
+                "SV_ENABLE_COVERAGE": "ON",
+                "SV_COVERAGE_TOOL": "gcov"
             }
         },
         {
-            "name": "gcc-relsan",
-            "inherits": "default-rel",
-            "hidden": true,
+            "name": "llvm-cov",
+            "inherits": ["default-debug"],
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "gcc",
-                "CMAKE_C_FLAGS": "-Wall -Wextra -Wfloat-equal -Wtype-limits -Wpointer-arith -Wshadow -Winit-self -fno-diagnostics-show-option -fsanitize=address,leak,undefined",
-                "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address,leak,undefined"
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_C_FLAGS": "--coverage -g3 -Og $env{SV_WARNING_C_FLAGS}",
+                "CMAKE_EXE_LINKER_FLAGS": "--coverage",
+                "SV_ENABLE_COVERAGE": "ON"
             }
         }
     ]
