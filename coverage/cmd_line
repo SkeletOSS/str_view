@@ -1,0 +1,1 @@
+genhtml /home/runner/work/str_view/str_view/docs/coverage.info --output-directory /home/runner/work/str_view/str_view/docs/coverage --prefix /home/runner/work/str_view/str_view --flat --title 'SV Test Suite Coverage Report'
