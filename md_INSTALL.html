@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('md_INSTALL.html',''); initResizable();
   <div class="headertitle"><div class="title">Building and Installation </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md4"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md5"></a>
 Fetch Content</h1>
 <p>This approach will allow CMake to build <code>str_view</code> from source as part of your project. It does not have external dependencies, besides the standard library, so this may be viable for you. This is helpful if you want the ability to build the library in release or debug mode along with your project and possibly step through it with a debugger during a debug build. If you would rather link to the release build library file see the next section for the manual install.</p>
 <p>To avoid including tests, samples, and other extraneous files when fetching content download a release.</p>
@@ -102,6 +102,7 @@ Fetch Content</h1>
 <div class="line">  ccc</div>
 <div class="line">  URL https://github.com/skeletoss/str_view/releases/download/v[MAJOR.MINOR.PATCH]/str_view-v[MAJOR.MINOR.PATCH].zip</div>
 <div class="line">  #DOWNLOAD_EXTRACT_TIMESTAMP FALSE # CMake may raise a warning to set this. If so, uncomment and set.</div>
+<div class="line">  URL_HASH SHA256=[HASH]</div>
 <div class="line">)</div>
 <div class="line">FetchContent_MakeAvailable(str_view)</div>
 <div class="line"># Optionally ignore compiler warnings from the str_view library.</div>
@@ -113,16 +114,20 @@ Fetch Content</h1>
 <div class="fragment"><div class="line">include(FetchContent)</div>
 <div class="line">FetchContent_Declare(</div>
 <div class="line">  ccc</div>
-<div class="line">  URL https://github.com/skeletoss/str_view/releases/download/v0.6.0/str_view-v0.6.0.zip</div>
+<div class="line">  URL https://github.com/skeletoss/str_view/releases/download/v0.7.2/str_view-v0.7.2.zip</div>
 <div class="line">  #DOWNLOAD_EXTRACT_TIMESTAMP FALSE # CMake may raise a warning to set this. If so, uncomment and set.</div>
+<div class="line">  URL_HASH SHA256=cbe9aa4f416ea13502cd48d089e5cb67d7f3552772b0a88773f62a9fe4cf1a5a</div>
 <div class="line">)</div>
 <div class="line">FetchContent_MakeAvailable(str_view)</div>
 <div class="line"># Optionally ignore compiler warnings from the str_view library.</div>
 <div class="line">target_compile_options(str_view PRIVATE &quot;-w&quot;)</div>
+<div class="line">get_target_property(str_view_SOURCE_DIR str_view SOURCE_DIR)</div>
 <div class="line">add_executable(main main.c)</div>
+<div class="line"># Optionally include str_view source directory as system so that your tooling like clang-tidy ignores it.</div>
+<div class="line">target_include_directories(main SYSTEM PRIVATE ${str_view_SOURCE_DIR})</div>
 <div class="line">target_link_libraries(main str_view::str_view)</div>
 </div><!-- fragment --><p>Now, <code>str_view</code> is part of your project build, allowing you to configure as you see fit. For a more traditional approach read the manual install section below.</p>
-<h1><a class="anchor" id="autotoc_md5"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Manual Install Quick Start</h1>
 <ol type="1">
 <li>Use the provided defaults</li>
@@ -153,34 +158,37 @@ Manual Install Quick Start</h1>
 <div class="line">    │       └── str_viewTargets-release.cmake</div>
 <div class="line">    └── libstr_view_release.a</div>
 </div><!-- fragment --><p>Now to delete the library if needed, simply find all folders and files with the <code>*str_view*</code> string somewhere within them and delete. You can also check the <code>build/install_manifest.txt</code> to confirm the locations of any files installed with this library.</p>
-<h1><a class="anchor" id="autotoc_md6"></a>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Include the Library</h1>
 <p>Once CMake can find the package, link against it and include the <code><a class="el" href="str__view_8h.html" title="The SV_Str_view Interface.">str_view.h</a></code> header.</p>
 <p>The <code>CMakeLists.txt</code> file.</p>
-<div class="fragment"><div class="line">add_executable(my_exe my_exe.c)</div>
+<div class="fragment"><div class="line"># Optionally use str_view as a system library so that your tooling like clang-tidy ignores it.</div>
+<div class="line">get_target_property(str_view_SOURCE_DIR str_view SOURCE_DIR)</div>
+<div class="line">add_executable(my_exe my_exe.c)</div>
+<div class="line">target_include_directories(main SYSTEM PRIVATE ${str_view_SOURCE_DIR})</div>
 <div class="line">target_link_libraries(my_exe str_view::str_view)</div>
 </div><!-- fragment --><p>The C code.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="str__view_8h.html">str_view/str_view.h</a>&quot;</span></div>
 <div class="ttc" id="astr__view_8h_html"><div class="ttname"><a href="str__view_8h.html">str_view.h</a></div><div class="ttdoc">The SV_Str_view Interface.</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
 Alternative Builds</h1>
 <p>You may wish to use a different compiler and toolchain than what your system default specifies. Review the <code>CMakePrests.json</code> file for different compilers.</p>
-<div class="fragment"><div class="line">make gcc-rel [OPTIONAL/INSTALL/PATH]</div>
+<div class="fragment"><div class="line">make gcc-str_view [OPTIONAL/INSTALL/PATH]</div>
 <div class="line">make install</div>
 </div><!-- fragment --><p>Use Clang to compile the library.</p>
-<div class="fragment"><div class="line">make clang-rel [OPTIONAL/INSTALL/PATH]</div>
+<div class="fragment"><div class="line">make clang-str_view [OPTIONAL/INSTALL/PATH]</div>
 <div class="line">make install</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
 Without Make</h1>
 <p>If your system does not support Makefiles or the <code>make</code> command here are the cmake commands one can run that will allow another generator such as <code>Ninja</code> to complete building and installation.</p>
 <div class="fragment"><div class="line"># Configure the project cmake files. </div>
 <div class="line"># Replace this preset with your own if you&#39;d like.</div>
-<div class="line">cmake --preset=default-rel -DCMAKE_INSTALL_PREFIX=[DESIRED/INSTALL/LOCATION]</div>
+<div class="line">cmake --preset=clang-release -DCMAKE_INSTALL_PREFIX=[DESIRED/INSTALL/LOCATION]</div>
 <div class="line">cmake --build build</div>
 <div class="line">cmake --build build --target install</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md10"></a>
 User Presets</h1>
-<p>If you do not like the default presets, create a <code>CMakeUserPresets.json</code> in this folder and place your preferred configuration in that file. Here is my preferred configuration to get you started. I like to use a newer gcc version than the default presets specify.</p>
+<p>If you do not like the default presets, create a <code>CMakeUserPresets.json</code> in this folder and place your preferred configuration in that file. Here is my preferred configuration to get you started.</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">    &quot;version&quot;: 3,</div>
 <div class="line">    &quot;cmakeMinimumRequired&quot;: {</div>
@@ -190,51 +198,45 @@ User Presets</h1>
 <div class="line">    },</div>
 <div class="line">    &quot;configurePresets&quot;: [</div>
 <div class="line">        {</div>
-<div class="line">            &quot;name&quot;: &quot;deb&quot;,</div>
-<div class="line">            &quot;displayName&quot;: &quot;GMake GCC Debug&quot;,</div>
-<div class="line">            &quot;description&quot;: &quot;Generated by GMake with GCC base debug preset.&quot;,</div>
-<div class="line">            &quot;generator&quot;: &quot;Unix Makefiles&quot;,</div>
-<div class="line">            &quot;inherits&quot;: [</div>
-<div class="line">                &quot;gcc-deb&quot;</div>
-<div class="line">            ],</div>
-<div class="line">            &quot;cacheVariables&quot;: {</div>
-<div class="line">                &quot;CMAKE_C_COMPILER&quot;: &quot;gcc-12&quot;</div>
-<div class="line">            }</div>
-<div class="line">        },</div>
-<div class="line">        {</div>
-<div class="line">            &quot;name&quot;: &quot;rel&quot;,</div>
-<div class="line">            &quot;displayName&quot;: &quot;GMake GCC Release&quot;,</div>
-<div class="line">            &quot;description&quot;: &quot;Generated by GMake with GCC base release preset.&quot;,</div>
-<div class="line">            &quot;generator&quot;: &quot;Unix Makefiles&quot;,</div>
-<div class="line">            &quot;inherits&quot;: [</div>
-<div class="line">                &quot;gcc-rel&quot;</div>
-<div class="line">            ],</div>
-<div class="line">            &quot;cacheVariables&quot;: {</div>
-<div class="line">                &quot;CMAKE_C_COMPILER&quot;: &quot;gcc-12&quot;</div>
-<div class="line">            }</div>
-<div class="line">        },</div>
-<div class="line">        {</div>
-<div class="line">            &quot;name&quot;: &quot;cdeb&quot;,</div>
-<div class="line">            &quot;displayName&quot;: &quot;Ninja clang Debug&quot;,</div>
-<div class="line">            &quot;description&quot;: &quot;Generated by Ninja with clang base debug preset.&quot;,</div>
+<div class="line">            &quot;name&quot;: &quot;my-clang-debug&quot;,</div>
+<div class="line">            &quot;inherits&quot;: [&quot;default-debug&quot;],</div>
 <div class="line">            &quot;generator&quot;: &quot;Ninja&quot;,</div>
-<div class="line">            &quot;inherits&quot;: [</div>
-<div class="line">                &quot;clang-deb&quot;</div>
-<div class="line">            ],</div>
 <div class="line">            &quot;cacheVariables&quot;: {</div>
-<div class="line">                &quot;CMAKE_C_COMPILER&quot;: &quot;clang&quot;</div>
+<div class="line">                &quot;CMAKE_C_COMPILER&quot;: &quot;clang-22&quot;,</div>
+<div class="line">                &quot;CMAKE_C_FLAGS&quot;: &quot;$env{SV_WARNING_C_FLAGS} -g3 -glldb&quot;</div>
 <div class="line">            }</div>
 <div class="line">        },</div>
 <div class="line">        {</div>
-<div class="line">            &quot;name&quot;: &quot;crel&quot;,</div>
-<div class="line">            &quot;displayName&quot;: &quot;Ninja clang Release&quot;,</div>
-<div class="line">            &quot;description&quot;: &quot;Generated by Ninja with clang base release preset.&quot;,</div>
+<div class="line">            &quot;name&quot;: &quot;my-clang-release&quot;,</div>
+<div class="line">            &quot;inherits&quot;: [&quot;default-release&quot;],</div>
 <div class="line">            &quot;generator&quot;: &quot;Ninja&quot;,</div>
-<div class="line">            &quot;inherits&quot;: [</div>
-<div class="line">                &quot;clang-rel&quot;</div>
-<div class="line">            ],</div>
 <div class="line">            &quot;cacheVariables&quot;: {</div>
-<div class="line">                &quot;CMAKE_C_COMPILER&quot;: &quot;clang&quot;</div>
+<div class="line">                &quot;CMAKE_C_COMPILER&quot;: &quot;clang-22&quot;</div>
+<div class="line">            }</div>
+<div class="line">        },</div>
+<div class="line">        {</div>
+<div class="line">            &quot;name&quot;: &quot;my-clang-memory-sanitize-debug&quot;,</div>
+<div class="line">            &quot;inherits&quot;: [&quot;clang-memory-sanitize-debug&quot;],</div>
+<div class="line">            &quot;generator&quot;: &quot;Ninja&quot;,</div>
+<div class="line">            &quot;cacheVariables&quot;: {</div>
+<div class="line">                &quot;CMAKE_C_COMPILER&quot;: &quot;clang-22&quot;</div>
+<div class="line">            }</div>
+<div class="line">        },</div>
+<div class="line">        {</div>
+<div class="line">            &quot;name&quot;: &quot;my-clang-memory-sanitize-release&quot;,</div>
+<div class="line">            &quot;inherits&quot;: [&quot;clang-memory-sanitize-release&quot;],</div>
+<div class="line">            &quot;generator&quot;: &quot;Ninja&quot;,</div>
+<div class="line">            &quot;cacheVariables&quot;: {</div>
+<div class="line">                &quot;CMAKE_C_COMPILER&quot;: &quot;clang-22&quot;</div>
+<div class="line">            }</div>
+<div class="line">        },</div>
+<div class="line">        {</div>
+<div class="line">            &quot;name&quot;: &quot;my-llvm-cov&quot;,</div>
+<div class="line">            &quot;inherits&quot;: [&quot;llvm-cov&quot;],</div>
+<div class="line">            &quot;generator&quot;: &quot;Ninja&quot;,</div>
+<div class="line">            &quot;cacheVariables&quot;: {</div>
+<div class="line">                &quot;CMAKE_C_COMPILER&quot;: &quot;clang-22&quot;,</div>
+<div class="line">                &quot;CMAKE_C_FLAGS&quot;: &quot;--coverage -g3 -glldb -Og $env{SV_WARNING_C_FLAGS}&quot;</div>
 <div class="line">            }</div>
 <div class="line">        }</div>
 <div class="line">    ]</div>
