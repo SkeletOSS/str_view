@@ -819,8 +819,9 @@ char_compare(char const a, char const b) {
 
 static inline bool
 bitset_set(size_t *const bitset, size_t const char_as_size_t) {
-    return bitset[char_as_size_t / (8 * sizeof(*bitset))]
-        |= (size_t)(1 << (char_as_size_t % (8 * sizeof(*bitset))));
+    return (bitset[char_as_size_t / (8 * sizeof(*bitset))]
+            |= (size_t)(1 << (char_as_size_t % (8 * sizeof(*bitset)))))
+        != 0;
 }
 
 static inline bool
