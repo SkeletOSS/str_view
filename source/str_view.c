@@ -818,14 +818,14 @@ char_compare(char const a, char const b) {
    using SV_Str_view that may not be null terminated requires modifications. */
 
 static inline bool
-bitset_set(size_t *const bitset, size_t const char_as_size_t) {
+bitset_set(size_t *const bitset, unsigned char const char_as_size_t) {
     return (bitset[char_as_size_t / (8 * sizeof(*bitset))]
             |= ((size_t)1 << (char_as_size_t % (8 * sizeof(*bitset)))))
         != 0;
 }
 
 static inline bool
-bitset_test(size_t const *bitset, size_t const char_as_size_t) {
+bitset_test(size_t const *bitset, unsigned char const char_as_size_t) {
     return (bitset[char_as_size_t / (8 * sizeof(*bitset))]
             & ((size_t)1 << (char_as_size_t % (8 * sizeof(*bitset)))))
         != 0;
@@ -865,12 +865,8 @@ view_span_in_set_complement_length(size_t const str_size,
         for (size_t i = 0; i < str_size && *a != *set; ++a, ++i) {}
         return (size_t)(a - str);
     }
-    for (size_t i = 0;
-         i < set_size && bitset_set(byteset, *(unsigned char *)set);
-         ++set, ++i) {}
-    for (size_t i = 0;
-         i < str_size && !bitset_test(byteset, *(unsigned char *)a); ++a, ++i) {
-    }
+    for (size_t i = 0; i < set_size && bitset_set(byteset, *set); ++set, ++i) {}
+    for (size_t i = 0; i < str_size && !bitset_test(byteset, *a); ++a, ++i) {}
     return (size_t)(a - str);
 }
 
