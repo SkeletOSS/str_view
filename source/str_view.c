@@ -817,9 +817,19 @@ char_compare(char const a, char const b) {
 /* This is section is modeled after the musl string.h library. However,
    using SV_Str_view that may not be null terminated requires modifications. */
 
-#define BITOP(a, b, op)                                                        \
-    ((a)[(size_t)(b) / (8 * sizeof *(a))] op(size_t)(                          \
-        1 << ((size_t)(b) % (8 * sizeof *(a)))))
+static inline bool
+bitset_set(size_t *const bitset, size_t const char_as_size_t) {
+    return (bitset[char_as_size_t / (8 * sizeof(*bitset))]
+            |= (size_t)(1 << (char_as_size_t % (8 * sizeof(*bitset)))))
+        != 0;
+}
+
+static inline bool
+bitset_test(size_t const *bitset, size_t const char_as_size_t) {
+    return (bitset[char_as_size_t / (8 * sizeof(*bitset))]
+            & (size_t)(1 << (char_as_size_t % (8 * sizeof(*bitset)))))
+        != 0;
+}
 
 /* This is dangerous. Do not use this under normal circumstances.
    This is an internal helper for the backwards two way string
@@ -856,10 +866,11 @@ view_span_in_set_complement_length(size_t const str_size,
         return (size_t)(a - str);
     }
     for (size_t i = 0;
-         i < set_size && BITOP(byteset, *(unsigned char *)set, |=);
+         i < set_size && bitset_set(byteset, *(unsigned char *)set);
          ++set, ++i) {}
-    for (size_t i = 0; i < str_size && !BITOP(byteset, *(unsigned char *)a, &);
-         ++a, ++i) {}
+    for (size_t i = 0;
+         i < str_size && !bitset_test(byteset, *(unsigned char *)a); ++a, ++i) {
+    }
     return (size_t)(a - str);
 }
 
@@ -884,10 +895,10 @@ view_span_in_set_length(size_t const str_size,
         return (size_t)(a - str);
     }
     for (size_t i = 0;
-         i < set_size && BITOP(byteset, *(unsigned char *)set, |=);
+         i < set_size && bitset_set(byteset, *(unsigned char *)set);
          ++set, ++i) {}
-    for (size_t i = 0; i < str_size && BITOP(byteset, *(unsigned char *)a, &);
-         ++a, ++i) {}
+    for (size_t i = 0;
+         i < str_size && bitset_test(byteset, *(unsigned char *)a); ++a, ++i) {}
     return (size_t)(a - str);
 }
 
