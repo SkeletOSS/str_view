@@ -4,12 +4,12 @@
    string_view type. There are some minor differences and C flavor thrown
    in. Additionally, there is a provided reimplementation of the Two-Way
    String-Searching algorithm, similar to glibc. */
-#include "str_view.h"
+#include "str_view/str_view.h"
+#include "str_view/configuration.h" /* IWYU pragma: keep */
 
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
-#include <string.h>
 
 /* Clang and GCC support static array parameter declarations while
    MSVC does not. This is how to solve the differing declaration
@@ -865,8 +865,10 @@ view_span_in_set_complement_length(size_t const str_size,
         for (size_t i = 0; i < str_size && *a != *set; ++a, ++i) {}
         return (size_t)(a - str);
     }
-    for (size_t i = 0; i < set_size && bitset_set(byteset, *set); ++set, ++i) {}
-    for (size_t i = 0; i < str_size && !bitset_test(byteset, *a); ++a, ++i) {}
+    for (size_t i = 0; i < set_size && bitset_set(byteset, (unsigned char)*set);
+         ++set, ++i) {}
+    for (size_t i = 0; i < str_size && !bitset_test(byteset, (unsigned char)*a);
+         ++a, ++i) {}
     return (size_t)(a - str);
 }
 
@@ -890,11 +892,10 @@ view_span_in_set_length(size_t const str_size,
         for (size_t i = 0; i < str_size && *a == *set; ++a, ++i) {}
         return (size_t)(a - str);
     }
-    for (size_t i = 0;
-         i < set_size && bitset_set(byteset, *(unsigned char *)set);
+    for (size_t i = 0; i < set_size && bitset_set(byteset, (unsigned char)*set);
          ++set, ++i) {}
-    for (size_t i = 0;
-         i < str_size && bitset_test(byteset, *(unsigned char *)a); ++a, ++i) {}
+    for (size_t i = 0; i < str_size && bitset_test(byteset, (unsigned char)*a);
+         ++a, ++i) {}
     return (size_t)(a - str);
 }
 
