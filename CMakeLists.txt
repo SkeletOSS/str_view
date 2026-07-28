@@ -12,13 +12,13 @@ project("str_view"
 # For the sake of vcpkg we will make sure cloning and building from
 # main will only build the minimal files in the all target. I can't
 # protect vcpkg from needlessly downloading 
-if (EXISTS "${PROJECT_SOURCE_DIR}/samples")
-    add_subdirectory("${PROJECT_SOURCE_DIR}/samples" EXCLUDE_FROM_ALL)
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/samples")
+    add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/samples" EXCLUDE_FROM_ALL)
 endif()
-if (EXISTS "${PROJECT_SOURCE_DIR}/tests")
-    add_subdirectory("${PROJECT_SOURCE_DIR}/tests" EXCLUDE_FROM_ALL)
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+    add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/tests" EXCLUDE_FROM_ALL)
 endif()
-if (EXISTS "${PROJECT_SOURCE_DIR}/tests" AND EXISTS "${PROJECT_SOURCE_DIR}/samples")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests" AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/samples")
     include(tools/scanners.cmake)
 endif()
 
