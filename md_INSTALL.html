@@ -99,10 +99,11 @@ Fetch Content</h1>
 <p>To avoid including tests, samples, and other extraneous files when fetching content download a release.</p>
 <div class="fragment"><div class="line">include(FetchContent)</div>
 <div class="line">FetchContent_Declare(</div>
-<div class="line">  ccc</div>
+<div class="line">  str_view </div>
 <div class="line">  URL https://github.com/skeletoss/str_view/releases/download/v[MAJOR.MINOR.PATCH]/str_view-v[MAJOR.MINOR.PATCH].zip</div>
 <div class="line">  #DOWNLOAD_EXTRACT_TIMESTAMP FALSE # CMake may raise a warning to set this. If so, uncomment and set.</div>
 <div class="line">  URL_HASH SHA256=[HASH]</div>
+<div class="line">  SYSTEM # Optional flag to mark ccc as a system library and silence compiler and tooling warnings.</div>
 <div class="line">)</div>
 <div class="line">FetchContent_MakeAvailable(str_view)</div>
 <div class="line"># Optionally ignore compiler warnings from the str_view library.</div>
@@ -113,10 +114,11 @@ Fetch Content</h1>
 </div><!-- fragment --><p>Here is a concrete example with an arbitrary release that is likely out of date. Replace this version with the newest version on the releases page.</p>
 <div class="fragment"><div class="line">include(FetchContent)</div>
 <div class="line">FetchContent_Declare(</div>
-<div class="line">  ccc</div>
+<div class="line">  str_view </div>
 <div class="line">  URL https://github.com/skeletoss/str_view/releases/download/v0.7.2/str_view-v0.7.2.zip</div>
 <div class="line">  #DOWNLOAD_EXTRACT_TIMESTAMP FALSE # CMake may raise a warning to set this. If so, uncomment and set.</div>
 <div class="line">  URL_HASH SHA256=cbe9aa4f416ea13502cd48d089e5cb67d7f3552772b0a88773f62a9fe4cf1a5a</div>
+<div class="line">  SYSTEM # Optional flag to mark ccc as a system library and silence compiler and tooling warnings.</div>
 <div class="line">)</div>
 <div class="line">FetchContent_MakeAvailable(str_view)</div>
 <div class="line"># Optionally ignore compiler warnings from the str_view library.</div>
@@ -128,6 +130,54 @@ Fetch Content</h1>
 <div class="line">target_link_libraries(main str_view::str_view)</div>
 </div><!-- fragment --><p>Now, <code>str_view</code> is part of your project build, allowing you to configure as you see fit. For a more traditional approach read the manual install section below.</p>
 <h1><a class="anchor" id="autotoc_md6"></a>
+Freestanding Environments</h1>
+<p>The string view library uses the following functions or macros that must be supported by the user on freestanding targets.</p>
+<p>Traditionally included via <code>&lt;string.h&gt;</code>:</p>
+<ul>
+<li><code>memmove()</code></li>
+<li><code>memcmp()</code></li>
+<li><code>strlen()</code></li>
+<li><code>strnlen()</code></li>
+</ul>
+<p>To provide these functions, the user may create a header. For example, <code>my_sv_configuration.h</code>.</p>
+<div class="fragment"><div class="line">my_project/</div>
+<div class="line">    my_sv_configuration/</div>
+<div class="line">        my_sv_configuration.h</div>
+</div><!-- fragment --><p>In this header the user has two options: provide the listed functions directly or include their versions of the headers that provide the needed functionality. It is common for freestanding environments to provide their own <code>&lt;string.h&gt;</code> that implement these functions.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#ifndef MY_SV_CONFIGURATION_H</span></div>
+<div class="line"><span class="preprocessor">#define MY_SV_CONFIGURATION_H</span></div>
+<div class="line"><span class="preprocessor">#include &quot;lib/string.h&quot;</span> <span class="comment">/* IWYU pragma: export */</span></div>
+<div class="line"><span class="preprocessor">#endif </span><span class="comment">/* MY_SV_CONFIGURATION_H */</span><span class="preprocessor"></span></div>
+</div><!-- fragment --><p>The Include What You Use (IWYU) comment is helpful if you want to avoid tooling warnings in SV code and have not marked SV code as a system library to silence such warnings. If you are providing functions directly, this is not applicable. Then, ensure the string view library can find that header.</p>
+<div class="fragment"><div class="line">include(FetchContent)</div>
+<div class="line">FetchContent_Declare(</div>
+<div class="line">  str_view </div>
+<div class="line">  URL https://github.com/skeletoss/str_view/releases/download/v0.7.2/str_view-v0.7.2.zip</div>
+<div class="line">  #DOWNLOAD_EXTRACT_TIMESTAMP FALSE # CMake may raise a warning to set this. If so, uncomment and set.</div>
+<div class="line">  URL_HASH SHA256=cbe9aa4f416ea13502cd48d089e5cb67d7f3552772b0a88773f62a9fe4cf1a5a</div>
+<div class="line">  SYSTEM # Optional flag to mark ccc as a system library and silence compiler and tooling warnings.</div>
+<div class="line">)</div>
+<div class="line">FetchContent_MakeAvailable(str_view)</div>
+<div class="line"># Include this line if you want to ignore compiler warnings from the ccc library when compiling your project.</div>
+<div class="line">target_compile_options(ccc PRIVATE &quot;-w&quot;)</div>
+<div class="line"> </div>
+<div class="line"># New step allowing CCC to find the configuration header.</div>
+<div class="line">target_include_directories(str_view PUBLIC</div>
+<div class="line">  $&lt;BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/my_sv_configuration&gt;</div>
+<div class="line">)</div>
+<div class="line"> </div>
+<div class="line">add_executable(freestanding freestanding.c)</div>
+<div class="line">target_link_libraries(freestanding str_view::str_view)</div>
+</div><!-- fragment --><p>Now pass the flag to CMake at configure time via <code>CMakePresets.json</code>, <code>CMakeUserPresets.json</code>, or the command line.</p>
+<div class="fragment"><div class="line">&quot;cacheVariables&quot;: {</div>
+<div class="line">    &quot;SV_USER_CONFIGURATION&quot;: &quot;my_sv_configuration.h&quot;,</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Or they can be passed on the command line.</p>
+<div class="fragment"><div class="line">cmake --preset=my-preset\</div>
+<div class="line"> -DSV_USER_CONFIGURATION=&quot;my_sv_configuration.h&quot;\</div>
+</div><!-- fragment --><p>Now the library is fully configured to be built as part of the user project in a freestanding environment.</p>
+<p>Any other C headers that the collection uses internally, such as <code>&lt;stdint.h&gt;</code> and <code>&lt;stddef.h&gt;</code>, are those provided by the C standard on freestanding targets and do not require a user implementation.</p>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Manual Install Quick Start</h1>
 <ol type="1">
 <li>Use the provided defaults</li>
@@ -158,7 +208,7 @@ Manual Install Quick Start</h1>
 <div class="line">    │       └── str_viewTargets-release.cmake</div>
 <div class="line">    └── libstr_view_release.a</div>
 </div><!-- fragment --><p>Now to delete the library if needed, simply find all folders and files with the <code>*str_view*</code> string somewhere within them and delete. You can also check the <code>build/install_manifest.txt</code> to confirm the locations of any files installed with this library.</p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md8"></a>
 Include the Library</h1>
 <p>Once CMake can find the package, link against it and include the <code><a class="el" href="str__view_8h.html" title="The SV_Str_view Interface.">str_view.h</a></code> header.</p>
 <p>The <code>CMakeLists.txt</code> file.</p>
@@ -170,7 +220,7 @@ Include the Library</h1>
 </div><!-- fragment --><p>The C code.</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="str__view_8h.html">str_view/str_view.h</a>&quot;</span></div>
 <div class="ttc" id="astr__view_8h_html"><div class="ttname"><a href="str__view_8h.html">str_view.h</a></div><div class="ttdoc">The SV_Str_view Interface.</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
 Alternative Builds</h1>
 <p>You may wish to use a different compiler and toolchain than what your system default specifies. Review the <code>CMakePrests.json</code> file for different compilers.</p>
 <div class="fragment"><div class="line">make gcc-str_view [OPTIONAL/INSTALL/PATH]</div>
@@ -178,7 +228,7 @@ Alternative Builds</h1>
 </div><!-- fragment --><p>Use Clang to compile the library.</p>
 <div class="fragment"><div class="line">make clang-str_view [OPTIONAL/INSTALL/PATH]</div>
 <div class="line">make install</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md10"></a>
 Without Make</h1>
 <p>If your system does not support Makefiles or the <code>make</code> command here are the cmake commands one can run that will allow another generator such as <code>Ninja</code> to complete building and installation.</p>
 <div class="fragment"><div class="line"># Configure the project cmake files. </div>
@@ -186,7 +236,7 @@ Without Make</h1>
 <div class="line">cmake --preset=clang-release -DCMAKE_INSTALL_PREFIX=[DESIRED/INSTALL/LOCATION]</div>
 <div class="line">cmake --build build</div>
 <div class="line">cmake --build build --target install</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md10"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md11"></a>
 User Presets</h1>
 <p>If you do not like the default presets, create a <code>CMakeUserPresets.json</code> in this folder and place your preferred configuration in that file. Here is my preferred configuration to get you started.</p>
 <div class="fragment"><div class="line">{</div>

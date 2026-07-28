@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Str View: File List</title>
+<title>Str View: str_view/configuration.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,7 +64,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('files.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('configuration_8h.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -90,21 +90,44 @@ $(document).ready(function(){initNavTree('files.html',''); initResizable(); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">File List</div></div>
+  <div class="headertitle"><div class="title">configuration.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all documented files with brief descriptions:</div><div class="directory">
-<div class="levels">[detail level <span onclick="javascript:toggleLevel(1);">1</span><span onclick="javascript:toggleLevel(2);">2</span>]</div><table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_0_" class="arrow" onclick="toggleFolder('0_')">&#9660;</span><span id="img_0_" class="iconfopen" onclick="toggleFolder('0_')">&#160;</span><a class="el" href="dir_c0a9194a9d1810f5b7b1f18d57ea0ad0.html" target="_self">str_view</a></td><td class="desc"></td></tr>
-<tr id="row_0_0_" class="odd"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><a href="configuration_8h_source.html"><span class="icondoc"></span></a><a class="el" href="configuration_8h.html" target="_self">configuration.h</a></td><td class="desc">The String View Configuration Header </td></tr>
-<tr id="row_0_1_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><a href="str__view_8h_source.html"><span class="icondoc"></span></a><a class="el" href="str__view_8h.html" target="_self">str_view.h</a></td><td class="desc">The <code><a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a></code> Interface </td></tr>
-</table>
-</div><!-- directory -->
-</div><!-- contents -->
+
+<p>The String View Configuration Header.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;string.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for configuration.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="configuration_8h__incl.png" border="0" usemap="#astr__view_2configuration_8h" alt=""/></div>
+<map name="astr__view_2configuration_8h" id="astr__view_2configuration_8h">
+<area shape="rect" title="The String View Configuration Header." alt="" coords="5,5,184,31"/>
+<area shape="rect" title=" " alt="" coords="59,79,130,104"/>
+</map>
+</div>
+</div>
+<p><a href="configuration_8h_source.html">Go to the source code of this file.</a></p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The String View Configuration Header. </p>
+<p>This file supports the library's ability to operate on freestanding targets. For full download and install instructions using a user configuration see INSTALL.md.</p>
+<p>The str_view library uses the following functions or macros that must be supported by the user on freestanding targets.</p>
+<p>Traditionally included via <code>&lt;string.h&gt;</code>:</p>
+<ul>
+<li><code>memmove()</code></li>
+<li><code>memcmp()</code></li>
+<li><code>strlen()</code></li>
+<li><code>strnlen()</code></li>
+</ul>
+<p>To provide these functions, the user may create a header. For example, <code>my_str_view_configuration.h</code>. In this header the user has two options: provide the listed functions directly or include their versions of the headers that provide the needed functionality. It is common for freestanding environments to provide their own <code>&lt;string.h&gt;</code> that implement these functions.</p>
+<p>Then, define <code>SV_USER_CONFIGURATION="my_sv_configuration.h"</code> at some point in the build steps. Either provide it in a CMakeLists.txt file, in a CMakePresets.json file, or as a command line argument. The library is then fully configured for a freestanding environment. See INSTALL.md for the full download and build instructions.</p>
+<p>Any other headers such as <code>&lt;stdint.h&gt;</code>, <code>&lt;stddef.h&gt;</code>, etc. that are included directly in source code now, or will be in the future, are those provided by the C standard on freestanding targets. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="dir_c0a9194a9d1810f5b7b1f18d57ea0ad0.html">str_view</a></li><li class="navelem"><a class="el" href="configuration_8h.html">configuration.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
   </ul>
 </div>

@@ -30,11 +30,12 @@ var NAVTREE =
     [ "Coverage Report", "index.html#autotoc_md3", null ],
     [ "Building and Installation", "md_INSTALL.html", [
       [ "Fetch Content", "md_INSTALL.html#autotoc_md5", null ],
-      [ "Manual Install Quick Start", "md_INSTALL.html#autotoc_md6", null ],
-      [ "Include the Library", "md_INSTALL.html#autotoc_md7", null ],
-      [ "Alternative Builds", "md_INSTALL.html#autotoc_md8", null ],
-      [ "Without Make", "md_INSTALL.html#autotoc_md9", null ],
-      [ "User Presets", "md_INSTALL.html#autotoc_md10", null ]
+      [ "Freestanding Environments", "md_INSTALL.html#autotoc_md6", null ],
+      [ "Manual Install Quick Start", "md_INSTALL.html#autotoc_md7", null ],
+      [ "Include the Library", "md_INSTALL.html#autotoc_md8", null ],
+      [ "Alternative Builds", "md_INSTALL.html#autotoc_md9", null ],
+      [ "Without Make", "md_INSTALL.html#autotoc_md10", null ],
+      [ "User Presets", "md_INSTALL.html#autotoc_md11", null ]
     ] ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
