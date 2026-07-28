@@ -56,7 +56,9 @@ target_sources(${PROJECT_NAME}
         FILE_SET public_headers
             TYPE HEADERS
             BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
-            FILES str_view/${PROJECT_NAME}.h
+            FILES 
+                str_view/${PROJECT_NAME}.h
+                str_view/configuration.h
 )
 target_compile_features(${PROJECT_NAME} PUBLIC c_std_11)
 if (BUILD_SHARED_LIBS AND WIN32)
