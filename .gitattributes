@@ -1,7 +1,7 @@
 tests/ export-ignore
 images/ export-ignore
 samples/ export-ignore
-etc/ export-ignore
+tools/ export-ignore
 res/ export-ignore
 .github/ export-ignore
 .pre-commit-config.yaml export-ignore
