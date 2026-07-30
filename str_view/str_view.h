@@ -28,49 +28,49 @@ global or static global storage is needed. */
 #ifndef SV_STR_VIEW
 #define SV_STR_VIEW
 
-/* SV_ATTRIB_PURE has no side effects when given the same arguments with the
+/* SV_ATTRIBUTE_PURE has no side effects when given the same arguments with the
    same data, producing the same return value. A SV_Str_view points to char
-   const * data which may change in between SV_Str_view calls. SV_ATTRIB_CONST
-   applies only where no pointers are accessed or dereferenced. Other
-   attributes provide more string safety and opportunities to optimize.
-   Credit Harith on Code Review Stack Exchange. */
+   const * data which may change in between SV_Str_view calls.
+   SV_ATTRIBUTE_CONST applies only where no pointers are accessed or
+   dereferenced. Other attributes provide more string safety and opportunities
+   to optimize. Credit Harith on Code Review Stack Exchange. */
 #if defined(__GNUC__) || defined(__clang__) || defined(__INTEL_LLVM_COMPILER)
 #    ifdef __has_attribute
 #        if __has_attribute(pure)
 /** @brief Describes a function as having no side effects when given the same
 arguments with same underlying data. Can be used when pointers are provided. */
-#            define SV_ATTRIB_PURE __attribute__((pure))
+#            define SV_ATTRIBUTE_PURE __attribute__((pure))
 #        else
 /** @brief Describes a function as having no side effects when given the same
 arguments with same underlying data. Can be used when pointers are provided. */
-#            define SV_ATTRIB_PURE /**/
+#            define SV_ATTRIBUTE_PURE /**/
 #        endif
 #        if __has_attribute(pure)
 /** @brief Describes a function as having no side effects and not depending on
 any pointer input that could change between calls. */
-#            define SV_ATTRIB_CONST __attribute__((const))
+#            define SV_ATTRIBUTE_CONST __attribute__((const))
 #        else
 /** @brief Describes a function as having no side effects and not depending on
 any pointer input that could change between calls. */
-#            define SV_ATTRIB_CONST /**/
+#            define SV_ATTRIBUTE_CONST /**/
 #        endif
 #        if __has_attribute(null_terminated_string_arg)
 /** @brief Describes a parameter as null terminated. */
-#            define SV_ATTRIB_NULLTERM(...)                                    \
+#            define SV_ATTRIBUTE_NULLTERM(...)                                 \
                 __attribute__((null_terminated_string_arg(__VA_ARGS__)))
 #        else
 /** @brief Describes a parameter as null terminated. */
-#            define SV_ATTRIB_NULLTERM(...) /**/
+#            define SV_ATTRIBUTE_NULLTERM(...) /**/
 #        endif
 #    else
 /** @brief Describes a function as having no side effects when given the same
 arguments with same underlying data. Can be used when pointers are provided. */
-#        define SV_ATTRIB_PURE          /**/
+#        define SV_ATTRIBUTE_PURE          /**/
 /** @brief Describes a function as having no side effects and not depending on
 any pointer input that could change between calls. */
-#        define SV_ATTRIB_CONST         /**/
+#        define SV_ATTRIBUTE_CONST         /**/
 /** @brief Describes a parameter as null terminated. */
-#        define SV_ATTRIB_NULLTERM(...) /**/
+#        define SV_ATTRIBUTE_NULLTERM(...) /**/
 #    endif
 /** @brief A helper macro to enforce only string literals for the SV_from
 constructor macro. GCC and Clang allow this syntax to create more errors when
@@ -80,12 +80,12 @@ bad input is provided to the SV_from constructor.
 #else
 /** @brief Describes a function as having no side effects when given the same
 arguments with same underlying data. Can be used when pointers are provided. */
-#    define SV_ATTRIB_PURE          /**/
+#    define SV_ATTRIBUTE_PURE          /**/
 /** @brief Describes a function as having no side effects and not depending on
 any pointer input that could change between calls. */
-#    define SV_ATTRIB_CONST         /**/
+#    define SV_ATTRIBUTE_CONST         /**/
 /** @brief Describes a parameter as null terminated. */
-#    define SV_ATTRIB_NULLTERM(...) /**/
+#    define SV_ATTRIBUTE_NULLTERM(...) /**/
 /** @brief MSVC does not allow strong enforcement of string literals to the
    SV_from constructor. This is a dummy wrapper for compatibility. */
 #    define SV_STR_LITERAL(str_literal) str_literal
@@ -175,7 +175,7 @@ However saving the SV_Str_view in a constant may be more convenient. */
 @warning The provided string must be null terminated. It is expected that all
 strings provided to string views are null terminated. */
 SV_API SV_Str_view SV_from_terminated(char const *str)
-    SV_ATTRIB_NULLTERM(1) SV_ATTRIB_PURE;
+    SV_ATTRIBUTE_NULLTERM(1) SV_ATTRIBUTE_PURE;
 
 /** @brief Constructs and returns a string view from a sequence of valid n bytes
 or string length, whichever comes first.
@@ -187,7 +187,7 @@ input string and the provided byte count.
 the input string is conceptually at the position of the null terminator of the
 view. */
 SV_API SV_Str_view SV_from_view(size_t n, char const *str)
-    SV_ATTRIB_NULLTERM(2) SV_ATTRIB_PURE;
+    SV_ATTRIBUTE_NULLTERM(2) SV_ATTRIBUTE_PURE;
 
 /** @brief Constructs and returns a string view from a null terminated string
 broken on the first occurrence of delimiter if found or null terminator if delim
@@ -200,7 +200,7 @@ delimiter or the entire string if no delimiter is found.
 This constructor will also skip the delimiter if that delimiter starts the
 string. This is similar to the tokenizing function in the iteration section. */
 SV_API SV_Str_view SV_from_delimiter(char const *str, char const *delim)
-    SV_ATTRIB_NULLTERM(1) SV_ATTRIB_NULLTERM(2) SV_ATTRIB_PURE;
+    SV_ATTRIBUTE_NULLTERM(1) SV_ATTRIBUTE_NULLTERM(2) SV_ATTRIBUTE_PURE;
 
 /** @brief Creates the substring from position pos for count length. The count
 is the minimum value between count and `(length - pos)`.
@@ -212,13 +212,13 @@ given greater than SV_Str_view length an empty view is returned positioned at
 the end of SV_Str_view.
 @warning The end position may or may not hold the null terminator. */
 SV_API SV_Str_view SV_substr(SV_Str_view sv, size_t pos,
-                             size_t count) SV_ATTRIB_PURE;
+                             size_t count) SV_ATTRIBUTE_PURE;
 
 /** @brief Returns the bytes of the string pointer to, null terminator included.
 @param[in] str the null terminated input string.
 @return the size in bytes of str, including the null terminator. */
 SV_API size_t SV_str_bytes(char const *str)
-    SV_ATTRIB_NULLTERM(1) SV_ATTRIB_PURE;
+    SV_ATTRIBUTE_NULLTERM(1) SV_ATTRIBUTE_PURE;
 
 /** @brief Copies the max of string bytes or input string length into a view,
 whichever ends first.
@@ -230,7 +230,7 @@ input string and the provided byte count.
 `str_bytes` of the input string is conceptually at the position of the null
 terminator of the view. */
 SV_API SV_Str_view SV_copy(size_t str_bytes, char const *src_str)
-    SV_ATTRIB_NULLTERM(2) SV_ATTRIB_PURE;
+    SV_ATTRIBUTE_NULLTERM(2) SV_ATTRIBUTE_PURE;
 
 /** @brief Fills the destination buffer with the minimum between destination
 size and source view size, null terminating the string.
@@ -253,7 +253,7 @@ This guarantees that the SV_Str_view returned ends at the null terminator of the
 underlying string as all strings used with SV_Str_views are assumed to be null
 terminated. It is undefined behavior to provide non null terminated strings to
 any SV_Str_view code. */
-SV_API SV_Str_view SV_extend(SV_Str_view sv) SV_ATTRIB_PURE;
+SV_API SV_Str_view SV_extend(SV_Str_view sv) SV_ATTRIBUTE_PURE;
 
 /**@}*/
 
@@ -270,7 +270,7 @@ side.
 
 Comparison is bounded by the shorter SV_Str_view length. ERR is returned if bad
 input is provided such as a SV_Str_view with a NULL pointer field. */
-SV_API SV_Order SV_compare(SV_Str_view lhs, SV_Str_view rhs) SV_ATTRIB_PURE;
+SV_API SV_Order SV_compare(SV_Str_view lhs, SV_Str_view rhs) SV_ATTRIBUTE_PURE;
 
 /** @brief Returns the standard C threeway comparison between cmp(lhs, rhs)
 between a SV_Str_view and a C string.
@@ -283,7 +283,7 @@ Comparison is bounded by the shorter SV_Str_view length. An error value is
 returned if bad input is provided such as a SV_Str_view with a NULL pointer
 field. */
 SV_API SV_Order SV_terminated_compare(SV_Str_view lhs, char const *rhs)
-    SV_ATTRIB_NULLTERM(2) SV_ATTRIB_PURE;
+    SV_ATTRIBUTE_NULLTERM(2) SV_ATTRIBUTE_PURE;
 
 /** @brief Returns the standard C threeway comparison between cmp(lhs, rhs)
 between a SV_Str_view and a C string, bounded by n bytes of the right hand side.
@@ -298,7 +298,7 @@ Comparison is bounded by the shortest length between left hand side, right hand
 side string length, and the byte limit n. An error value is returned if bad
 input is provided such as a SV_Str_view with a NULL pointer field. */
 SV_API SV_Order SV_view_compare(SV_Str_view lhs, char const *rhs, size_t n)
-    SV_ATTRIB_NULLTERM(2) SV_ATTRIB_PURE;
+    SV_ATTRIBUTE_NULLTERM(2) SV_ATTRIBUTE_PURE;
 
 /**@}*/
 
@@ -318,7 +318,7 @@ string and the size zero substring at the final position in the SV_Str_view is
 returned wich may or may not be the null termiator. If no delim is found the
 entire SV_Str_view is returned. */
 SV_API SV_Str_view SV_token_begin(SV_Str_view src,
-                                  SV_Str_view delim) SV_ATTRIB_PURE;
+                                  SV_Str_view delim) SV_ATTRIBUTE_PURE;
 
 /** @brief Provides the status of the current tokenization for use in conditions
 such as loops.
@@ -328,7 +328,7 @@ such as loops.
 meaning a call to SV_token_begin() or SV_token_next() has yielded a size 0
 SV_Str_view that points at the end of the src SV_Str_view, which may or may not
 be null terminated. */
-SV_API bool SV_token_end(SV_Str_view src, SV_Str_view token) SV_ATTRIB_PURE;
+SV_API bool SV_token_end(SV_Str_view src, SV_Str_view token) SV_ATTRIBUTE_PURE;
 
 /** @brief Advances to the next token in the remaining view separated by the
 delim.
@@ -343,7 +343,7 @@ null terminator. The token is bounded by the length of the view between two
 delimiters or the length from a delimiter to the end of src, whichever comes
 first. */
 SV_API SV_Str_view SV_token_next(SV_Str_view src, SV_Str_view token,
-                                 SV_Str_view delim) SV_ATTRIB_PURE;
+                                 SV_Str_view delim) SV_ATTRIBUTE_PURE;
 
 /** Obtains the last token in a string in preparation for reverse tokenized
 iteration.
@@ -356,7 +356,7 @@ view is returned.
 @note Though the SV_Str_view is tokenized in reverse, the token view returned
 will start at the first character and be the length of the token found. */
 SV_API SV_Str_view SV_token_reverse_begin(SV_Str_view src,
-                                          SV_Str_view delim) SV_ATTRIB_PURE;
+                                          SV_Str_view delim) SV_ATTRIBUTE_PURE;
 
 /** @brief Provides the status of the current tokenization for use in conditions
 such as loops.
@@ -367,7 +367,7 @@ position, meaning a call to SV_token_reverse_begin() or SV_token_reverse_next()
 has yielded a size 0 SV_Str_view that points at the start of the src
 SV_Str_view. */
 SV_API bool SV_token_reverse_end(SV_Str_view src,
-                                 SV_Str_view token) SV_ATTRIB_PURE;
+                                 SV_Str_view token) SV_ATTRIBUTE_PURE;
 
 /** @brief Advances the token in src to the next token between two delimiters
 provided by delim.
@@ -384,27 +384,28 @@ delimiter is in a token. This is because the string is now being parsed from
 right to left. However, the token returned starts at the first character and is
 read from left to right between two delimiters as in the forward version. */
 SV_API SV_Str_view SV_token_reverse_next(SV_Str_view src, SV_Str_view token,
-                                         SV_Str_view delim) SV_ATTRIB_PURE;
+                                         SV_Str_view delim) SV_ATTRIBUTE_PURE;
 
 /** @brief Returns a read only pointer to the beginning of the string view,
 the first valid character in the view.
 @param[in] sv the input string view.
 @return if the view stores NULL, the placeholder SV_null() is returned. */
-SV_API char const *SV_begin(SV_Str_view sv) SV_ATTRIB_PURE;
+SV_API char const *SV_begin(SV_Str_view sv) SV_ATTRIBUTE_PURE;
 
 /** @brief Returns the reverse iterator beginning, the last character of the
 current view.
 @param[in] sv the input string view.
 @return if the view is null SV_null() is returned. If the view is sized zero
 with a valid pointer that pointer in the view is returned. */
-SV_API char const *SV_reverse_begin(SV_Str_view sv) SV_ATTRIB_PURE;
+SV_API char const *SV_reverse_begin(SV_Str_view sv) SV_ATTRIBUTE_PURE;
 
 /** @brief Advances the null terminated string pointer from its previous
 position. If NULL is provided SV_null() is returned.
 @param[in] c the pointer to a null terminated string iterator.
 @return the next character in the string or the end iterator if no characters
 remain. */
-SV_API char const *SV_next(char const *c) SV_ATTRIB_NULLTERM(1) SV_ATTRIB_PURE;
+SV_API char const *SV_next(char const *c)
+    SV_ATTRIBUTE_NULLTERM(1) SV_ATTRIBUTE_PURE;
 
 /** @brief Advances the iterator to the next character in the SV_Str_view being
 iterated through in reverse.
@@ -412,14 +413,14 @@ iterated through in reverse.
 @warning It is undefined behavior to change the SV_Str_view one is iterating
 through during iteration.
 If the char pointer is null, SV_null() is returned. */
-SV_API char const *SV_reverse_next(char const *c) SV_ATTRIB_PURE;
+SV_API char const *SV_reverse_next(char const *c) SV_ATTRIBUTE_PURE;
 
 /** @brief Returns a read only pointer to the end of the string view.
 @param[in] sv the view being iterated over.
 @return the character pointer to the end of this iteration. This may or may not
 be a null terminated character depending on the view. If the view stores NULL,
 the placeholder SV_null() is returned. */
-SV_API char const *SV_end(SV_Str_view sv) SV_ATTRIB_PURE;
+SV_API char const *SV_end(SV_Str_view sv) SV_ATTRIBUTE_PURE;
 
 /** @brief The ending position of a reverse iteration.
 @param[in] sv the view being iterated over in reverse.
@@ -427,7 +428,7 @@ SV_API char const *SV_end(SV_Str_view sv) SV_ATTRIB_PURE;
 @warning It is undefined behavior to access or use rend. It is undefined
 behavior to pass in any SV_Str_view not being iterated through as started with
 reverse_begin. */
-SV_API char const *SV_reverse_end(SV_Str_view sv) SV_ATTRIB_PURE;
+SV_API char const *SV_reverse_end(SV_Str_view sv) SV_ATTRIBUTE_PURE;
 
 /**@}*/
 
@@ -443,7 +444,7 @@ Search a `SV_Str_view` for various types of substrings and character matches. */
 than the haystack, or position is greater than haystack length, then haystack
 length (npos) is returned. */
 SV_API size_t SV_find(SV_Str_view haystack, size_t pos,
-                      SV_Str_view needle) SV_ATTRIB_PURE;
+                      SV_Str_view needle) SV_ATTRIBUTE_PURE;
 
 /** @brief Searches for the last occurrence of needle in haystack starting from
 pos from right to left.
@@ -457,14 +458,14 @@ returned.
 
 If the position is larger than the haystack, the entire haystack is searched. */
 SV_API size_t SV_reverse_find(SV_Str_view haystack, size_t pos,
-                              SV_Str_view needle) SV_ATTRIB_PURE;
+                              SV_Str_view needle) SV_ATTRIBUTE_PURE;
 
 /** @brief Tests membership of needle in haystack.
 @param[in] haystack the source string view to search.
 @param[in] needle the substring to match within haystack.
 @return true if the needle is found in the haystack, false otherwise. */
 SV_API bool SV_contains(SV_Str_view haystack,
-                        SV_Str_view needle) SV_ATTRIB_PURE;
+                        SV_Str_view needle) SV_ATTRIBUTE_PURE;
 
 /** @brief Search for a substring within a source string view.
 @param[in] haystack the source string view to search.
@@ -475,7 +476,7 @@ returned. This may or may not be null terminated at that position. If needle is
 greater than haystack length an empty view at the end of haystack is returned.
 If haystack is NULL, SV_null is returned. */
 SV_API SV_Str_view SV_match(SV_Str_view haystack,
-                            SV_Str_view needle) SV_ATTRIB_PURE;
+                            SV_Str_view needle) SV_ATTRIBUTE_PURE;
 
 /** @brief Search for a substring within a source string in reverse.
 @param[in] haystack the source string view to reverse search.
@@ -486,14 +487,15 @@ returned. This may or may not be null terminated at that position. If needle is
 greater than haystack length an empty view at haystack size is returned. If
 haystack is NULL, SV_null is returned (modeled after strstr). */
 SV_API SV_Str_view SV_reverse_match(SV_Str_view haystack,
-                                    SV_Str_view needle) SV_ATTRIB_PURE;
+                                    SV_Str_view needle) SV_ATTRIBUTE_PURE;
 
 /** @brief Confirms the presence of a prefix within a string view.
 @param[in] sv the string view to search.
 @param[in] prefix the substring prefix to match with the input view.
 @return true if a prefix shorter than or equal in length to the SV_Str_view is
 present, false otherwise. */
-SV_API bool SV_starts_with(SV_Str_view sv, SV_Str_view prefix) SV_ATTRIB_PURE;
+SV_API bool SV_starts_with(SV_Str_view sv,
+                           SV_Str_view prefix) SV_ATTRIBUTE_PURE;
 
 /** Removes the minimum between SV_Str_view length and n from the start of the
 SV_Str_view.
@@ -504,14 +506,14 @@ SV_Str_view.
 It is safe to provide n larger than SV_Str_view size as that will result in a
 size 0 view to the end of the current view which may or may not be the null
 terminator. */
-SV_API SV_Str_view SV_remove_prefix(SV_Str_view sv, size_t n) SV_ATTRIB_PURE;
+SV_API SV_Str_view SV_remove_prefix(SV_Str_view sv, size_t n) SV_ATTRIBUTE_PURE;
 
 /** @brief Confirms the presence of a suffix within a string view.
 @param[in] sv the string view to search.
 @param[in] suffix the substring suffix to match with the input view.
 @return true if a suffix shorter than or equal in length to the SV_Str_view is
 present, false otherwise. */
-SV_API bool SV_ends_with(SV_Str_view sv, SV_Str_view suffix) SV_ATTRIB_PURE;
+SV_API bool SV_ends_with(SV_Str_view sv, SV_Str_view suffix) SV_ATTRIBUTE_PURE;
 
 /** Removes the minimum between SV_Str_view length and n from the end of the
 SV_Str_view.
@@ -522,7 +524,7 @@ SV_Str_view.
 It is safe to provide n larger than SV_Str_view size as that will result in a
 size 0 view to the end of the current view which may or may not be the null
 terminator. */
-SV_API SV_Str_view SV_remove_suffix(SV_Str_view sv, size_t n) SV_ATTRIB_PURE;
+SV_API SV_Str_view SV_remove_suffix(SV_Str_view sv, size_t n) SV_ATTRIBUTE_PURE;
 
 /** Finds the first position of an occurrence of any character in set.
 @param[in] haystack the input view to search.
@@ -533,7 +535,7 @@ haystack.
 provided. If no occurrence is found haystack size is returned. An empty set
 (NULL) is valid, returning npos. An empty haystack returns 0. */
 SV_API size_t SV_find_first_of(SV_Str_view haystack,
-                               SV_Str_view set) SV_ATTRIB_PURE;
+                               SV_Str_view set) SV_ATTRIBUTE_PURE;
 
 /** Finds the first position at which no characters in set can be found.
 @param[in] haystack the input view to search.
@@ -545,7 +547,7 @@ set provided. If only characters in the set are encountered haystack size is
 returned. An empty set (NULL) is valid, returning npos. An empty haystack
 returns 0. */
 SV_API size_t SV_find_first_not_of(SV_Str_view haystack,
-                                   SV_Str_view set) SV_ATTRIB_PURE;
+                                   SV_Str_view set) SV_ATTRIBUTE_PURE;
 
 /** Finds the last position of an occurrence of any character in set.
 @param[in] haystack the input view to search.
@@ -556,7 +558,7 @@ haystack.
 provided. If no occurrence is found haystack size is returned. An empty set
 (NULL) is valid, returning npos. An empty haystack returns 0. */
 SV_API size_t SV_find_last_of(SV_Str_view haystack,
-                              SV_Str_view set) SV_ATTRIB_PURE;
+                              SV_Str_view set) SV_ATTRIBUTE_PURE;
 
 /** Finds the last position at which no characters in set can be found.
 @param[in] haystack the input view to search.
@@ -568,7 +570,7 @@ set provided. If only characters in the set are encountered haystack size is
 returned. An empty set (NULL) is valid, returning npos. An empty haystack
 returns 0. */
 SV_API size_t SV_find_last_not_of(SV_Str_view haystack,
-                                  SV_Str_view set) SV_ATTRIB_PURE;
+                                  SV_Str_view set) SV_ATTRIBUTE_PURE;
 
 /**@}*/
 
@@ -581,14 +583,14 @@ Obtain current state of an `SV_Str_view` and C strings. */
 @param[in] n the limiting byte count to compare.
 @return the minimum between the length of the string and n. */
 SV_API size_t SV_min_len(char const *str, size_t n)
-    SV_ATTRIB_NULLTERM(1) SV_ATTRIB_PURE;
+    SV_ATTRIBUTE_NULLTERM(1) SV_ATTRIBUTE_PURE;
 
 /** @brief A sentinel empty string. Safely dereference to view a null
 terminator. This may be returned from various functions when bad input is given
 such as NULL pointers as the underlying SV_Str_view string pointer.
 @return a read only character pointer that points to a null terminator and can
 be safely dereferenced. */
-SV_API char const *SV_null(void) SV_ATTRIB_PURE;
+SV_API char const *SV_null(void) SV_ATTRIBUTE_PURE;
 
 /** @brief The end of a SV_Str_view guaranteed to be greater than or equal to
 size.
@@ -598,7 +600,7 @@ size.
 This value may be used for the idiomatic check for most string searching
 function return values when something is not found. If a size is returned from a
 searching function it is possible to check it against this value. */
-SV_API size_t SV_npos(SV_Str_view sv) SV_ATTRIB_CONST;
+SV_API size_t SV_npos(SV_Str_view sv) SV_ATTRIBUTE_CONST;
 
 /** @brief Returns true if the provided SV_Str_view is empty, false otherwise.
 @param[in] sv the string view to check.
@@ -606,7 +608,7 @@ SV_API size_t SV_npos(SV_Str_view sv) SV_ATTRIB_CONST;
 
 This is a useful function to check for SV_Str_view searches that yield an empty
 view at the end of a SV_Str_view when an element cannot be found. */
-SV_API bool SV_is_empty(SV_Str_view sv) SV_ATTRIB_CONST;
+SV_API bool SV_is_empty(SV_Str_view sv) SV_ATTRIBUTE_CONST;
 
 /** @brief Returns the length of the SV_Str_view in O(1) time.
 @param[in] sv the string view to check.
@@ -614,7 +616,7 @@ SV_API bool SV_is_empty(SV_Str_view sv) SV_ATTRIB_CONST;
 
 The position at SV_Str_view size is interpreted as the null terminator and not
 counted toward length of a SV_Str_view. */
-SV_API size_t SV_len(SV_Str_view sv) SV_ATTRIB_CONST;
+SV_API size_t SV_len(SV_Str_view sv) SV_ATTRIBUTE_CONST;
 
 /** Returns the bytes of SV_Str_view including null terminator.
 @param[in] sv the string view to check.
@@ -623,7 +625,7 @@ character.
 @note String views may not actually be null terminated but the position at
 SV_Str_view[SV_Str_view.len] is interpreted as the null terminator and thus
 counts towards the byte count. */
-SV_API size_t SV_bytes(SV_Str_view sv) SV_ATTRIB_CONST;
+SV_API size_t SV_bytes(SV_Str_view sv) SV_ATTRIBUTE_CONST;
 
 /** @brief Returns the character pointer at the minimum between the indicated
 position and the end of the string view.
@@ -631,7 +633,7 @@ position and the end of the string view.
 @param[in] i the index within range of `[0, string view length - 1)`.
 @return a pointer to the character at the designated index. If NULL is stored by
 the SV_Str_view then SV_null() is returned. */
-SV_API char const *SV_pointer(SV_Str_view sv, size_t i) SV_ATTRIB_PURE;
+SV_API char const *SV_pointer(SV_Str_view sv, size_t i) SV_ATTRIBUTE_PURE;
 
 /** @brief Obtain a character at a position in the string view.
 @param[in] sv the input string view.
@@ -639,19 +641,19 @@ SV_API char const *SV_pointer(SV_Str_view sv, size_t i) SV_ATTRIB_PURE;
 @return the character in the string at position i with bounds checking. If i is
 greater than or equal to the size of SV_Str_view the null terminator character
 is returned. */
-SV_API char SV_at(SV_Str_view sv, size_t i) SV_ATTRIB_PURE;
+SV_API char SV_at(SV_Str_view sv, size_t i) SV_ATTRIBUTE_PURE;
 
 /** @brief Obtain the character at the first position of SV_Str_view.
 @param[in] sv the input string view.
 @return the first character in the string view. An empty SV_Str_view or NULL
 pointer is valid and will return '\0'. */
-SV_API char SV_front(SV_Str_view sv) SV_ATTRIB_PURE;
+SV_API char SV_front(SV_Str_view sv) SV_ATTRIBUTE_PURE;
 
 /** @brief Obtain the character at the last position of SV_Str_view.
 @param[in] sv the input string view.
 @return the last character in the string view. An empty SV_Str_view or NULL
 pointer is valid and will return '\0'. */
-SV_API char SV_back(SV_Str_view sv) SV_ATTRIB_PURE;
+SV_API char SV_back(SV_Str_view sv) SV_ATTRIBUTE_PURE;
 
 /**@}*/
 
