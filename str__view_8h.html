@@ -128,18 +128,18 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a8bc45837a6af4c6f8a18d674626bbe34"><td class="memItemLeft" align="right" valign="top"><a id="a8bc45837a6af4c6f8a18d674626bbe34" name="a8bc45837a6af4c6f8a18d674626bbe34"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SV_ATTRIB_PURE</b></td></tr>
-<tr class="memdesc:a8bc45837a6af4c6f8a18d674626bbe34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes a function as having no side effects when given the same arguments with same underlying data. Can be used when pointers are provided. <br /></td></tr>
-<tr class="separator:a8bc45837a6af4c6f8a18d674626bbe34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8df9c93f659cdd2543c3c1f11236bb4"><td class="memItemLeft" align="right" valign="top"><a id="aa8df9c93f659cdd2543c3c1f11236bb4" name="aa8df9c93f659cdd2543c3c1f11236bb4"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SV_ATTRIB_CONST</b></td></tr>
-<tr class="memdesc:aa8df9c93f659cdd2543c3c1f11236bb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes a function as having no side effects and not depending on any pointer input that could change between calls. <br /></td></tr>
-<tr class="separator:aa8df9c93f659cdd2543c3c1f11236bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15ca829e06962ad8c8c690db021ba2ef"><td class="memItemLeft" align="right" valign="top"><a id="a15ca829e06962ad8c8c690db021ba2ef" name="a15ca829e06962ad8c8c690db021ba2ef"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>SV_ATTRIB_NULLTERM</b>(...)</td></tr>
-<tr class="memdesc:a15ca829e06962ad8c8c690db021ba2ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes a parameter as null terminated. <br /></td></tr>
-<tr class="separator:a15ca829e06962ad8c8c690db021ba2ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e4eb12c3d447efb92a67cfe0f6b9882"><td class="memItemLeft" align="right" valign="top"><a id="a5e4eb12c3d447efb92a67cfe0f6b9882" name="a5e4eb12c3d447efb92a67cfe0f6b9882"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SV_ATTRIBUTE_PURE</b></td></tr>
+<tr class="memdesc:a5e4eb12c3d447efb92a67cfe0f6b9882"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes a function as having no side effects when given the same arguments with same underlying data. Can be used when pointers are provided. <br /></td></tr>
+<tr class="separator:a5e4eb12c3d447efb92a67cfe0f6b9882"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b1b638551b7837c6672429b0f30e998"><td class="memItemLeft" align="right" valign="top"><a id="a1b1b638551b7837c6672429b0f30e998" name="a1b1b638551b7837c6672429b0f30e998"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SV_ATTRIBUTE_CONST</b></td></tr>
+<tr class="memdesc:a1b1b638551b7837c6672429b0f30e998"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes a function as having no side effects and not depending on any pointer input that could change between calls. <br /></td></tr>
+<tr class="separator:a1b1b638551b7837c6672429b0f30e998"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a360fc7bba6d26e5e9feaa6ba3fc30a0f"><td class="memItemLeft" align="right" valign="top"><a id="a360fc7bba6d26e5e9feaa6ba3fc30a0f" name="a360fc7bba6d26e5e9feaa6ba3fc30a0f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SV_ATTRIBUTE_NULLTERM</b>(...)</td></tr>
+<tr class="memdesc:a360fc7bba6d26e5e9feaa6ba3fc30a0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes a parameter as null terminated. <br /></td></tr>
+<tr class="separator:a360fc7bba6d26e5e9feaa6ba3fc30a0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6efdaade95a9e224ba814c928204e4dc"><td class="memItemLeft" align="right" valign="top"><a id="a6efdaade95a9e224ba814c928204e4dc" name="a6efdaade95a9e224ba814c928204e4dc"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>SV_STR_LITERAL</b>(str_literal)&#160;&#160;&#160;str_literal</td></tr>
 <tr class="memdesc:a6efdaade95a9e224ba814c928204e4dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">MSVC does not allow strong enforcement of string literals to the SV_from constructor. This is a dummy wrapper for compatibility. <br /></td></tr>
@@ -155,30 +155,30 @@ Macros</h2></td></tr>
 <tr class="memitem:ab735680cc4059381ce2cad6c8fc690d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ab735680cc4059381ce2cad6c8fc690d3">SV_from</a>(str_literal)&#160;&#160;&#160;    ((<a class="el" href="structSV__Str__view.html">SV_Str_view</a>){<a class="el" href="str__view_8h.html#a6efdaade95a9e224ba814c928204e4dc">SV_STR_LITERAL</a>(str_literal), sizeof(str_literal) - 1})</td></tr>
 <tr class="memdesc:ab735680cc4059381ce2cad6c8fc690d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">A macro to reduce the chance for errors in repeating oneself when constructing an inline or const <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a>. The input must be a string literal.  <br /></td></tr>
 <tr class="separator:ab735680cc4059381ce2cad6c8fc690d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfe5d77c0a37dfeafc737e62abd8aa19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#acfe5d77c0a37dfeafc737e62abd8aa19">SV_from_terminated</a> (char const *str) <a class="el" href="str__view_8h.html#a15ca829e06962ad8c8c690db021ba2ef">SV_ATTRIB_NULLTERM</a>(1) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:acfe5d77c0a37dfeafc737e62abd8aa19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs and returns a string view from a null terminated string.  <br /></td></tr>
-<tr class="separator:acfe5d77c0a37dfeafc737e62abd8aa19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2923ce2c520b5963cd37250b66e9d196"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a2923ce2c520b5963cd37250b66e9d196">SV_from_view</a> (size_t n, char const *str) <a class="el" href="str__view_8h.html#a15ca829e06962ad8c8c690db021ba2ef">SV_ATTRIB_NULLTERM</a>(2) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a2923ce2c520b5963cd37250b66e9d196"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs and returns a string view from a sequence of valid n bytes or string length, whichever comes first.  <br /></td></tr>
-<tr class="separator:a2923ce2c520b5963cd37250b66e9d196"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a146a05bec7fd24999d74a2fa46223b9a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a146a05bec7fd24999d74a2fa46223b9a">SV_from_delimiter</a> (char const *str, char const *delim) <a class="el" href="str__view_8h.html#a15ca829e06962ad8c8c690db021ba2ef">SV_ATTRIB_NULLTERM</a>(1) <a class="el" href="str__view_8h.html#a15ca829e06962ad8c8c690db021ba2ef">SV_ATTRIB_NULLTERM</a>(2) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a146a05bec7fd24999d74a2fa46223b9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs and returns a string view from a null terminated string broken on the first occurrence of delimiter if found or null terminator if delim cannot be found.  <br /></td></tr>
-<tr class="separator:a146a05bec7fd24999d74a2fa46223b9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ffc135012b68a396f786638f5ac6278"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a6ffc135012b68a396f786638f5ac6278">SV_substr</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv, size_t pos, size_t count) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a6ffc135012b68a396f786638f5ac6278"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the substring from position pos for count length. The count is the minimum value between count and <code>(length - pos)</code>.  <br /></td></tr>
-<tr class="separator:a6ffc135012b68a396f786638f5ac6278"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62b1315242b9acfbfdd38dcbefe0e7f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a62b1315242b9acfbfdd38dcbefe0e7f3">SV_str_bytes</a> (char const *str) <a class="el" href="str__view_8h.html#a15ca829e06962ad8c8c690db021ba2ef">SV_ATTRIB_NULLTERM</a>(1) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a62b1315242b9acfbfdd38dcbefe0e7f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the bytes of the string pointer to, null terminator included.  <br /></td></tr>
-<tr class="separator:a62b1315242b9acfbfdd38dcbefe0e7f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac18f3e34b3533cb52347d9b18c05fb56"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ac18f3e34b3533cb52347d9b18c05fb56">SV_copy</a> (size_t str_bytes, char const *src_str) <a class="el" href="str__view_8h.html#a15ca829e06962ad8c8c690db021ba2ef">SV_ATTRIB_NULLTERM</a>(2) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:ac18f3e34b3533cb52347d9b18c05fb56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the max of string bytes or input string length into a view, whichever ends first.  <br /></td></tr>
-<tr class="separator:ac18f3e34b3533cb52347d9b18c05fb56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d67d4bf50b2eeffa8e44a50b037e648"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a8d67d4bf50b2eeffa8e44a50b037e648">SV_from_terminated</a> (char const *str) <a class="el" href="str__view_8h.html#a360fc7bba6d26e5e9feaa6ba3fc30a0f">SV_ATTRIBUTE_NULLTERM</a>(1) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a8d67d4bf50b2eeffa8e44a50b037e648"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs and returns a string view from a null terminated string.  <br /></td></tr>
+<tr class="separator:a8d67d4bf50b2eeffa8e44a50b037e648"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af661a529bc5545bdc8486179c91b4de2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#af661a529bc5545bdc8486179c91b4de2">SV_from_view</a> (size_t n, char const *str) <a class="el" href="str__view_8h.html#a360fc7bba6d26e5e9feaa6ba3fc30a0f">SV_ATTRIBUTE_NULLTERM</a>(2) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:af661a529bc5545bdc8486179c91b4de2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs and returns a string view from a sequence of valid n bytes or string length, whichever comes first.  <br /></td></tr>
+<tr class="separator:af661a529bc5545bdc8486179c91b4de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeeb866e6908bdcff709897405e60b42e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#aeeb866e6908bdcff709897405e60b42e">SV_from_delimiter</a> (char const *str, char const *delim) <a class="el" href="str__view_8h.html#a360fc7bba6d26e5e9feaa6ba3fc30a0f">SV_ATTRIBUTE_NULLTERM</a>(1) <a class="el" href="str__view_8h.html#a360fc7bba6d26e5e9feaa6ba3fc30a0f">SV_ATTRIBUTE_NULLTERM</a>(2) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:aeeb866e6908bdcff709897405e60b42e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs and returns a string view from a null terminated string broken on the first occurrence of delimiter if found or null terminator if delim cannot be found.  <br /></td></tr>
+<tr class="separator:aeeb866e6908bdcff709897405e60b42e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab669ed23c2db562fae315c7a0f93f57d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ab669ed23c2db562fae315c7a0f93f57d">SV_substr</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv, size_t pos, size_t count) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:ab669ed23c2db562fae315c7a0f93f57d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the substring from position pos for count length. The count is the minimum value between count and <code>(length - pos)</code>.  <br /></td></tr>
+<tr class="separator:ab669ed23c2db562fae315c7a0f93f57d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae17ba3843062565f1933588c1c315425"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ae17ba3843062565f1933588c1c315425">SV_str_bytes</a> (char const *str) <a class="el" href="str__view_8h.html#a360fc7bba6d26e5e9feaa6ba3fc30a0f">SV_ATTRIBUTE_NULLTERM</a>(1) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:ae17ba3843062565f1933588c1c315425"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the bytes of the string pointer to, null terminator included.  <br /></td></tr>
+<tr class="separator:ae17ba3843062565f1933588c1c315425"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7eeae574a52ce07d44b0edd2eea0343"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ac7eeae574a52ce07d44b0edd2eea0343">SV_copy</a> (size_t str_bytes, char const *src_str) <a class="el" href="str__view_8h.html#a360fc7bba6d26e5e9feaa6ba3fc30a0f">SV_ATTRIBUTE_NULLTERM</a>(2) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:ac7eeae574a52ce07d44b0edd2eea0343"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the max of string bytes or input string length into a view, whichever ends first.  <br /></td></tr>
+<tr class="separator:ac7eeae574a52ce07d44b0edd2eea0343"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73ef3f2b4b5fb182d447544677c7282c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a73ef3f2b4b5fb182d447544677c7282c">SV_fill</a> (size_t dest_bytes, char *dest_buf, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> src)</td></tr>
 <tr class="memdesc:a73ef3f2b4b5fb182d447544677c7282c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the destination buffer with the minimum between destination size and source view size, null terminating the string.  <br /></td></tr>
 <tr class="separator:a73ef3f2b4b5fb182d447544677c7282c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf51d3f645a2f24fa6f6a2fbece51cdc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#adf51d3f645a2f24fa6f6a2fbece51cdc">SV_extend</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:adf51d3f645a2f24fa6f6a2fbece51cdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> of the entirety of the underlying string, starting at the current view pointer position.  <br /></td></tr>
-<tr class="separator:adf51d3f645a2f24fa6f6a2fbece51cdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebff693d54e4ca280761b2173c4892e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#aebff693d54e4ca280761b2173c4892e2">SV_extend</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:aebff693d54e4ca280761b2173c4892e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> of the entirety of the underlying string, starting at the current view pointer position.  <br /></td></tr>
+<tr class="separator:aebff693d54e4ca280761b2173c4892e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader">Types</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p>The types of the <code><a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a></code> interface. </p>
@@ -194,124 +194,124 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader">Comparison</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p>Comparing a <code><a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a></code> with another instance or a C string. </p>
 </td></tr>
-<tr class="memitem:a688dcdc0c6fe3901d71d114ad699c765"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="str__view_8h.html#a648d7dfc8555055b2e5b742d0aa6fdf7">SV_Order</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a688dcdc0c6fe3901d71d114ad699c765">SV_compare</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> lhs, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> rhs) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a688dcdc0c6fe3901d71d114ad699c765"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the standard C threeway comparison between cmp(lhs, rhs) between two string views.  <br /></td></tr>
-<tr class="separator:a688dcdc0c6fe3901d71d114ad699c765"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7d6a7d0e99847c09f13183a84ced42e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="str__view_8h.html#a648d7dfc8555055b2e5b742d0aa6fdf7">SV_Order</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#af7d6a7d0e99847c09f13183a84ced42e">SV_terminated_compare</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> lhs, char const *rhs) <a class="el" href="str__view_8h.html#a15ca829e06962ad8c8c690db021ba2ef">SV_ATTRIB_NULLTERM</a>(2) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:af7d6a7d0e99847c09f13183a84ced42e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the standard C threeway comparison between cmp(lhs, rhs) between a <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> and a C string.  <br /></td></tr>
-<tr class="separator:af7d6a7d0e99847c09f13183a84ced42e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c9c796c96c8fd907aefee8e5a875c20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="str__view_8h.html#a648d7dfc8555055b2e5b742d0aa6fdf7">SV_Order</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a6c9c796c96c8fd907aefee8e5a875c20">SV_view_compare</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> lhs, char const *rhs, size_t n) <a class="el" href="str__view_8h.html#a15ca829e06962ad8c8c690db021ba2ef">SV_ATTRIB_NULLTERM</a>(2) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a6c9c796c96c8fd907aefee8e5a875c20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the standard C threeway comparison between cmp(lhs, rhs) between a <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> and a C string, bounded by n bytes of the right hand side. If <code>n</code> is shorter than the right hand side string the <code>n</code>th byte is compared.  <br /></td></tr>
-<tr class="separator:a6c9c796c96c8fd907aefee8e5a875c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21733c63ea91ca479cbd29432aa15376"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="str__view_8h.html#a648d7dfc8555055b2e5b742d0aa6fdf7">SV_Order</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a21733c63ea91ca479cbd29432aa15376">SV_compare</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> lhs, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> rhs) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a21733c63ea91ca479cbd29432aa15376"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the standard C threeway comparison between cmp(lhs, rhs) between two string views.  <br /></td></tr>
+<tr class="separator:a21733c63ea91ca479cbd29432aa15376"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a5364014b9216a8ff066e006450cc17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="str__view_8h.html#a648d7dfc8555055b2e5b742d0aa6fdf7">SV_Order</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a0a5364014b9216a8ff066e006450cc17">SV_terminated_compare</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> lhs, char const *rhs) <a class="el" href="str__view_8h.html#a360fc7bba6d26e5e9feaa6ba3fc30a0f">SV_ATTRIBUTE_NULLTERM</a>(2) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a0a5364014b9216a8ff066e006450cc17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the standard C threeway comparison between cmp(lhs, rhs) between a <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> and a C string.  <br /></td></tr>
+<tr class="separator:a0a5364014b9216a8ff066e006450cc17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae45a99e915a8932a2f374c20c962cfd4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="str__view_8h.html#a648d7dfc8555055b2e5b742d0aa6fdf7">SV_Order</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ae45a99e915a8932a2f374c20c962cfd4">SV_view_compare</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> lhs, char const *rhs, size_t n) <a class="el" href="str__view_8h.html#a360fc7bba6d26e5e9feaa6ba3fc30a0f">SV_ATTRIBUTE_NULLTERM</a>(2) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:ae45a99e915a8932a2f374c20c962cfd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the standard C threeway comparison between cmp(lhs, rhs) between a <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> and a C string, bounded by n bytes of the right hand side. If <code>n</code> is shorter than the right hand side string the <code>n</code>th byte is compared.  <br /></td></tr>
+<tr class="separator:ae45a99e915a8932a2f374c20c962cfd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader">Tokenization and Iteration</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p>Tokenize a <code><a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a></code> and use convenient iteration abstractions. </p>
 </td></tr>
-<tr class="memitem:a62b250077ad955f6625508c890f2661f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a62b250077ad955f6625508c890f2661f">SV_token_begin</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> src, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> delim) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a62b250077ad955f6625508c890f2661f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the first tokenized position in the string view given any length delim <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a>.  <br /></td></tr>
-<tr class="separator:a62b250077ad955f6625508c890f2661f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a405f4d6a75078d52dd7ebb38877796e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a405f4d6a75078d52dd7ebb38877796e0">SV_token_end</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> src, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> token) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a405f4d6a75078d52dd7ebb38877796e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the status of the current tokenization for use in conditions such as loops.  <br /></td></tr>
-<tr class="separator:a405f4d6a75078d52dd7ebb38877796e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e6cb5dcc148fd82026f194299ebbe32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a4e6cb5dcc148fd82026f194299ebbe32">SV_token_next</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> src, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> token, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> delim) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a4e6cb5dcc148fd82026f194299ebbe32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances to the next token in the remaining view separated by the delim.  <br /></td></tr>
-<tr class="separator:a4e6cb5dcc148fd82026f194299ebbe32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac68c938032a96116e93902e9e9d749da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ac68c938032a96116e93902e9e9d749da">SV_token_reverse_begin</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> src, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> delim) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="separator:ac68c938032a96116e93902e9e9d749da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75dcc72fda448d3ca49789a8efbe95f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a75dcc72fda448d3ca49789a8efbe95f9">SV_token_reverse_end</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> src, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> token) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a75dcc72fda448d3ca49789a8efbe95f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the status of the current tokenization for use in conditions such as loops.  <br /></td></tr>
-<tr class="separator:a75dcc72fda448d3ca49789a8efbe95f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a655161c9c6e475c7da280d622c63740a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a655161c9c6e475c7da280d622c63740a">SV_token_reverse_next</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> src, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> token, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> delim) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a655161c9c6e475c7da280d622c63740a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances the token in src to the next token between two delimiters provided by delim.  <br /></td></tr>
-<tr class="separator:a655161c9c6e475c7da280d622c63740a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46e8ee9b18ff6110dc8ec907442c8616"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a46e8ee9b18ff6110dc8ec907442c8616">SV_begin</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a46e8ee9b18ff6110dc8ec907442c8616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a read only pointer to the beginning of the string view, the first valid character in the view.  <br /></td></tr>
-<tr class="separator:a46e8ee9b18ff6110dc8ec907442c8616"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a138480842acd552567d9ad95c83cb71c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a138480842acd552567d9ad95c83cb71c">SV_reverse_begin</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a138480842acd552567d9ad95c83cb71c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the reverse iterator beginning, the last character of the current view.  <br /></td></tr>
-<tr class="separator:a138480842acd552567d9ad95c83cb71c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f9fa408933690832b2ae4df3643167a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a8f9fa408933690832b2ae4df3643167a">SV_next</a> (char const *c) <a class="el" href="str__view_8h.html#a15ca829e06962ad8c8c690db021ba2ef">SV_ATTRIB_NULLTERM</a>(1) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a8f9fa408933690832b2ae4df3643167a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances the null terminated string pointer from its previous position. If NULL is provided <a class="el" href="str__view_8h.html#a7dcc45b3e74f7e8b64d825268ffacba7" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned.  <br /></td></tr>
-<tr class="separator:a8f9fa408933690832b2ae4df3643167a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36a2d227f439ab73152a172cca2150aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a36a2d227f439ab73152a172cca2150aa">SV_reverse_next</a> (char const *c) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a36a2d227f439ab73152a172cca2150aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances the iterator to the next character in the <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> being iterated through in reverse.  <br /></td></tr>
-<tr class="separator:a36a2d227f439ab73152a172cca2150aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6951dd73c6c8828691ed6086ceb373d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a6951dd73c6c8828691ed6086ceb373d9">SV_end</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a6951dd73c6c8828691ed6086ceb373d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a read only pointer to the end of the string view.  <br /></td></tr>
-<tr class="separator:a6951dd73c6c8828691ed6086ceb373d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5cbbc03e7e0fbc110b66e5b5458d3e47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a5cbbc03e7e0fbc110b66e5b5458d3e47">SV_reverse_end</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a5cbbc03e7e0fbc110b66e5b5458d3e47"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ending position of a reverse iteration.  <br /></td></tr>
-<tr class="separator:a5cbbc03e7e0fbc110b66e5b5458d3e47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0fd7b1973a326742a4c13ba11e7e63a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ac0fd7b1973a326742a4c13ba11e7e63a">SV_token_begin</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> src, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> delim) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:ac0fd7b1973a326742a4c13ba11e7e63a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the first tokenized position in the string view given any length delim <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a>.  <br /></td></tr>
+<tr class="separator:ac0fd7b1973a326742a4c13ba11e7e63a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2582312ebcdf8fc0cc62b0223fc05994"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a2582312ebcdf8fc0cc62b0223fc05994">SV_token_end</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> src, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> token) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a2582312ebcdf8fc0cc62b0223fc05994"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the status of the current tokenization for use in conditions such as loops.  <br /></td></tr>
+<tr class="separator:a2582312ebcdf8fc0cc62b0223fc05994"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b6426e2e332476994f863b9a448b6eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a5b6426e2e332476994f863b9a448b6eb">SV_token_next</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> src, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> token, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> delim) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a5b6426e2e332476994f863b9a448b6eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances to the next token in the remaining view separated by the delim.  <br /></td></tr>
+<tr class="separator:a5b6426e2e332476994f863b9a448b6eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8f965cf0b83753f8361c94e69510d10"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ab8f965cf0b83753f8361c94e69510d10">SV_token_reverse_begin</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> src, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> delim) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="separator:ab8f965cf0b83753f8361c94e69510d10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d3efdc92dc6904ed78baed18f2a9b3b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a4d3efdc92dc6904ed78baed18f2a9b3b">SV_token_reverse_end</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> src, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> token) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a4d3efdc92dc6904ed78baed18f2a9b3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the status of the current tokenization for use in conditions such as loops.  <br /></td></tr>
+<tr class="separator:a4d3efdc92dc6904ed78baed18f2a9b3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7ab406c9e9443ccaafaac9753cda49d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#aa7ab406c9e9443ccaafaac9753cda49d">SV_token_reverse_next</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> src, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> token, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> delim) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:aa7ab406c9e9443ccaafaac9753cda49d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances the token in src to the next token between two delimiters provided by delim.  <br /></td></tr>
+<tr class="separator:aa7ab406c9e9443ccaafaac9753cda49d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade768a86069a8967db286c8c2ef77242"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ade768a86069a8967db286c8c2ef77242">SV_begin</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:ade768a86069a8967db286c8c2ef77242"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a read only pointer to the beginning of the string view, the first valid character in the view.  <br /></td></tr>
+<tr class="separator:ade768a86069a8967db286c8c2ef77242"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af34b5851e3f67e80cc90ce11fcd1bc00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#af34b5851e3f67e80cc90ce11fcd1bc00">SV_reverse_begin</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:af34b5851e3f67e80cc90ce11fcd1bc00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the reverse iterator beginning, the last character of the current view.  <br /></td></tr>
+<tr class="separator:af34b5851e3f67e80cc90ce11fcd1bc00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad5bab5e857bdbf572e2b1c6da433be4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#aad5bab5e857bdbf572e2b1c6da433be4">SV_next</a> (char const *c) <a class="el" href="str__view_8h.html#a360fc7bba6d26e5e9feaa6ba3fc30a0f">SV_ATTRIBUTE_NULLTERM</a>(1) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:aad5bab5e857bdbf572e2b1c6da433be4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances the null terminated string pointer from its previous position. If NULL is provided <a class="el" href="str__view_8h.html#a792eddfcb2c25c45028abcbd2d022503" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned.  <br /></td></tr>
+<tr class="separator:aad5bab5e857bdbf572e2b1c6da433be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7129b51098bcb123bfaca0ea6c397b5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a7129b51098bcb123bfaca0ea6c397b5b">SV_reverse_next</a> (char const *c) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a7129b51098bcb123bfaca0ea6c397b5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances the iterator to the next character in the <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> being iterated through in reverse.  <br /></td></tr>
+<tr class="separator:a7129b51098bcb123bfaca0ea6c397b5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a297ffe6be19fb1f041fadc0714b719f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a297ffe6be19fb1f041fadc0714b719f0">SV_end</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a297ffe6be19fb1f041fadc0714b719f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a read only pointer to the end of the string view.  <br /></td></tr>
+<tr class="separator:a297ffe6be19fb1f041fadc0714b719f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c595440210d762a7d1aded4b97d5c27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a4c595440210d762a7d1aded4b97d5c27">SV_reverse_end</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a4c595440210d762a7d1aded4b97d5c27"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ending position of a reverse iteration.  <br /></td></tr>
+<tr class="separator:a4c595440210d762a7d1aded4b97d5c27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader">String Matching</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p>Search a <code><a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a></code> for various types of substrings and character matches. </p>
 </td></tr>
-<tr class="memitem:a93a55d034c1de8b45d51fcb22e879600"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a93a55d034c1de8b45d51fcb22e879600">SV_find</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, size_t pos, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> needle) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a93a55d034c1de8b45d51fcb22e879600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches for needle in haystack starting from pos.  <br /></td></tr>
-<tr class="separator:a93a55d034c1de8b45d51fcb22e879600"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b1ee28c15cef81bfe06294ca2a90421"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a3b1ee28c15cef81bfe06294ca2a90421">SV_reverse_find</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, size_t pos, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> needle) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a3b1ee28c15cef81bfe06294ca2a90421"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches for the last occurrence of needle in haystack starting from pos from right to left.  <br /></td></tr>
-<tr class="separator:a3b1ee28c15cef81bfe06294ca2a90421"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abda3bd093b8f513f8d299b09e3894aa5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#abda3bd093b8f513f8d299b09e3894aa5">SV_contains</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> needle) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:abda3bd093b8f513f8d299b09e3894aa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests membership of needle in haystack.  <br /></td></tr>
-<tr class="separator:abda3bd093b8f513f8d299b09e3894aa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5c032d8aef68920426ed01818a9ebf0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ac5c032d8aef68920426ed01818a9ebf0">SV_match</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> needle) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:ac5c032d8aef68920426ed01818a9ebf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for a substring within a source string view.  <br /></td></tr>
-<tr class="separator:ac5c032d8aef68920426ed01818a9ebf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77a42a2acef5e7a57516d0eb78cc338e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a77a42a2acef5e7a57516d0eb78cc338e">SV_reverse_match</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> needle) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a77a42a2acef5e7a57516d0eb78cc338e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for a substring within a source string in reverse.  <br /></td></tr>
-<tr class="separator:a77a42a2acef5e7a57516d0eb78cc338e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1ed256cc213d1c5ce599a80095f13e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ae1ed256cc213d1c5ce599a80095f13e8">SV_starts_with</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> prefix) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:ae1ed256cc213d1c5ce599a80095f13e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Confirms the presence of a prefix within a string view.  <br /></td></tr>
-<tr class="separator:ae1ed256cc213d1c5ce599a80095f13e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55d65ba65e53a6b4cebac2bc8f20d260"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a55d65ba65e53a6b4cebac2bc8f20d260">SV_remove_prefix</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv, size_t n) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="separator:a55d65ba65e53a6b4cebac2bc8f20d260"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a51df59030495220376ee055dc6475b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a4a51df59030495220376ee055dc6475b">SV_ends_with</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> suffix) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a4a51df59030495220376ee055dc6475b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Confirms the presence of a suffix within a string view.  <br /></td></tr>
-<tr class="separator:a4a51df59030495220376ee055dc6475b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaed44c202a2e11978aca3d06877a00db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#aaed44c202a2e11978aca3d06877a00db">SV_remove_suffix</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv, size_t n) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="separator:aaed44c202a2e11978aca3d06877a00db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7419870318b8657fe00ce5fb7889b6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ad7419870318b8657fe00ce5fb7889b6a">SV_find_first_of</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> set) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="separator:ad7419870318b8657fe00ce5fb7889b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa05019727da818cc4bc585ed3d7ae32c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#aa05019727da818cc4bc585ed3d7ae32c">SV_find_first_not_of</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> set) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="separator:aa05019727da818cc4bc585ed3d7ae32c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeff05fad09dde73aeab519cbce425396"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#aeff05fad09dde73aeab519cbce425396">SV_find_last_of</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> set) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="separator:aeff05fad09dde73aeab519cbce425396"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5ea35766e4fdb45a0724f46f7d159fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#aa5ea35766e4fdb45a0724f46f7d159fd">SV_find_last_not_of</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> set) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="separator:aa5ea35766e4fdb45a0724f46f7d159fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d92dd67404583e2d93894fdacad0584"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a0d92dd67404583e2d93894fdacad0584">SV_find</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, size_t pos, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> needle) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a0d92dd67404583e2d93894fdacad0584"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches for needle in haystack starting from pos.  <br /></td></tr>
+<tr class="separator:a0d92dd67404583e2d93894fdacad0584"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4568a97fe9831e50d029c6482858f825"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a4568a97fe9831e50d029c6482858f825">SV_reverse_find</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, size_t pos, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> needle) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a4568a97fe9831e50d029c6482858f825"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches for the last occurrence of needle in haystack starting from pos from right to left.  <br /></td></tr>
+<tr class="separator:a4568a97fe9831e50d029c6482858f825"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5097957990af8f6a0b66631d19e25a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ac5097957990af8f6a0b66631d19e25a6">SV_contains</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> needle) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:ac5097957990af8f6a0b66631d19e25a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests membership of needle in haystack.  <br /></td></tr>
+<tr class="separator:ac5097957990af8f6a0b66631d19e25a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14b51dffaf1099b4049946e75cbd644e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a14b51dffaf1099b4049946e75cbd644e">SV_match</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> needle) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a14b51dffaf1099b4049946e75cbd644e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for a substring within a source string view.  <br /></td></tr>
+<tr class="separator:a14b51dffaf1099b4049946e75cbd644e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a453bcb0876df3e50ad5b84965e8482fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a453bcb0876df3e50ad5b84965e8482fe">SV_reverse_match</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> needle) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a453bcb0876df3e50ad5b84965e8482fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for a substring within a source string in reverse.  <br /></td></tr>
+<tr class="separator:a453bcb0876df3e50ad5b84965e8482fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f21ba26da8074314a17971a228171df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a3f21ba26da8074314a17971a228171df">SV_starts_with</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> prefix) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a3f21ba26da8074314a17971a228171df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Confirms the presence of a prefix within a string view.  <br /></td></tr>
+<tr class="separator:a3f21ba26da8074314a17971a228171df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b5d86c89e9d4cf3452f319a8e3a9d14"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a6b5d86c89e9d4cf3452f319a8e3a9d14">SV_remove_prefix</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv, size_t n) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="separator:a6b5d86c89e9d4cf3452f319a8e3a9d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad05d4d47161e322479c3d86435534a87"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ad05d4d47161e322479c3d86435534a87">SV_ends_with</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> suffix) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:ad05d4d47161e322479c3d86435534a87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Confirms the presence of a suffix within a string view.  <br /></td></tr>
+<tr class="separator:ad05d4d47161e322479c3d86435534a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5c4f7393e98995e1d6a6bda37cfdde8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> <a class="el" href="structSV__Str__view.html">SV_Str_view</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ac5c4f7393e98995e1d6a6bda37cfdde8">SV_remove_suffix</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv, size_t n) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="separator:ac5c4f7393e98995e1d6a6bda37cfdde8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a771d19fcb27ab295fa1d48d766e2a2b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a771d19fcb27ab295fa1d48d766e2a2b5">SV_find_first_of</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> set) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="separator:a771d19fcb27ab295fa1d48d766e2a2b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70684a4e27818cb83792cf0afb782b44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a70684a4e27818cb83792cf0afb782b44">SV_find_first_not_of</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> set) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="separator:a70684a4e27818cb83792cf0afb782b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a952832c5bda02ed91808924305d60908"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a952832c5bda02ed91808924305d60908">SV_find_last_of</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> set) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="separator:a952832c5bda02ed91808924305d60908"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ba9b49f7704832e10b2b05eddf07ece"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a4ba9b49f7704832e10b2b05eddf07ece">SV_find_last_not_of</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> haystack, <a class="el" href="structSV__Str__view.html">SV_Str_view</a> set) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="separator:a4ba9b49f7704832e10b2b05eddf07ece"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader">State</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p>Obtain current state of an <code><a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a></code> and C strings. </p>
 </td></tr>
-<tr class="memitem:abb04b423a7122b27cd6ea12dd78a0134"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#abb04b423a7122b27cd6ea12dd78a0134">SV_min_len</a> (char const *str, size_t n) <a class="el" href="str__view_8h.html#a15ca829e06962ad8c8c690db021ba2ef">SV_ATTRIB_NULLTERM</a>(1) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:abb04b423a7122b27cd6ea12dd78a0134"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the minimum between the string size vs n bytes.  <br /></td></tr>
-<tr class="separator:abb04b423a7122b27cd6ea12dd78a0134"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dcc45b3e74f7e8b64d825268ffacba7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a7dcc45b3e74f7e8b64d825268ffacba7">SV_null</a> (void) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a7dcc45b3e74f7e8b64d825268ffacba7"><td class="mdescLeft">&#160;</td><td class="mdescRight">A sentinel empty string. Safely dereference to view a null terminator. This may be returned from various functions when bad input is given such as NULL pointers as the underlying <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> string pointer.  <br /></td></tr>
-<tr class="separator:a7dcc45b3e74f7e8b64d825268ffacba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada02c23f45597bf76446a8ca3ce22983"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ada02c23f45597bf76446a8ca3ce22983">SV_npos</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#aa8df9c93f659cdd2543c3c1f11236bb4">SV_ATTRIB_CONST</a></td></tr>
-<tr class="memdesc:ada02c23f45597bf76446a8ca3ce22983"><td class="mdescLeft">&#160;</td><td class="mdescRight">The end of a <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> guaranteed to be greater than or equal to size.  <br /></td></tr>
-<tr class="separator:ada02c23f45597bf76446a8ca3ce22983"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bbd790f94c692b9414e2f66208aaf38"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a9bbd790f94c692b9414e2f66208aaf38">SV_is_empty</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#aa8df9c93f659cdd2543c3c1f11236bb4">SV_ATTRIB_CONST</a></td></tr>
-<tr class="memdesc:a9bbd790f94c692b9414e2f66208aaf38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the provided <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> is empty, false otherwise.  <br /></td></tr>
-<tr class="separator:a9bbd790f94c692b9414e2f66208aaf38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4212c23637ecd0ca93539cec3967d080"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a4212c23637ecd0ca93539cec3967d080">SV_len</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#aa8df9c93f659cdd2543c3c1f11236bb4">SV_ATTRIB_CONST</a></td></tr>
-<tr class="memdesc:a4212c23637ecd0ca93539cec3967d080"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the length of the <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> in O(1) time.  <br /></td></tr>
-<tr class="separator:a4212c23637ecd0ca93539cec3967d080"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab343394ad4ab6d05bef0793faf11c2df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ab343394ad4ab6d05bef0793faf11c2df">SV_bytes</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#aa8df9c93f659cdd2543c3c1f11236bb4">SV_ATTRIB_CONST</a></td></tr>
-<tr class="separator:ab343394ad4ab6d05bef0793faf11c2df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a273d93cb03aafaf8722e850b98fd2e0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a273d93cb03aafaf8722e850b98fd2e0a">SV_pointer</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv, size_t i) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a273d93cb03aafaf8722e850b98fd2e0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the character pointer at the minimum between the indicated position and the end of the string view.  <br /></td></tr>
-<tr class="separator:a273d93cb03aafaf8722e850b98fd2e0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5a6ed7644fef209bbb1348688798bf0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ac5a6ed7644fef209bbb1348688798bf0">SV_at</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv, size_t i) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:ac5a6ed7644fef209bbb1348688798bf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a character at a position in the string view.  <br /></td></tr>
-<tr class="separator:ac5a6ed7644fef209bbb1348688798bf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedcbc80e6658730cc9cf17f9cddeb351"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#aedcbc80e6658730cc9cf17f9cddeb351">SV_front</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:aedcbc80e6658730cc9cf17f9cddeb351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the character at the first position of <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a>.  <br /></td></tr>
-<tr class="separator:aedcbc80e6658730cc9cf17f9cddeb351"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a035cd674c3935cc96aeac032d4db9485"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a035cd674c3935cc96aeac032d4db9485">SV_back</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a8bc45837a6af4c6f8a18d674626bbe34">SV_ATTRIB_PURE</a></td></tr>
-<tr class="memdesc:a035cd674c3935cc96aeac032d4db9485"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the character at the last position of <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a>.  <br /></td></tr>
-<tr class="separator:a035cd674c3935cc96aeac032d4db9485"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3c7fa30cd12a842921e49732ee26169"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#aa3c7fa30cd12a842921e49732ee26169">SV_min_len</a> (char const *str, size_t n) <a class="el" href="str__view_8h.html#a360fc7bba6d26e5e9feaa6ba3fc30a0f">SV_ATTRIBUTE_NULLTERM</a>(1) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:aa3c7fa30cd12a842921e49732ee26169"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the minimum between the string size vs n bytes.  <br /></td></tr>
+<tr class="separator:aa3c7fa30cd12a842921e49732ee26169"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a792eddfcb2c25c45028abcbd2d022503"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a792eddfcb2c25c45028abcbd2d022503">SV_null</a> (void) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a792eddfcb2c25c45028abcbd2d022503"><td class="mdescLeft">&#160;</td><td class="mdescRight">A sentinel empty string. Safely dereference to view a null terminator. This may be returned from various functions when bad input is given such as NULL pointers as the underlying <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> string pointer.  <br /></td></tr>
+<tr class="separator:a792eddfcb2c25c45028abcbd2d022503"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a183b7c92ffcc11f7593265adc662cc14"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a183b7c92ffcc11f7593265adc662cc14">SV_npos</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a1b1b638551b7837c6672429b0f30e998">SV_ATTRIBUTE_CONST</a></td></tr>
+<tr class="memdesc:a183b7c92ffcc11f7593265adc662cc14"><td class="mdescLeft">&#160;</td><td class="mdescRight">The end of a <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> guaranteed to be greater than or equal to size.  <br /></td></tr>
+<tr class="separator:a183b7c92ffcc11f7593265adc662cc14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16cec7f07250260a9a238113eb575371"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a16cec7f07250260a9a238113eb575371">SV_is_empty</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a1b1b638551b7837c6672429b0f30e998">SV_ATTRIBUTE_CONST</a></td></tr>
+<tr class="memdesc:a16cec7f07250260a9a238113eb575371"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the provided <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> is empty, false otherwise.  <br /></td></tr>
+<tr class="separator:a16cec7f07250260a9a238113eb575371"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b79b2a1239cd5a9cf2ebef2f5431f21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a5b79b2a1239cd5a9cf2ebef2f5431f21">SV_len</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a1b1b638551b7837c6672429b0f30e998">SV_ATTRIBUTE_CONST</a></td></tr>
+<tr class="memdesc:a5b79b2a1239cd5a9cf2ebef2f5431f21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the length of the <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> in O(1) time.  <br /></td></tr>
+<tr class="separator:a5b79b2a1239cd5a9cf2ebef2f5431f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5014bad613e05f3602d6f5e15716489"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ad5014bad613e05f3602d6f5e15716489">SV_bytes</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a1b1b638551b7837c6672429b0f30e998">SV_ATTRIBUTE_CONST</a></td></tr>
+<tr class="separator:ad5014bad613e05f3602d6f5e15716489"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a925110263e7ea802868539ec74e4e38f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char const *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a925110263e7ea802868539ec74e4e38f">SV_pointer</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv, size_t i) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a925110263e7ea802868539ec74e4e38f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the character pointer at the minimum between the indicated position and the end of the string view.  <br /></td></tr>
+<tr class="separator:a925110263e7ea802868539ec74e4e38f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6d9a5170360ee7ff1ad85c0ca7ce99e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ac6d9a5170360ee7ff1ad85c0ca7ce99e">SV_at</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv, size_t i) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:ac6d9a5170360ee7ff1ad85c0ca7ce99e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a character at a position in the string view.  <br /></td></tr>
+<tr class="separator:ac6d9a5170360ee7ff1ad85c0ca7ce99e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad868b46f942e4475b1064c1b9d072189"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#ad868b46f942e4475b1064c1b9d072189">SV_front</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:ad868b46f942e4475b1064c1b9d072189"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the character at the first position of <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a>.  <br /></td></tr>
+<tr class="separator:ad868b46f942e4475b1064c1b9d072189"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55aeea4baa8c55871a11065edd20c32e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="str__view_8h.html#ab632a39b679bbed9a2f8a8cbb6c04807">SV_API</a> char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="str__view_8h.html#a55aeea4baa8c55871a11065edd20c32e">SV_back</a> (<a class="el" href="structSV__Str__view.html">SV_Str_view</a> sv) <a class="el" href="str__view_8h.html#a5e4eb12c3d447efb92a67cfe0f6b9882">SV_ATTRIBUTE_PURE</a></td></tr>
+<tr class="memdesc:a55aeea4baa8c55871a11065edd20c32e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the character at the last position of <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a>.  <br /></td></tr>
+<tr class="separator:a55aeea4baa8c55871a11065edd20c32e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ab735680cc4059381ce2cad6c8fc690d3" name="ab735680cc4059381ce2cad6c8fc690d3"></a>
@@ -342,13 +342,13 @@ Macros</h2></td></tr>
 <div class="ttc" id="astr__view_8h_html_ab735680cc4059381ce2cad6c8fc690d3"><div class="ttname"><a href="str__view_8h.html#ab735680cc4059381ce2cad6c8fc690d3">SV_from</a></div><div class="ttdeci">#define SV_from(str_literal)</div><div class="ttdoc">A macro to reduce the chance for errors in repeating oneself when constructing an inline or const SV_...</div><div class="ttdef"><b>Definition:</b> str_view.h:169</div></div>
 <div class="ttc" id="astructSV__Str__view_html"><div class="ttname"><a href="structSV__Str__view.html">SV_Str_view</a></div><div class="ttdoc">A read-only view of string data in C.</div><div class="ttdef"><b>Definition:</b> str_view.h:123</div></div>
 </div><!-- fragment --><p>One can even use this in code when string literals are used rather than saved constants to avoid errors in <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> constructions.</p>
-<div class="fragment"><div class="line"><span class="keywordflow">for</span> (<a class="code hl_struct" href="structSV__Str__view.html">SV_Str_view</a> cur = <a class="code hl_function" href="str__view_8h.html#a62b250077ad955f6625508c890f2661f">SV_token_begin</a>(src, <a class="code hl_define" href="str__view_8h.html#ab735680cc4059381ce2cad6c8fc690d3">SV_from</a>(<span class="stringliteral">&quot; &quot;</span>));</div>
-<div class="line">    !<a class="code hl_function" href="str__view_8h.html#a405f4d6a75078d52dd7ebb38877796e0">SV_token_end</a>(src, cur);</div>
-<div class="line">    cur = <a class="code hl_function" href="str__view_8h.html#a4e6cb5dcc148fd82026f194299ebbe32">SV_token_next</a>(src, cur, <a class="code hl_define" href="str__view_8h.html#ab735680cc4059381ce2cad6c8fc690d3">SV_from</a>(<span class="stringliteral">&quot; &quot;</span>))</div>
+<div class="fragment"><div class="line"><span class="keywordflow">for</span> (<a class="code hl_struct" href="structSV__Str__view.html">SV_Str_view</a> cur = <a class="code hl_function" href="str__view_8h.html#ac0fd7b1973a326742a4c13ba11e7e63a">SV_token_begin</a>(src, <a class="code hl_define" href="str__view_8h.html#ab735680cc4059381ce2cad6c8fc690d3">SV_from</a>(<span class="stringliteral">&quot; &quot;</span>));</div>
+<div class="line">    !<a class="code hl_function" href="str__view_8h.html#a2582312ebcdf8fc0cc62b0223fc05994">SV_token_end</a>(src, cur);</div>
+<div class="line">    cur = <a class="code hl_function" href="str__view_8h.html#a5b6426e2e332476994f863b9a448b6eb">SV_token_next</a>(src, cur, <a class="code hl_define" href="str__view_8h.html#ab735680cc4059381ce2cad6c8fc690d3">SV_from</a>(<span class="stringliteral">&quot; &quot;</span>))</div>
 <div class="line">{}</div>
-<div class="ttc" id="astr__view_8h_html_a405f4d6a75078d52dd7ebb38877796e0"><div class="ttname"><a href="str__view_8h.html#a405f4d6a75078d52dd7ebb38877796e0">SV_token_end</a></div><div class="ttdeci">SV_API bool SV_token_end(SV_Str_view src, SV_Str_view token) SV_ATTRIB_PURE</div><div class="ttdoc">Provides the status of the current tokenization for use in conditions such as loops.</div></div>
-<div class="ttc" id="astr__view_8h_html_a4e6cb5dcc148fd82026f194299ebbe32"><div class="ttname"><a href="str__view_8h.html#a4e6cb5dcc148fd82026f194299ebbe32">SV_token_next</a></div><div class="ttdeci">SV_API SV_Str_view SV_token_next(SV_Str_view src, SV_Str_view token, SV_Str_view delim) SV_ATTRIB_PURE</div><div class="ttdoc">Advances to the next token in the remaining view separated by the delim.</div></div>
-<div class="ttc" id="astr__view_8h_html_a62b250077ad955f6625508c890f2661f"><div class="ttname"><a href="str__view_8h.html#a62b250077ad955f6625508c890f2661f">SV_token_begin</a></div><div class="ttdeci">SV_API SV_Str_view SV_token_begin(SV_Str_view src, SV_Str_view delim) SV_ATTRIB_PURE</div><div class="ttdoc">Finds the first tokenized position in the string view given any length delim SV_Str_view.</div></div>
+<div class="ttc" id="astr__view_8h_html_a2582312ebcdf8fc0cc62b0223fc05994"><div class="ttname"><a href="str__view_8h.html#a2582312ebcdf8fc0cc62b0223fc05994">SV_token_end</a></div><div class="ttdeci">SV_API bool SV_token_end(SV_Str_view src, SV_Str_view token) SV_ATTRIBUTE_PURE</div><div class="ttdoc">Provides the status of the current tokenization for use in conditions such as loops.</div></div>
+<div class="ttc" id="astr__view_8h_html_a5b6426e2e332476994f863b9a448b6eb"><div class="ttname"><a href="str__view_8h.html#a5b6426e2e332476994f863b9a448b6eb">SV_token_next</a></div><div class="ttdeci">SV_API SV_Str_view SV_token_next(SV_Str_view src, SV_Str_view token, SV_Str_view delim) SV_ATTRIBUTE_PURE</div><div class="ttdoc">Advances to the next token in the remaining view separated by the delim.</div></div>
+<div class="ttc" id="astr__view_8h_html_ac0fd7b1973a326742a4c13ba11e7e63a"><div class="ttname"><a href="str__view_8h.html#ac0fd7b1973a326742a4c13ba11e7e63a">SV_token_begin</a></div><div class="ttdeci">SV_API SV_Str_view SV_token_begin(SV_Str_view src, SV_Str_view delim) SV_ATTRIBUTE_PURE</div><div class="ttdoc">Finds the first tokenized position in the string view given any length delim SV_Str_view.</div></div>
 </div><!-- fragment --><p>However saving the <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> in a constant may be more convenient. </p>
 
 </div>
@@ -372,8 +372,8 @@ Macros</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ac5a6ed7644fef209bbb1348688798bf0" name="ac5a6ed7644fef209bbb1348688798bf0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5a6ed7644fef209bbb1348688798bf0">&#9670;&#160;</a></span>SV_at()</h2>
+<a id="ac6d9a5170360ee7ff1ad85c0ca7ce99e" name="ac6d9a5170360ee7ff1ad85c0ca7ce99e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6d9a5170360ee7ff1ad85c0ca7ce99e">&#9670;&#160;</a></span>SV_at()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -410,8 +410,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a035cd674c3935cc96aeac032d4db9485" name="a035cd674c3935cc96aeac032d4db9485"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a035cd674c3935cc96aeac032d4db9485">&#9670;&#160;</a></span>SV_back()</h2>
+<a id="a55aeea4baa8c55871a11065edd20c32e" name="a55aeea4baa8c55871a11065edd20c32e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55aeea4baa8c55871a11065edd20c32e">&#9670;&#160;</a></span>SV_back()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -437,8 +437,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a46e8ee9b18ff6110dc8ec907442c8616" name="a46e8ee9b18ff6110dc8ec907442c8616"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46e8ee9b18ff6110dc8ec907442c8616">&#9670;&#160;</a></span>SV_begin()</h2>
+<a id="ade768a86069a8967db286c8c2ef77242" name="ade768a86069a8967db286c8c2ef77242"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade768a86069a8967db286c8c2ef77242">&#9670;&#160;</a></span>SV_begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -460,12 +460,12 @@ Macros</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if the view stores NULL, the placeholder <a class="el" href="str__view_8h.html#a7dcc45b3e74f7e8b64d825268ffacba7" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>if the view stores NULL, the placeholder <a class="el" href="str__view_8h.html#a792eddfcb2c25c45028abcbd2d022503" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned. </dd></dl>
 
 </div>
 </div>
-<a id="ab343394ad4ab6d05bef0793faf11c2df" name="ab343394ad4ab6d05bef0793faf11c2df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab343394ad4ab6d05bef0793faf11c2df">&#9670;&#160;</a></span>SV_bytes()</h2>
+<a id="ad5014bad613e05f3602d6f5e15716489" name="ad5014bad613e05f3602d6f5e15716489"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5014bad613e05f3602d6f5e15716489">&#9670;&#160;</a></span>SV_bytes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -490,8 +490,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a688dcdc0c6fe3901d71d114ad699c765" name="a688dcdc0c6fe3901d71d114ad699c765"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a688dcdc0c6fe3901d71d114ad699c765">&#9670;&#160;</a></span>SV_compare()</h2>
+<a id="a21733c63ea91ca479cbd29432aa15376" name="a21733c63ea91ca479cbd29432aa15376"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21733c63ea91ca479cbd29432aa15376">&#9670;&#160;</a></span>SV_compare()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -529,8 +529,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="abda3bd093b8f513f8d299b09e3894aa5" name="abda3bd093b8f513f8d299b09e3894aa5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abda3bd093b8f513f8d299b09e3894aa5">&#9670;&#160;</a></span>SV_contains()</h2>
+<a id="ac5097957990af8f6a0b66631d19e25a6" name="ac5097957990af8f6a0b66631d19e25a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5097957990af8f6a0b66631d19e25a6">&#9670;&#160;</a></span>SV_contains()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -567,8 +567,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="ac18f3e34b3533cb52347d9b18c05fb56" name="ac18f3e34b3533cb52347d9b18c05fb56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac18f3e34b3533cb52347d9b18c05fb56">&#9670;&#160;</a></span>SV_copy()</h2>
+<a id="ac7eeae574a52ce07d44b0edd2eea0343" name="ac7eeae574a52ce07d44b0edd2eea0343"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7eeae574a52ce07d44b0edd2eea0343">&#9670;&#160;</a></span>SV_copy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -606,8 +606,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a6951dd73c6c8828691ed6086ceb373d9" name="a6951dd73c6c8828691ed6086ceb373d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6951dd73c6c8828691ed6086ceb373d9">&#9670;&#160;</a></span>SV_end()</h2>
+<a id="a297ffe6be19fb1f041fadc0714b719f0" name="a297ffe6be19fb1f041fadc0714b719f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a297ffe6be19fb1f041fadc0714b719f0">&#9670;&#160;</a></span>SV_end()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -629,12 +629,12 @@ Macros</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the character pointer to the end of this iteration. This may or may not be a null terminated character depending on the view. If the view stores NULL, the placeholder <a class="el" href="str__view_8h.html#a7dcc45b3e74f7e8b64d825268ffacba7" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the character pointer to the end of this iteration. This may or may not be a null terminated character depending on the view. If the view stores NULL, the placeholder <a class="el" href="str__view_8h.html#a792eddfcb2c25c45028abcbd2d022503" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned. </dd></dl>
 
 </div>
 </div>
-<a id="a4a51df59030495220376ee055dc6475b" name="a4a51df59030495220376ee055dc6475b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a51df59030495220376ee055dc6475b">&#9670;&#160;</a></span>SV_ends_with()</h2>
+<a id="ad05d4d47161e322479c3d86435534a87" name="ad05d4d47161e322479c3d86435534a87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad05d4d47161e322479c3d86435534a87">&#9670;&#160;</a></span>SV_ends_with()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -671,8 +671,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="adf51d3f645a2f24fa6f6a2fbece51cdc" name="adf51d3f645a2f24fa6f6a2fbece51cdc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf51d3f645a2f24fa6f6a2fbece51cdc">&#9670;&#160;</a></span>SV_extend()</h2>
+<a id="aebff693d54e4ca280761b2173c4892e2" name="aebff693d54e4ca280761b2173c4892e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebff693d54e4ca280761b2173c4892e2">&#9670;&#160;</a></span>SV_extend()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -745,8 +745,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a93a55d034c1de8b45d51fcb22e879600" name="a93a55d034c1de8b45d51fcb22e879600"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93a55d034c1de8b45d51fcb22e879600">&#9670;&#160;</a></span>SV_find()</h2>
+<a id="a0d92dd67404583e2d93894fdacad0584" name="a0d92dd67404583e2d93894fdacad0584"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d92dd67404583e2d93894fdacad0584">&#9670;&#160;</a></span>SV_find()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -790,8 +790,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="aa05019727da818cc4bc585ed3d7ae32c" name="aa05019727da818cc4bc585ed3d7ae32c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa05019727da818cc4bc585ed3d7ae32c">&#9670;&#160;</a></span>SV_find_first_not_of()</h2>
+<a id="a70684a4e27818cb83792cf0afb782b44" name="a70684a4e27818cb83792cf0afb782b44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70684a4e27818cb83792cf0afb782b44">&#9670;&#160;</a></span>SV_find_first_not_of()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -826,8 +826,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="ad7419870318b8657fe00ce5fb7889b6a" name="ad7419870318b8657fe00ce5fb7889b6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7419870318b8657fe00ce5fb7889b6a">&#9670;&#160;</a></span>SV_find_first_of()</h2>
+<a id="a771d19fcb27ab295fa1d48d766e2a2b5" name="a771d19fcb27ab295fa1d48d766e2a2b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a771d19fcb27ab295fa1d48d766e2a2b5">&#9670;&#160;</a></span>SV_find_first_of()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -862,8 +862,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="aa5ea35766e4fdb45a0724f46f7d159fd" name="aa5ea35766e4fdb45a0724f46f7d159fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5ea35766e4fdb45a0724f46f7d159fd">&#9670;&#160;</a></span>SV_find_last_not_of()</h2>
+<a id="a4ba9b49f7704832e10b2b05eddf07ece" name="a4ba9b49f7704832e10b2b05eddf07ece"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ba9b49f7704832e10b2b05eddf07ece">&#9670;&#160;</a></span>SV_find_last_not_of()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -898,8 +898,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="aeff05fad09dde73aeab519cbce425396" name="aeff05fad09dde73aeab519cbce425396"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeff05fad09dde73aeab519cbce425396">&#9670;&#160;</a></span>SV_find_last_of()</h2>
+<a id="a952832c5bda02ed91808924305d60908" name="a952832c5bda02ed91808924305d60908"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a952832c5bda02ed91808924305d60908">&#9670;&#160;</a></span>SV_find_last_of()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -934,8 +934,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a146a05bec7fd24999d74a2fa46223b9a" name="a146a05bec7fd24999d74a2fa46223b9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a146a05bec7fd24999d74a2fa46223b9a">&#9670;&#160;</a></span>SV_from_delimiter()</h2>
+<a id="aeeb866e6908bdcff709897405e60b42e" name="aeeb866e6908bdcff709897405e60b42e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeeb866e6908bdcff709897405e60b42e">&#9670;&#160;</a></span>SV_from_delimiter()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -973,8 +973,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="acfe5d77c0a37dfeafc737e62abd8aa19" name="acfe5d77c0a37dfeafc737e62abd8aa19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acfe5d77c0a37dfeafc737e62abd8aa19">&#9670;&#160;</a></span>SV_from_terminated()</h2>
+<a id="a8d67d4bf50b2eeffa8e44a50b037e648" name="a8d67d4bf50b2eeffa8e44a50b037e648"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d67d4bf50b2eeffa8e44a50b037e648">&#9670;&#160;</a></span>SV_from_terminated()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1001,8 +1001,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a2923ce2c520b5963cd37250b66e9d196" name="a2923ce2c520b5963cd37250b66e9d196"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2923ce2c520b5963cd37250b66e9d196">&#9670;&#160;</a></span>SV_from_view()</h2>
+<a id="af661a529bc5545bdc8486179c91b4de2" name="af661a529bc5545bdc8486179c91b4de2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af661a529bc5545bdc8486179c91b4de2">&#9670;&#160;</a></span>SV_from_view()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1040,8 +1040,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="aedcbc80e6658730cc9cf17f9cddeb351" name="aedcbc80e6658730cc9cf17f9cddeb351"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aedcbc80e6658730cc9cf17f9cddeb351">&#9670;&#160;</a></span>SV_front()</h2>
+<a id="ad868b46f942e4475b1064c1b9d072189" name="ad868b46f942e4475b1064c1b9d072189"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad868b46f942e4475b1064c1b9d072189">&#9670;&#160;</a></span>SV_front()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1067,8 +1067,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a9bbd790f94c692b9414e2f66208aaf38" name="a9bbd790f94c692b9414e2f66208aaf38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9bbd790f94c692b9414e2f66208aaf38">&#9670;&#160;</a></span>SV_is_empty()</h2>
+<a id="a16cec7f07250260a9a238113eb575371" name="a16cec7f07250260a9a238113eb575371"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16cec7f07250260a9a238113eb575371">&#9670;&#160;</a></span>SV_is_empty()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1095,8 +1095,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a4212c23637ecd0ca93539cec3967d080" name="a4212c23637ecd0ca93539cec3967d080"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4212c23637ecd0ca93539cec3967d080">&#9670;&#160;</a></span>SV_len()</h2>
+<a id="a5b79b2a1239cd5a9cf2ebef2f5431f21" name="a5b79b2a1239cd5a9cf2ebef2f5431f21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b79b2a1239cd5a9cf2ebef2f5431f21">&#9670;&#160;</a></span>SV_len()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1123,8 +1123,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="ac5c032d8aef68920426ed01818a9ebf0" name="ac5c032d8aef68920426ed01818a9ebf0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5c032d8aef68920426ed01818a9ebf0">&#9670;&#160;</a></span>SV_match()</h2>
+<a id="a14b51dffaf1099b4049946e75cbd644e" name="a14b51dffaf1099b4049946e75cbd644e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14b51dffaf1099b4049946e75cbd644e">&#9670;&#160;</a></span>SV_match()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1161,8 +1161,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="abb04b423a7122b27cd6ea12dd78a0134" name="abb04b423a7122b27cd6ea12dd78a0134"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb04b423a7122b27cd6ea12dd78a0134">&#9670;&#160;</a></span>SV_min_len()</h2>
+<a id="aa3c7fa30cd12a842921e49732ee26169" name="aa3c7fa30cd12a842921e49732ee26169"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3c7fa30cd12a842921e49732ee26169">&#9670;&#160;</a></span>SV_min_len()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1199,8 +1199,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a8f9fa408933690832b2ae4df3643167a" name="a8f9fa408933690832b2ae4df3643167a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f9fa408933690832b2ae4df3643167a">&#9670;&#160;</a></span>SV_next()</h2>
+<a id="aad5bab5e857bdbf572e2b1c6da433be4" name="aad5bab5e857bdbf572e2b1c6da433be4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad5bab5e857bdbf572e2b1c6da433be4">&#9670;&#160;</a></span>SV_next()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1215,7 +1215,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Advances the null terminated string pointer from its previous position. If NULL is provided <a class="el" href="str__view_8h.html#a7dcc45b3e74f7e8b64d825268ffacba7" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned. </p>
+<p>Advances the null terminated string pointer from its previous position. If NULL is provided <a class="el" href="str__view_8h.html#a792eddfcb2c25c45028abcbd2d022503" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">c</td><td>the pointer to a null terminated string iterator. </td></tr>
@@ -1226,8 +1226,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="ada02c23f45597bf76446a8ca3ce22983" name="ada02c23f45597bf76446a8ca3ce22983"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada02c23f45597bf76446a8ca3ce22983">&#9670;&#160;</a></span>SV_npos()</h2>
+<a id="a183b7c92ffcc11f7593265adc662cc14" name="a183b7c92ffcc11f7593265adc662cc14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a183b7c92ffcc11f7593265adc662cc14">&#9670;&#160;</a></span>SV_npos()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1254,8 +1254,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a7dcc45b3e74f7e8b64d825268ffacba7" name="a7dcc45b3e74f7e8b64d825268ffacba7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7dcc45b3e74f7e8b64d825268ffacba7">&#9670;&#160;</a></span>SV_null()</h2>
+<a id="a792eddfcb2c25c45028abcbd2d022503" name="a792eddfcb2c25c45028abcbd2d022503"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a792eddfcb2c25c45028abcbd2d022503">&#9670;&#160;</a></span>SV_null()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1275,8 +1275,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a273d93cb03aafaf8722e850b98fd2e0a" name="a273d93cb03aafaf8722e850b98fd2e0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a273d93cb03aafaf8722e850b98fd2e0a">&#9670;&#160;</a></span>SV_pointer()</h2>
+<a id="a925110263e7ea802868539ec74e4e38f" name="a925110263e7ea802868539ec74e4e38f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a925110263e7ea802868539ec74e4e38f">&#9670;&#160;</a></span>SV_pointer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1309,12 +1309,12 @@ Macros</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a pointer to the character at the designated index. If NULL is stored by the <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> then <a class="el" href="str__view_8h.html#a7dcc45b3e74f7e8b64d825268ffacba7" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>a pointer to the character at the designated index. If NULL is stored by the <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> then <a class="el" href="str__view_8h.html#a792eddfcb2c25c45028abcbd2d022503" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned. </dd></dl>
 
 </div>
 </div>
-<a id="a55d65ba65e53a6b4cebac2bc8f20d260" name="a55d65ba65e53a6b4cebac2bc8f20d260"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55d65ba65e53a6b4cebac2bc8f20d260">&#9670;&#160;</a></span>SV_remove_prefix()</h2>
+<a id="a6b5d86c89e9d4cf3452f319a8e3a9d14" name="a6b5d86c89e9d4cf3452f319a8e3a9d14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b5d86c89e9d4cf3452f319a8e3a9d14">&#9670;&#160;</a></span>SV_remove_prefix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1350,8 +1350,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="aaed44c202a2e11978aca3d06877a00db" name="aaed44c202a2e11978aca3d06877a00db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaed44c202a2e11978aca3d06877a00db">&#9670;&#160;</a></span>SV_remove_suffix()</h2>
+<a id="ac5c4f7393e98995e1d6a6bda37cfdde8" name="ac5c4f7393e98995e1d6a6bda37cfdde8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5c4f7393e98995e1d6a6bda37cfdde8">&#9670;&#160;</a></span>SV_remove_suffix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1387,8 +1387,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a138480842acd552567d9ad95c83cb71c" name="a138480842acd552567d9ad95c83cb71c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a138480842acd552567d9ad95c83cb71c">&#9670;&#160;</a></span>SV_reverse_begin()</h2>
+<a id="af34b5851e3f67e80cc90ce11fcd1bc00" name="af34b5851e3f67e80cc90ce11fcd1bc00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af34b5851e3f67e80cc90ce11fcd1bc00">&#9670;&#160;</a></span>SV_reverse_begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1410,12 +1410,12 @@ Macros</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>if the view is null <a class="el" href="str__view_8h.html#a7dcc45b3e74f7e8b64d825268ffacba7" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned. If the view is sized zero with a valid pointer that pointer in the view is returned. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>if the view is null <a class="el" href="str__view_8h.html#a792eddfcb2c25c45028abcbd2d022503" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned. If the view is sized zero with a valid pointer that pointer in the view is returned. </dd></dl>
 
 </div>
 </div>
-<a id="a5cbbc03e7e0fbc110b66e5b5458d3e47" name="a5cbbc03e7e0fbc110b66e5b5458d3e47"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5cbbc03e7e0fbc110b66e5b5458d3e47">&#9670;&#160;</a></span>SV_reverse_end()</h2>
+<a id="a4c595440210d762a7d1aded4b97d5c27" name="a4c595440210d762a7d1aded4b97d5c27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c595440210d762a7d1aded4b97d5c27">&#9670;&#160;</a></span>SV_reverse_end()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1442,8 +1442,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a3b1ee28c15cef81bfe06294ca2a90421" name="a3b1ee28c15cef81bfe06294ca2a90421"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b1ee28c15cef81bfe06294ca2a90421">&#9670;&#160;</a></span>SV_reverse_find()</h2>
+<a id="a4568a97fe9831e50d029c6482858f825" name="a4568a97fe9831e50d029c6482858f825"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4568a97fe9831e50d029c6482858f825">&#9670;&#160;</a></span>SV_reverse_find()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1488,8 +1488,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a77a42a2acef5e7a57516d0eb78cc338e" name="a77a42a2acef5e7a57516d0eb78cc338e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77a42a2acef5e7a57516d0eb78cc338e">&#9670;&#160;</a></span>SV_reverse_match()</h2>
+<a id="a453bcb0876df3e50ad5b84965e8482fe" name="a453bcb0876df3e50ad5b84965e8482fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a453bcb0876df3e50ad5b84965e8482fe">&#9670;&#160;</a></span>SV_reverse_match()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1526,8 +1526,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a36a2d227f439ab73152a172cca2150aa" name="a36a2d227f439ab73152a172cca2150aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36a2d227f439ab73152a172cca2150aa">&#9670;&#160;</a></span>SV_reverse_next()</h2>
+<a id="a7129b51098bcb123bfaca0ea6c397b5b" name="a7129b51098bcb123bfaca0ea6c397b5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7129b51098bcb123bfaca0ea6c397b5b">&#9670;&#160;</a></span>SV_reverse_next()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1549,12 +1549,12 @@ Macros</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section warning"><dt>Warning</dt><dd>It is undefined behavior to change the <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> one is iterating through during iteration. If the char pointer is null, <a class="el" href="str__view_8h.html#a7dcc45b3e74f7e8b64d825268ffacba7" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>It is undefined behavior to change the <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> one is iterating through during iteration. If the char pointer is null, <a class="el" href="str__view_8h.html#a792eddfcb2c25c45028abcbd2d022503" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned. </dd></dl>
 
 </div>
 </div>
-<a id="ae1ed256cc213d1c5ce599a80095f13e8" name="ae1ed256cc213d1c5ce599a80095f13e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1ed256cc213d1c5ce599a80095f13e8">&#9670;&#160;</a></span>SV_starts_with()</h2>
+<a id="a3f21ba26da8074314a17971a228171df" name="a3f21ba26da8074314a17971a228171df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f21ba26da8074314a17971a228171df">&#9670;&#160;</a></span>SV_starts_with()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1591,8 +1591,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a62b1315242b9acfbfdd38dcbefe0e7f3" name="a62b1315242b9acfbfdd38dcbefe0e7f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62b1315242b9acfbfdd38dcbefe0e7f3">&#9670;&#160;</a></span>SV_str_bytes()</h2>
+<a id="ae17ba3843062565f1933588c1c315425" name="ae17ba3843062565f1933588c1c315425"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae17ba3843062565f1933588c1c315425">&#9670;&#160;</a></span>SV_str_bytes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1618,8 +1618,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a6ffc135012b68a396f786638f5ac6278" name="a6ffc135012b68a396f786638f5ac6278"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ffc135012b68a396f786638f5ac6278">&#9670;&#160;</a></span>SV_substr()</h2>
+<a id="ab669ed23c2db562fae315c7a0f93f57d" name="ab669ed23c2db562fae315c7a0f93f57d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab669ed23c2db562fae315c7a0f93f57d">&#9670;&#160;</a></span>SV_substr()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1664,8 +1664,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="af7d6a7d0e99847c09f13183a84ced42e" name="af7d6a7d0e99847c09f13183a84ced42e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7d6a7d0e99847c09f13183a84ced42e">&#9670;&#160;</a></span>SV_terminated_compare()</h2>
+<a id="a0a5364014b9216a8ff066e006450cc17" name="a0a5364014b9216a8ff066e006450cc17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a5364014b9216a8ff066e006450cc17">&#9670;&#160;</a></span>SV_terminated_compare()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1703,8 +1703,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a62b250077ad955f6625508c890f2661f" name="a62b250077ad955f6625508c890f2661f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62b250077ad955f6625508c890f2661f">&#9670;&#160;</a></span>SV_token_begin()</h2>
+<a id="ac0fd7b1973a326742a4c13ba11e7e63a" name="ac0fd7b1973a326742a4c13ba11e7e63a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0fd7b1973a326742a4c13ba11e7e63a">&#9670;&#160;</a></span>SV_token_begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1737,12 +1737,12 @@ Macros</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the first token encountered in the source view or the entire view if no token was found. Skips leading delimiters in construction. If the <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> to be searched stores NULL than the <a class="el" href="str__view_8h.html#a7dcc45b3e74f7e8b64d825268ffacba7" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned. If delim stores NULL, that is interpreted as a search for the null terminating character or empty string and the size zero substring at the final position in the <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> is returned wich may or may not be the null termiator. If no delim is found the entire <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> is returned. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the first token encountered in the source view or the entire view if no token was found. Skips leading delimiters in construction. If the <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> to be searched stores NULL than the <a class="el" href="str__view_8h.html#a792eddfcb2c25c45028abcbd2d022503" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> is returned. If delim stores NULL, that is interpreted as a search for the null terminating character or empty string and the size zero substring at the final position in the <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> is returned wich may or may not be the null termiator. If no delim is found the entire <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> is returned. </dd></dl>
 
 </div>
 </div>
-<a id="a405f4d6a75078d52dd7ebb38877796e0" name="a405f4d6a75078d52dd7ebb38877796e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a405f4d6a75078d52dd7ebb38877796e0">&#9670;&#160;</a></span>SV_token_end()</h2>
+<a id="a2582312ebcdf8fc0cc62b0223fc05994" name="a2582312ebcdf8fc0cc62b0223fc05994"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2582312ebcdf8fc0cc62b0223fc05994">&#9670;&#160;</a></span>SV_token_end()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1775,12 +1775,12 @@ Macros</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if no further tokens are found and position is at the end position, meaning a call to <a class="el" href="str__view_8h.html#a62b250077ad955f6625508c890f2661f" title="Finds the first tokenized position in the string view given any length delim SV_Str_view.">SV_token_begin()</a> or <a class="el" href="str__view_8h.html#a4e6cb5dcc148fd82026f194299ebbe32" title="Advances to the next token in the remaining view separated by the delim.">SV_token_next()</a> has yielded a size 0 <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> that points at the end of the src <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a>, which may or may not be null terminated. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if no further tokens are found and position is at the end position, meaning a call to <a class="el" href="str__view_8h.html#ac0fd7b1973a326742a4c13ba11e7e63a" title="Finds the first tokenized position in the string view given any length delim SV_Str_view.">SV_token_begin()</a> or <a class="el" href="str__view_8h.html#a5b6426e2e332476994f863b9a448b6eb" title="Advances to the next token in the remaining view separated by the delim.">SV_token_next()</a> has yielded a size 0 <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> that points at the end of the src <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a>, which may or may not be null terminated. </dd></dl>
 
 </div>
 </div>
-<a id="a4e6cb5dcc148fd82026f194299ebbe32" name="a4e6cb5dcc148fd82026f194299ebbe32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e6cb5dcc148fd82026f194299ebbe32">&#9670;&#160;</a></span>SV_token_next()</h2>
+<a id="a5b6426e2e332476994f863b9a448b6eb" name="a5b6426e2e332476994f863b9a448b6eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b6426e2e332476994f863b9a448b6eb">&#9670;&#160;</a></span>SV_token_next()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1820,12 +1820,12 @@ Macros</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the string view of the next available token. Repeating delimiter patterns will be skipped until the next token or end of string is found. If <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> stores NULL the <a class="el" href="str__view_8h.html#a7dcc45b3e74f7e8b64d825268ffacba7" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> placeholder is returned. If delim stores NULL the end position of the <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> is returned which may or may not be the null terminator. The token is bounded by the length of the view between two delimiters or the length from a delimiter to the end of src, whichever comes first. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the string view of the next available token. Repeating delimiter patterns will be skipped until the next token or end of string is found. If <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> stores NULL the <a class="el" href="str__view_8h.html#a792eddfcb2c25c45028abcbd2d022503" title="A sentinel empty string. Safely dereference to view a null terminator. This may be returned from vari...">SV_null()</a> placeholder is returned. If delim stores NULL the end position of the <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> is returned which may or may not be the null terminator. The token is bounded by the length of the view between two delimiters or the length from a delimiter to the end of src, whichever comes first. </dd></dl>
 
 </div>
 </div>
-<a id="ac68c938032a96116e93902e9e9d749da" name="ac68c938032a96116e93902e9e9d749da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac68c938032a96116e93902e9e9d749da">&#9670;&#160;</a></span>SV_token_reverse_begin()</h2>
+<a id="ab8f965cf0b83753f8361c94e69510d10" name="ab8f965cf0b83753f8361c94e69510d10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8f965cf0b83753f8361c94e69510d10">&#9670;&#160;</a></span>SV_token_reverse_begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1861,8 +1861,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a75dcc72fda448d3ca49789a8efbe95f9" name="a75dcc72fda448d3ca49789a8efbe95f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75dcc72fda448d3ca49789a8efbe95f9">&#9670;&#160;</a></span>SV_token_reverse_end()</h2>
+<a id="a4d3efdc92dc6904ed78baed18f2a9b3b" name="a4d3efdc92dc6904ed78baed18f2a9b3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d3efdc92dc6904ed78baed18f2a9b3b">&#9670;&#160;</a></span>SV_token_reverse_end()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1895,12 +1895,12 @@ Macros</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if no further tokens are found and position is at the start position, meaning a call to <a class="el" href="str__view_8h.html#ac68c938032a96116e93902e9e9d749da">SV_token_reverse_begin()</a> or <a class="el" href="str__view_8h.html#a655161c9c6e475c7da280d622c63740a" title="Advances the token in src to the next token between two delimiters provided by delim.">SV_token_reverse_next()</a> has yielded a size 0 <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> that points at the start of the src <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if no further tokens are found and position is at the start position, meaning a call to <a class="el" href="str__view_8h.html#ab8f965cf0b83753f8361c94e69510d10">SV_token_reverse_begin()</a> or <a class="el" href="str__view_8h.html#aa7ab406c9e9443ccaafaac9753cda49d" title="Advances the token in src to the next token between two delimiters provided by delim.">SV_token_reverse_next()</a> has yielded a size 0 <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a> that points at the start of the src <a class="el" href="structSV__Str__view.html" title="A read-only view of string data in C.">SV_Str_view</a>. </dd></dl>
 
 </div>
 </div>
-<a id="a655161c9c6e475c7da280d622c63740a" name="a655161c9c6e475c7da280d622c63740a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a655161c9c6e475c7da280d622c63740a">&#9670;&#160;</a></span>SV_token_reverse_next()</h2>
+<a id="aa7ab406c9e9443ccaafaac9753cda49d" name="aa7ab406c9e9443ccaafaac9753cda49d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7ab406c9e9443ccaafaac9753cda49d">&#9670;&#160;</a></span>SV_token_reverse_next()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1945,8 +1945,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a6c9c796c96c8fd907aefee8e5a875c20" name="a6c9c796c96c8fd907aefee8e5a875c20"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c9c796c96c8fd907aefee8e5a875c20">&#9670;&#160;</a></span>SV_view_compare()</h2>
+<a id="ae45a99e915a8932a2f374c20c962cfd4" name="ae45a99e915a8932a2f374c20c962cfd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae45a99e915a8932a2f374c20c962cfd4">&#9670;&#160;</a></span>SV_view_compare()</h2>
 
 <div class="memitem">
 <div class="memproto">
